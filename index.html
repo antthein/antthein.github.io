@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antt Hein | Portfolio</title>
+  <meta name="description"
+    content="Antt Hein — Application Developer specializing in Power Platform, Java, and workflow automation.">
+  <meta name="theme-color" content="#008080">
+  <meta property="og:title" content="Antt Hein | Portfolio">
+  <meta property="og:description" content="Power Platform developer building apps, automations, and clean UIs.">
+  <meta property="og:image" content="images/profile.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Accessibility: skip to content -->
+  <a class="skip" href="#home">Skip to content</a>
+
+  <!-- NAV: left on desktop, top on mobile/tablet -->
+  <nav class="sidebar" role="navigation">
+    <div class="sidebar-header">
+      <div class="brand">Antt Hein</div>
+      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle sidebar" title="Collapse sidebar">
+        <span class="toggle-icon">‹</span>
+      </button>
+    </div>
+
+    <button id="modeToggle" class="mode-btn" aria-label="Toggle dark mode">
+      <span class="mode-icon"><i class="fas fa-moon"></i></span>
+      <span class="mode-text">Dark</span>
+    </button>
+
+    <button class="hamburger" id="navToggle" aria-label="Menu" aria-controls="navMenu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="summary" id="sectionSummary" aria-live="polite"></div>
+
+    <ul class="nav" id="navMenu">
+      <li><a class="nav-link" href="#home" data-label="Home" title="Home">
+          <span class="nav-icon"><i class="fas fa-home"></i></span>
+          <span class="nav-text">Home</span>
+        </a></li>
+      <li><a class="nav-link" href="#about" data-label="About" title="About">
+          <span class="nav-icon"><i class="fas fa-user"></i></span>
+          <span class="nav-text">About</span>
+        </a></li>
+      <li><a class="nav-link" href="#projects" data-label="Projects" title="Projects">
+          <span class="nav-icon"><i class="fas fa-code"></i></span>
+          <span class="nav-text">Projects</span>
+        </a></li>
+      <li><a class="nav-link" href="#contact" data-label="Contact" title="Contact">
+          <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+          <span class="nav-text">Contact</span>
+        </a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HOME / HERO -->
+    <section id="home" class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="profile-container">
+          <div class="profile-img-wrapper">
+            <img src="images/profile.jpg" alt="Antt Hein" class="profile-img">
+            <div class="status-indicator"></div>
+          </div>
+        </div>
+        <h1 class="hero-title">
+          <span class="greeting">Hello, I'm</span>
+          <span class="name">Antt Hein</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span class="typewriter">Application Developer | Power Platform Expert | Automation Specialist</span>
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-hero">View My Work</a>
+          <a href="#contact" class="btn-hero-outline">Get In Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p class="lead">
+              Microsoft-certified IT professional with 2+ years of experience transforming business processes
+              through innovative software solutions and intelligent automation.
+            </p>
+            <p>
+              I specialize in building scalable applications on the Power Platform, creating seamless integrations,
+              and developing custom solutions that drive efficiency and growth. My passion lies in bridging the gap
+              between complex technical requirements and user-friendly experiences.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-number" data-target="15">0</span>
+                <span class="stat-label">Projects Completed</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-target="2">0</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-target="5">0</span>
+                <span class="stat-label">Certifications</span>
+              </div>
+            </div>
+          </div>
+          <div class="skills-section">
+            <h3>Technical Skills</h3>
+            <div class="skills-grid">
+              <div class="skill-category">
+                <h4>Power Platform</h4>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="95%">
+                    <span>Power Apps, Power Automate, Power BI</span>
+                  </div>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Programming</h4>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="85%">
+                    <span>Java, JavaScript, Power Fx, SQL</span>
+                  </div>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Cloud & Integration</h4>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="90%">
+                    <span>Azure, SharePoint, APIs, Dataverse</span>
+                  </div>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Automation & RPA</h4>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="88%">
+                    <span>Workflow Design, Process Optimization</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Showcasing innovative solutions that drive business transformation</p>
+
+        <div class="projects-filter">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="power-platform">Power Platform</button>
+          <button class="filter-btn" data-filter="web-dev">Web Development</button>
+          <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card" data-category="power-platform">
+            <div class="project-image">
+              <div class="project-preview crm-preview">
+                <div class="mock-header">
+                  <div class="mock-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span class="mock-title">Insurance CRM</span>
+                </div>
+                <div class="mock-content">
+                  <div class="mock-sidebar">
+                    <div class="mock-nav-item active"></div>
+                    <div class="mock-nav-item"></div>
+                    <div class="mock-nav-item"></div>
+                  </div>
+                  <div class="mock-main">
+                    <div class="mock-card"></div>
+                    <div class="mock-card"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link">View Details</a>
+                  <a href="#" class="project-link">Live Demo</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Insurance CRM System</h3>
+              <p>Comprehensive Power Apps solution for policy management, claims processing, and customer relationship
+                management with real-time analytics.</p>
+              <div class="project-tech">
+                <span>Power Apps</span>
+                <span>Dataverse</span>
+                <span>Power BI</span>
+              </div>
+              <div class="project-metrics">
+                <span>40% faster processing</span>
+                <span>500+ policies managed</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="automation">
+            <div class="project-image">
+              <div class="project-preview workflow-preview">
+                <div class="mock-header">
+                  <div class="mock-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span class="mock-title">Approval Flow</span>
+                </div>
+                <div class="workflow-diagram">
+                  <div class="workflow-step">
+                    <div class="step-icon"><i class="fas fa-file-alt"></i></div>
+                    <span>Request</span>
+                  </div>
+                  <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                  <div class="workflow-step">
+                    <div class="step-icon"><i class="fas fa-user-check"></i></div>
+                    <span>Review</span>
+                  </div>
+                  <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                  <div class="workflow-step">
+                    <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                    <span>Approve</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link">View Flow</a>
+                  <a href="#" class="project-link">Documentation</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Smart Approval Workflow</h3>
+              <p>Intelligent approval system with dynamic routing, automated reminders, and comprehensive audit trails
+                for enterprise compliance.</p>
+              <div class="project-tech">
+                <span>Power Automate</span>
+                <span>SharePoint</span>
+                <span>Teams</span>
+              </div>
+              <div class="project-metrics">
+                <span>75% time reduction</span>
+                <span>100% audit compliance</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview todo-preview">
+                <div class="mock-header">
+                  <div class="mock-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span class="mock-title">TaskFlow</span>
+                </div>
+                <div class="todo-interface">
+                  <div class="todo-input"></div>
+                  <div class="todo-item completed">
+                    <div class="todo-check"><i class="fas fa-check"></i></div>
+                    <span>Design mockups</span>
+                  </div>
+                  <div class="todo-item">
+                    <div class="todo-check"></div>
+                    <span>Implement features</span>
+                  </div>
+                  <div class="todo-item">
+                    <div class="todo-check"></div>
+                    <span>Deploy application</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="project-link">GitHub</a>
+                  <a href="#" class="project-link">Live App</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>TaskFlow - Smart Todo App</h3>
+              <p>Modern task management application with intelligent prioritization, collaborative features, and
+                seamless synchronization across devices.</p>
+              <div class="project-tech">
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>LocalStorage</span>
+              </div>
+              <div class="project-metrics">
+                <span>Real-time sync</span>
+                <span>Offline capable</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-subtitle">Ready to transform your business processes? Let's discuss your next project.</p>
+
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-card">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <h3>Email</h3>
+              <p><a href="mailto:antthein1999@gmail.com">antthein1999@gmail.com</a></p>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+              <h3>LinkedIn</h3>
+              <p><a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener">Connect with
+                  me</a></p>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-icon"><i class="fas fa-globe"></i></div>
+              <h3>Location</h3>
+              <p>Available for remote work</p>
+            </div>
+
+            <div class="availability">
+              <div class="availability-status">
+                <div class="status-dot"></div>
+                <span>Available for new projects</span>
+              </div>
+              <p>Typical response time: 24 hours</p>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <form id="contactForm" class="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input id="name" name="name" type="text" required minlength="2" placeholder="John Doe" />
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input id="email" name="_replyto" type="email" required placeholder="john@company.com" />
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Project Type</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Select project type</option>
+                  <option value="power-platform">Power Platform Development</option>
+                  <option value="automation">Process Automation</option>
+                  <option value="integration">System Integration</option>
+                  <option value="consulting">Technical Consulting</option>
+                  <option value="other">Other</option>
+                </select>
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Project Details</label>
+                <textarea id="message" name="message" rows="5" required minlength="10"
+                  placeholder="Tell me about your project requirements, timeline, and goals..."></textarea>
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                  <span class="btn-text">Send Message</span>
+                  <span class="btn-loading">Sending...</span>
+                </button>
+                <a id="mailtoLink" class="btn-secondary"
+                  href="mailto:antthein1999@gmail.com?subject=Portfolio%20Contact">Use Email App</a>
+              </div>
+
+              <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BACK TO TOP -->
+  <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
