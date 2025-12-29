@@ -296,6 +296,9 @@ function validateForm() {
   return isValid;
 }
 
+const contactEmailLink = document.querySelector('.contact-card a[href^="mailto:"]');
+const CONTACT_EMAIL = contactEmailLink?.getAttribute('href')?.replace('mailto:', '') || 'antthein.dev@gmail.com';
+
 contactForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -337,7 +340,7 @@ contactForm?.addEventListener('submit', async (e) => {
       const messageText = encodeURIComponent(formData.get('message'));
       
       const mailtoBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${messageText}`;
-      const mailtoLink = `mailto:antthein1999@gmail.com?subject=${subject}&body=${mailtoBody}`;
+      const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${mailtoBody}`;
       
       window.location.href = mailtoLink;
       setFormStatus('Opening your email client... If it doesn\'t open automatically, please copy the information and email me directly.', true);
