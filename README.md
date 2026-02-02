@@ -13,7 +13,7 @@ This folder contains a responsive one‑page portfolio:
 
 ## Images
 Add these files next to the HTML:
-- `profile.jpg`        — your face photo
+- `Image.png`        — your face photo
 - `proj1.jpg` `proj2.jpg` `proj3.jpg` — screenshots (≈800×500, ≤200KB)
 
 ## Run

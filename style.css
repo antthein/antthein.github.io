@@ -580,7 +580,15 @@ section {
 
 .typewriter {
   border-right: 2px solid var(--secondary);
-  animation: typewriter 4s steps(40) 1s both, blink 1s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.7s step-end infinite;
+  display: inline-block;
+  max-width: 100%;
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
 }
 
 .hero-cta {

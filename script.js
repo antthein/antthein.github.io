@@ -44,7 +44,7 @@ sidebarToggle.addEventListener('click', () => {
   const isCollapsed = sidebar.classList.toggle('collapsed');
   document.body.classList.toggle('sidebar-collapsed', isCollapsed);
   localStorage.setItem('sidebarCollapsed', isCollapsed);
-  
+
   // Update tooltip
   sidebarToggle.title = isCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
 });
@@ -76,7 +76,7 @@ navLinks.forEach(link => {
 ========================= */
 
 // Get all sections for intersection observer
-const sections = [...navLinks].map(link => 
+const sections = [...navLinks].map(link =>
   document.querySelector(link.getAttribute('href'))
 ).filter(Boolean);
 
@@ -92,7 +92,7 @@ const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const id = entry.target.getAttribute('id');
     const link = document.querySelector(`.nav-link[href="#${id}"]`);
-    
+
     if (entry.isIntersecting) {
       // Remove active class from all links
       navLinks.forEach(l => l.classList.remove('active'));
@@ -114,13 +114,13 @@ navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     const targetId = link.getAttribute('href');
     const target = document.querySelector(targetId);
-    
+
     if (!target) return;
-    
+
     e.preventDefault();
-    target.scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'start' 
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
   });
 });
@@ -138,15 +138,15 @@ window.addEventListener('scroll', () => {
   } else {
     backToTop.classList.remove('show');
   }
-  
+
   // Add elevation to sidebar on scroll
   sidebar.classList.toggle('elevated', window.scrollY > 8);
 });
 
 backToTop.addEventListener('click', () => {
-  window.scrollTo({ 
-    top: 0, 
-    behavior: 'smooth' 
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
   });
 });
 
@@ -158,7 +158,7 @@ function animateCounter(element, target, duration = 2000) {
   const start = 0;
   const increment = target / (duration / 16);
   let current = start;
-  
+
   const timer = setInterval(() => {
     current += increment;
     if (current >= target) {
@@ -218,16 +218,16 @@ const projectCards = document.querySelectorAll('.project-card');
 filterButtons.forEach(button => {
   button.addEventListener('click', () => {
     const filter = button.dataset.filter;
-    
+
     // Update active filter button
     filterButtons.forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
-    
+
     // Filter project cards
     projectCards.forEach(card => {
       const category = card.dataset.category;
       const shouldShow = filter === 'all' || category === filter;
-      
+
       if (shouldShow) {
         card.style.display = 'block';
         card.style.animation = 'fadeInUp 0.5s ease forwards';
@@ -255,44 +255,44 @@ function setFormStatus(message, isSuccess = true) {
 
 function validateForm() {
   let isValid = true;
-  
+
   // Clear previous errors
   formStatus.textContent = '';
   contactForm.querySelectorAll('.error').forEach(error => {
     error.textContent = '';
   });
-  
+
   // Get form fields
   const name = contactForm.name;
   const email = contactForm._replyto || contactForm.email;
   const subject = contactForm.subject;
   const message = contactForm.message;
-  
+
   // Validate name
   if (!name.value || name.value.trim().length < 2) {
     name.nextElementSibling.textContent = 'Please enter your name (at least 2 characters).';
     isValid = false;
   }
-  
+
   // Validate email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email.value || !emailRegex.test(email.value.trim())) {
     email.nextElementSibling.textContent = 'Please enter a valid email address.';
     isValid = false;
   }
-  
+
   // Validate subject
   if (!subject.value) {
     subject.nextElementSibling.textContent = 'Please select a project type.';
     isValid = false;
   }
-  
+
   // Validate message
   if (!message.value || message.value.trim().length < 10) {
     message.nextElementSibling.textContent = 'Please enter a message (at least 10 characters).';
     isValid = false;
   }
-  
+
   return isValid;
 }
 
@@ -301,19 +301,19 @@ const CONTACT_EMAIL = contactEmailLink?.getAttribute('href')?.replace('mailto:',
 
 contactForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
+
   if (!validateForm()) {
     return;
   }
-  
+
   const submitBtn = contactForm.querySelector('button[type="submit"]');
   const btnText = submitBtn.querySelector('.btn-text');
   const btnLoading = submitBtn.querySelector('.btn-loading');
-  
+
   // Show loading state
   submitBtn.classList.add('loading');
   submitBtn.disabled = true;
-  
+
   try {
     if (FORM_ENDPOINT) {
       // Use Formspree or similar service
@@ -324,7 +324,7 @@ contactForm?.addEventListener('submit', async (e) => {
         },
         body: new FormData(contactForm)
       });
-      
+
       if (response.ok) {
         setFormStatus('Thank you! Your message has been sent successfully. I\'ll get back to you soon.', true);
         contactForm.reset();
@@ -338,10 +338,10 @@ contactForm?.addEventListener('submit', async (e) => {
       const email = encodeURIComponent(formData.get('_replyto') || formData.get('email'));
       const subject = encodeURIComponent(`Portfolio Contact - ${formData.get('subject')}`);
       const messageText = encodeURIComponent(formData.get('message'));
-      
+
       const mailtoBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${messageText}`;
       const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${mailtoBody}`;
-      
+
       window.location.href = mailtoLink;
       setFormStatus('Opening your email client... If it doesn\'t open automatically, please copy the information and email me directly.', true);
     }
@@ -397,7 +397,7 @@ function debounce(func, wait) {
 // Throttle resize events
 function throttle(func, limit) {
   let inThrottle;
-  return function() {
+  return function () {
     const args = arguments;
     const context = this;
     if (!inThrottle) {
@@ -411,10 +411,10 @@ function throttle(func, limit) {
 // Optimized scroll handler
 const optimizedScrollHandler = debounce(() => {
   const scrollY = window.scrollY;
-  
+
   // Update back to top button
   backToTop.classList.toggle('show', scrollY > 300);
-  
+
   // Update sidebar elevation
   sidebar.classList.toggle('elevated', scrollY > 8);
 }, 10);
@@ -432,7 +432,7 @@ document.addEventListener('keydown', (e) => {
     sidebar.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
   }
-  
+
   // Enter/Space for custom buttons
   if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('filter-btn')) {
     e.preventDefault();
@@ -445,14 +445,14 @@ sidebarToggle.addEventListener('click', () => {
   // Announce state change to screen readers
   const isCollapsed = sidebar.classList.contains('collapsed');
   const announcement = isCollapsed ? 'Sidebar collapsed' : 'Sidebar expanded';
-  
+
   // Create temporary announcement for screen readers
   const announcement_el = document.createElement('div');
   announcement_el.setAttribute('aria-live', 'polite');
   announcement_el.setAttribute('aria-atomic', 'true');
   announcement_el.className = 'sr-only';
   announcement_el.textContent = announcement;
-  
+
   document.body.appendChild(announcement_el);
   setTimeout(() => {
     document.body.removeChild(announcement_el);
@@ -466,9 +466,9 @@ sidebarToggle.addEventListener('click', () => {
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Portfolio initialized successfully!');
-  
+
   // Add any additional initialization code here
-  
+
   // Preload critical animations
   document.body.classList.add('loaded');
 });
@@ -479,5 +479,30 @@ document.addEventListener('visibilitychange', () => {
     // Page is hidden - pause animations if needed
   } else {
     // Page is visible - resume animations if needed
+  }
+});
+
+/* =========================
+   TYPING EFFECT
+========================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const text = "Mid-Senior Power Platform Developer | 3+ Years Experience | Myanmar";
+  const element = document.getElementById('typing-text');
+
+  if (element) {
+    element.textContent = '';
+    let index = 0;
+
+    function typeWriter() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 50); // Faster speed
+      }
+    }
+
+    // Start typing after a short delay
+    setTimeout(typeWriter, 500);
   }
 });
