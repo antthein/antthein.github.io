@@ -1,0 +1,8 @@
+{
+  "name": "antthein-github-io",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No automated tests configured for this static site.\""
+  }
+}
