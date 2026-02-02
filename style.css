@@ -747,6 +747,74 @@ section {
   font-weight: 500;
 }
 
+/* Learning Section */
+.learning-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.learning-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+}
+
+.learning-item:hover {
+  transform: translateY(-5px);
+}
+
+.learning-icon {
+  font-size: 2rem;
+  color: var(--primary);
+  background: var(--bg-secondary);
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learning-content {
+  flex: 1;
+}
+
+.learning-content h4 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.learning-content p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.progress {
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+  transition: width 1.5s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .learning-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
 /* =========================
    PROJECTS SECTION
 ========================= */
