@@ -508,23 +508,59 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================
-   CERTIFICATE MODAL
+   CERTIFICATE MODAL & GALLERY
 ========================= */
 
 const certModal = document.getElementById('certModal');
 const certModalImg = document.getElementById('certImage');
 const certCloseBtn = document.querySelector('.close-modal');
+const prevBtn = document.querySelector('.modal-prev');
+const nextBtn = document.querySelector('.modal-next');
+
+let currentCertImages = [];
+let currentCertIndex = 0;
+
+function showCertImage(index) {
+  if (index >= currentCertImages.length) index = 0;
+  if (index < 0) index = currentCertImages.length - 1;
+
+  currentCertIndex = index;
+  certModalImg.src = currentCertImages[currentCertIndex];
+
+  // Manage navigation buttons visibility
+  if (currentCertImages.length > 1) {
+    prevBtn.style.display = "block";
+    nextBtn.style.display = "block";
+  } else {
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  }
+}
+
+// Global function for onclick events in HTML
+window.changeSlide = function (n) {
+  showCertImage(currentCertIndex + n);
+};
 
 if (certModal && certModalImg && certCloseBtn) {
-  // Open modal when clicking on a certificate item with data-cert-image attribute
-  document.querySelectorAll('.cert-item[data-cert-image]').forEach(item => {
-    // Set background image variable for the hover effect
-    const bgUrl = item.dataset.certImage;
-    item.style.setProperty('--cert-bg', `url('${bgUrl}')`);
+  // Open modal when clicking on a certificate item
+  document.querySelectorAll('.cert-item[data-cert-images]').forEach(item => {
+    // Get all images
+    const imagesAttr = item.dataset.certImages;
+    const images = imagesAttr.split(',').map(img => img.trim());
+
+    // Set background image variable for the hover effect (use first image)
+    if (images.length > 0) {
+      item.style.setProperty('--cert-bg', `url('${images[0]}')`);
+    }
 
     item.addEventListener('click', () => {
+      currentCertImages = images;
+      currentCertIndex = 0;
+
       certModal.style.display = "block";
-      certModalImg.src = item.dataset.certImage;
+      showCertImage(0);
+
       // Disable scrolling on body
       document.body.style.overflow = "hidden";
     });
@@ -533,7 +569,6 @@ if (certModal && certModalImg && certCloseBtn) {
   // Close modal when clicking on (x)
   certCloseBtn.addEventListener('click', () => {
     certModal.style.display = "none";
-    // Enable scrolling on body
     document.body.style.overflow = "";
   });
 
@@ -545,11 +580,17 @@ if (certModal && certModalImg && certCloseBtn) {
     }
   });
 
-  // Close modal with Escape key
+  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && certModal.style.display === "block") {
-      certModal.style.display = "none";
-      document.body.style.overflow = "";
+    if (certModal.style.display === "block") {
+      if (e.key === 'Escape') {
+        certModal.style.display = "none";
+        document.body.style.overflow = "";
+      } else if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+      }
     }
   });
 }

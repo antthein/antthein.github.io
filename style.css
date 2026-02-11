@@ -1934,7 +1934,7 @@ section {
   z-index: 1;
 }
 
-.cert-item[data-cert-image] {
+.cert-item[data-cert-images] {
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -1956,12 +1956,12 @@ section {
   transform: scale(1);
 }
 
-.cert-item[data-cert-image]:hover::before {
+.cert-item[data-cert-images]:hover::before {
   opacity: 0.25;
   transform: scale(1.1);
 }
 
-.cert-item[data-cert-image]:hover {
+.cert-item[data-cert-images]:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
   /* background: var(--bg-card); Removed to let image show through/blend better if needed, or keep overlapping */
@@ -2052,4 +2052,40 @@ body.dark .cert-item>* {
   .cert-modal-content {
     width: 95%;
   }
+}
+
+/* Modal Navigation Buttons */
+.modal-prev,
+.modal-next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  z-index: 2002;
+  text-decoration: none;
+}
+
+.modal-next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.modal-prev {
+  left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.modal-prev:hover,
+.modal-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--secondary);
 }
