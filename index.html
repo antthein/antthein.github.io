@@ -120,7 +120,7 @@
                 <span class="stat-label">Major Projects</span>
               </div>
               <div class="stat">
-                <span class="stat-number" data-target="6">0</span>
+                <span class="stat-number" data-target="7">0</span>
                 <span class="stat-label">Certifications</span>
               </div>
             </div>
@@ -260,14 +260,21 @@
           <div class="cert-category">
             <h3>Certifications</h3>
             <div class="cert-list">
-              <div class="cert-item">
+              <div class="cert-item" data-cert-image="assets/Google_Technical_Support.png">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>Technical Support Fundamental</h4>
+                  <p>Google</p>
+                </div>
+              </div>
+              <div class="cert-item" data-cert-image="assets/CS50x.png">
                 <div class="cert-icon">🏆</div>
                 <div class="cert-info">
                   <h4>CS50x: CS50's Introduction to Computer Science</h4>
                   <p>Harvard University</p>
                 </div>
               </div>
-              <div class="cert-item">
+              <div class="cert-item" data-cert-image="assets/PL 900.png">
                 <div class="cert-icon">🏆</div>
                 <div class="cert-info">
                   <h4>PL-900: Microsoft Power Platform Fundamentals</h4>
@@ -580,6 +587,12 @@
   </main>
 
   <!-- BACK TO TOP -->
+  <!-- Certificate Modal -->
+  <div id="certModal" class="cert-modal">
+    <span class="close-modal">&times;</span>
+    <img class="cert-modal-content" id="certImage" alt="Certificate">
+  </div>
+
   <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
   <script src="script.js"></script>

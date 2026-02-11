@@ -506,3 +506,50 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeWriter, 500);
   }
 });
+
+/* =========================
+   CERTIFICATE MODAL
+========================= */
+
+const certModal = document.getElementById('certModal');
+const certModalImg = document.getElementById('certImage');
+const certCloseBtn = document.querySelector('.close-modal');
+
+if (certModal && certModalImg && certCloseBtn) {
+  // Open modal when clicking on a certificate item with data-cert-image attribute
+  document.querySelectorAll('.cert-item[data-cert-image]').forEach(item => {
+    // Set background image variable for the hover effect
+    const bgUrl = item.dataset.certImage;
+    item.style.setProperty('--cert-bg', `url('${bgUrl}')`);
+
+    item.addEventListener('click', () => {
+      certModal.style.display = "block";
+      certModalImg.src = item.dataset.certImage;
+      // Disable scrolling on body
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  // Close modal when clicking on (x)
+  certCloseBtn.addEventListener('click', () => {
+    certModal.style.display = "none";
+    // Enable scrolling on body
+    document.body.style.overflow = "";
+  });
+
+  // Close modal when clicking anywhere outside of the image
+  certModal.addEventListener('click', (e) => {
+    if (e.target === certModal) {
+      certModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && certModal.style.display === "block") {
+      certModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
+}
