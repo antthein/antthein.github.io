@@ -13,6 +13,7 @@
   <meta property="og:image" content="images/profile.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="images/Image.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -57,7 +58,98 @@
           <span class="nav-icon"><i class="fas fa-envelope"></i></span>
           <span class="nav-text">Contact</span>
         </a></li>
+      <!-- Guide — mobile only, inside hamburger dropdown -->
+      <li class="nav-guide-mobile-li">
+        <button class="nav-link nav-guide-mobile-btn" id="guideNavBtnMobile" title="Site Guide">
+          <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+          <span class="nav-text">Guide</span>
+        </button>
+      </li>
     </ul>
+
+    <!-- Guide pinned at very bottom of sidebar -->
+    <div class="nav-guide-item">
+      <button class="nav-link nav-guide-btn" id="guideNavBtn" title="Site Guide">
+        <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+        <span class="nav-text">Guide</span>
+      </button>
+    </div>
+
+    <!-- Guide drawer inside sidebar -->
+    <div class="guide-drawer" id="guideDrawer">
+      <div class="guide-drawer-header">
+        <span><i class="fas fa-book-open"></i> Site Documentation</span>
+        <button class="guide-drawer-close" id="guideDrawerClose">&times;</button>
+      </div>
+      <div class="guide-drawer-body">
+
+        <div class="guide-section">
+          <h4>🛠 Tech Stack</h4>
+          <ul>
+            <li><strong>HTML5</strong> — semantic structure</li>
+            <li><strong>CSS3</strong> — custom properties, Flexbox, Grid, animations</li>
+            <li><strong>Vanilla JavaScript</strong> — no frameworks</li>
+            <li><strong>Font Awesome 6</strong> — icon set</li>
+            <li><strong>Google Fonts</strong> — Inter typeface</li>
+            <li><strong>GitHub Pages</strong> — static hosting</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>✨ Features</h4>
+          <ul>
+            <li><strong>Dark / Light mode</strong> — saved to localStorage</li>
+            <li><strong>Typing animation</strong> — hero subtitle cycles through roles</li>
+            <li><strong>Counter animation</strong> — stats animate on scroll</li>
+            <li><strong>Project modals</strong> — click "View Details" on any card</li>
+            <li><strong>Certificate gallery</strong> — keyboard navigable modal</li>
+            <li><strong>Skill bars</strong> — animated on scroll reveal</li>
+            <li><strong>Project filter</strong> — Power Platform / Web Dev</li>
+            <li><strong>Profile coin flip</strong> — click photo to flip avatar ↔ real</li>
+            <li><strong>Scroll animations</strong> — elements fade in on scroll</li>
+            <li><strong>Robot assistant</strong> — rockets in, eyes track cursor, click to chat</li>
+            <li><strong>Contact form</strong> — sends via mailto fallback</li>
+            <li><strong>Fully responsive</strong> — mobile menu, fluid grid</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>🤖 Built With AI</h4>
+          <ul>
+            <li><strong>Codex</strong> — initial scaffolding</li>
+            <li><strong>Antigravity</strong> — design iteration</li>
+            <li><strong>Claude</strong> — features &amp; polish</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>📁 File Structure</h4>
+          <pre class="guide-code">antthein.github.io/
+├── index.html
+├── style.css
+├── script.js
+├── images/
+└── assets/</pre>
+        </div>
+
+        <div class="guide-section">
+          <h4>🚀 How to Use</h4>
+          <ul>
+            <li>Navigate sections via this sidebar</li>
+            <li>Click project card → "View Details"</li>
+            <li>Click certifications → gallery opens</li>
+            <li>Click the robot 🤖 to chat</li>
+            <li>Click profile photo to flip</li>
+            <li>Toggle 🌙 for dark mode</li>
+          </ul>
+        </div>
+
+        <div class="guide-section guide-version">
+          <span>v2.0 · Last updated 2026</span>
+        </div>
+
+      </div>
+    </div>
   </nav>
 
   <!-- MAIN -->
@@ -68,7 +160,16 @@
       <div class="hero-inner">
         <div class="profile-container">
           <div class="profile-img-wrapper">
-            <img src="images/Image.png" alt="Antt Hein" class="profile-img">
+            <div class="profile-flip" id="profileFlip" title="Click to flip!">
+              <div class="profile-flip-inner">
+                <div class="profile-flip-front">
+                  <img src="images/Image.png" alt="Antt Hein - Avatar" class="profile-img">
+                </div>
+                <div class="profile-flip-back">
+                  <img src="images/profile.jpg" alt="Antt Hein" class="profile-img">
+                </div>
+              </div>
+            </div>
             <div class="status-indicator"></div>
           </div>
         </div>
@@ -82,9 +183,9 @@
         <div class="hero-cta">
           <a href="#projects" class="btn-hero">View My Work</a>
           <a href="#contact" class="btn-hero-outline">Get In Touch</a>
-          <a href="assets/Antt%20Hein%20CV.pdf" class="btn-hero-outline" download>
+          <button class="btn-hero-outline btn-download" id="cvDownloadBtn" onclick="openCVModal()">
             <i class="fas fa-download"></i>&nbsp;&nbsp;Download CV
-          </a>
+          </button>
         </div>
       </div>
       <div class="scroll-indicator">
@@ -130,34 +231,30 @@
             <div class="skills-grid">
               <div class="skill-category">
                 <h4>Power Platform</h4>
+                <p class="skill-label">Power Apps (Canvas & Model-Driven), Power Automate, Power BI</p>
                 <div class="skill-bar">
-                  <div class="skill-progress" data-width="70%">
-                    <span>Power Apps (Canvas & Model-Driven), Power Automate, Power BI</span>
-                  </div>
+                  <div class="skill-progress" data-width="70%"></div>
                 </div>
               </div>
               <div class="skill-category">
                 <h4>Dataverse & CRM</h4>
+                <p class="skill-label">Dataverse, Table design, relationships, security roles, business rules</p>
                 <div class="skill-bar">
-                  <div class="skill-progress" data-width="50%">
-                    <span>Dataverse, Table design, relationships, security roles, business rules</span>
-                  </div>
+                  <div class="skill-progress" data-width="50%"></div>
                 </div>
               </div>
               <div class="skill-category">
                 <h4>Development</h4>
+                <p class="skill-label">JavaScript, HTML, CSS, Python, Java, Django, MySQL</p>
                 <div class="skill-bar">
-                  <div class="skill-progress" data-width="65%">
-                    <span>JavaScript, HTML, CSS, Python, Java, Django, MySQL</span>
-                  </div>
+                  <div class="skill-progress" data-width="65%"></div>
                 </div>
               </div>
               <div class="skill-category">
                 <h4>Automation & Integration</h4>
+                <p class="skill-label">Approval flows, scheduled flows, error handling, SharePoint integration</p>
                 <div class="skill-bar">
-                  <div class="skill-progress" data-width="70%">
-                    <span>Approval flows, scheduled flows, error handling, SharePoint integration</span>
-                  </div>
+                  <div class="skill-progress" data-width="70%"></div>
                 </div>
               </div>
             </div>
@@ -358,7 +455,7 @@
         </div>
 
         <div class="projects-grid">
-          <article class="project-card" data-category="power-platform">
+          <article class="project-card animate-on-scroll" data-category="power-platform">
             <div class="project-image">
               <div class="project-preview crm-preview">
                 <div class="mock-header">
@@ -381,7 +478,7 @@
               </div>
               <div class="project-overlay">
                 <div class="project-links">
-                  <a href="#" class="project-link">View Details</a>
+                  <button class="project-link" onclick="openProjectModal('crm')">View Details</button>
                 </div>
               </div>
             </div>
@@ -401,7 +498,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-category="automation">
+          <article class="project-card animate-on-scroll" data-category="automation">
             <div class="project-image">
               <div class="project-preview workflow-preview">
                 <div class="mock-header">
@@ -429,7 +526,7 @@
               </div>
               <div class="project-overlay">
                 <div class="project-links">
-                  <a href="#" class="project-link">View Details</a>
+                  <button class="project-link" onclick="openProjectModal('invoice')">View Details</button>
                 </div>
               </div>
             </div>
@@ -449,7 +546,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-category="power-platform">
+          <article class="project-card animate-on-scroll" data-category="power-platform">
             <div class="project-image">
               <div class="project-preview todo-preview">
                 <div class="mock-header">
@@ -476,7 +573,7 @@
               </div>
               <div class="project-overlay">
                 <div class="project-links">
-                  <a href="#" class="project-link">View Details</a>
+                  <button class="project-link" onclick="openProjectModal('carbooking')">View Details</button>
                 </div>
               </div>
             </div>
@@ -492,6 +589,129 @@
               <div class="project-metrics">
                 <span>Role-Based Access</span>
                 <span>Automated Approvals</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card animate-on-scroll" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview kitchen-preview">
+                <div class="mock-header">
+                  <div class="mock-dots"><span></span><span></span><span></span></div>
+                  <span class="mock-title">TRP Kitchen</span>
+                </div>
+                <div class="kitchen-mockup">
+                  <div class="kitchen-hero">Complete Commercial Kitchen Solutions</div>
+                  <div class="kitchen-services">
+                    <div class="ks-item"><i class="fas fa-utensils"></i><span>Design</span></div>
+                    <div class="ks-item"><i class="fas fa-tools"></i><span>Install</span></div>
+                    <div class="ks-item"><i class="fas fa-wrench"></i><span>Maintain</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('trp')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>TRP Kitchen Solutions</h3>
+              <p>Professional website for a Singapore-based commercial kitchen provider serving the F&B industry with design, supply, installation, and maintenance services.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>Netlify</span>
+              </div>
+              <div class="project-metrics">
+                <span>Client Website</span>
+                <span>Responsive Design</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card animate-on-scroll" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview engineering-preview">
+                <div class="mock-header">
+                  <div class="mock-dots"><span></span><span></span><span></span></div>
+                  <span class="mock-title">LJY Engineering</span>
+                </div>
+                <div class="engineering-mockup">
+                  <div class="eng-title">Engineering Services</div>
+                  <div class="eng-services">
+                    <div class="eng-item"><i class="fas fa-bolt"></i><span>Electrical</span></div>
+                    <div class="eng-item"><i class="fas fa-wind"></i><span>HVAC</span></div>
+                    <div class="eng-item"><i class="fas fa-hard-hat"></i><span>Construction</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('ljy')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>LJY Engineering Services</h3>
+              <p>Corporate website for a Singapore engineering company offering electrical, air-conditioning, and construction services. Designed for B2B credibility and client inquiries.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>JavaScript</span>
+                <span>Responsive Design</span>
+                <span>Netlify</span>
+              </div>
+              <div class="project-metrics">
+                <span>B2B Corporate Site</span>
+                <span>Quote Request Flow</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card animate-on-scroll" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview checkers-preview">
+                <div class="mock-header">
+                  <div class="mock-dots"><span></span><span></span><span></span></div>
+                  <span class="mock-title">Checkers · CS50</span>
+                </div>
+                <div class="checkerboard">
+                  <div class="cb-row">
+                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
+                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
+                  </div>
+                  <div class="cb-row">
+                    <div class="cb light"></div><div class="cb dark"></div>
+                    <div class="cb light"></div><div class="cb dark"></div>
+                  </div>
+                  <div class="cb-row">
+                    <div class="cb dark"></div><div class="cb light"></div>
+                    <div class="cb dark"><div class="cb-piece black"></div></div><div class="cb light"></div>
+                  </div>
+                  <div class="cb-row">
+                    <div class="cb light"></div><div class="cb dark"><div class="cb-piece black"></div></div>
+                    <div class="cb light"></div><div class="cb dark"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('checkers')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Checkers Game (CS50)</h3>
+              <p>Full-stack web implementation of classic Checkers built for Harvard's CS50x. Features an AI opponent, local multiplayer, glassmorphism UI, undo/redo, and game history tracking.</p>
+              <div class="project-tech">
+                <span>Python / Flask</span>
+                <span>JavaScript</span>
+                <span>SQLite</span>
+                <span>CSS3</span>
+              </div>
+              <div class="project-metrics">
+                <span>Harvard CS50x</span>
+                <span>AI Opponent</span>
               </div>
             </div>
           </article>
@@ -595,8 +815,177 @@
     <a class="modal-next" onclick="changeSlide(1)">&#10095;</a>
   </div>
 
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; <span id="footerYear"></span> Antt Hein</span>
+      <span class="footer-made">
+        Made with <span class="footer-heart">&#10084;</span> by
+        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" alt="Codex" class="footer-logo">Codex</span>
+        ,
+        <span class="footer-tool"><img src="images/Google-Antigravity-Icon-Full-Color.png" alt="Antigravity" class="footer-logo">Antigravity</span>
+        ,
+        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" class="footer-logo">Claude</span>
+        &amp; my experience
+      </span>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/antthein" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Detail Modal -->
+  <div id="projectModal" class="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="project-modal-box">
+      <button class="project-modal-close" id="projectModalClose" aria-label="Close modal">&times;</button>
+      <div class="project-modal-image-area">
+        <div class="project-modal-placeholder" id="projectModalPlaceholder">
+          <i class="fas fa-image"></i>
+          <span>Screenshot coming soon</span>
+        </div>
+        <img id="projectModalImg" class="project-modal-img" src="" alt="" style="display:none">
+      </div>
+      <div class="project-modal-body">
+        <span class="project-modal-category" id="projectModalCategory"></span>
+        <h2 id="projectModalTitle"></h2>
+        <p id="projectModalDesc"></p>
+        <div class="project-modal-section">
+          <h4>Tech Stack</h4>
+          <div class="project-modal-tags" id="projectModalTech"></div>
+        </div>
+        <div class="project-modal-section">
+          <h4>Key Achievements</h4>
+          <ul id="projectModalAchievements"></ul>
+        </div>
+        <div class="project-modal-actions" id="projectModalActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guide modal for mobile (full-screen overlay) -->
+  <div id="guideMobileModal" class="guide-mobile-modal" role="dialog" aria-label="Site Guide">
+    <div class="guide-mobile-inner">
+      <div class="guide-mobile-header">
+        <span><i class="fas fa-book-open"></i> Site Documentation</span>
+        <button id="guideMobileClose" class="guide-mobile-close">&times;</button>
+      </div>
+      <div class="guide-mobile-body">
+        <div class="guide-section">
+          <h4>🛠 Tech Stack</h4>
+          <ul>
+            <li><strong>HTML5</strong> — semantic structure</li>
+            <li><strong>CSS3</strong> — custom properties, Flexbox, Grid, animations</li>
+            <li><strong>Vanilla JavaScript</strong> — no frameworks</li>
+            <li><strong>Font Awesome 6</strong> — icon set</li>
+            <li><strong>Google Fonts</strong> — Inter typeface</li>
+            <li><strong>GitHub Pages</strong> — static hosting</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h4>✨ Features</h4>
+          <ul>
+            <li><strong>Dark / Light mode</strong> — saved to localStorage</li>
+            <li><strong>Typing animation</strong> — hero subtitle cycles through roles</li>
+            <li><strong>Counter animation</strong> — stats animate on scroll</li>
+            <li><strong>Project modals</strong> — click "View Details" on any card</li>
+            <li><strong>Certificate gallery</strong> — keyboard navigable modal</li>
+            <li><strong>Skill bars</strong> — animated on scroll reveal</li>
+            <li><strong>Project filter</strong> — Power Platform / Web Dev</li>
+            <li><strong>Profile coin flip</strong> — click photo to flip avatar ↔ real</li>
+            <li><strong>Robot assistant</strong> — rockets in, eyes track cursor, click to chat</li>
+            <li><strong>Contact form</strong> — sends via mailto fallback</li>
+            <li><strong>Fully responsive</strong> — mobile menu, fluid grid</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h4>🤖 Built With AI</h4>
+          <ul>
+            <li><strong>Codex</strong> — initial scaffolding</li>
+            <li><strong>Antigravity</strong> — design iteration</li>
+            <li><strong>Claude</strong> — features &amp; polish</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h4>📁 File Structure</h4>
+          <pre class="guide-code">antthein.github.io/
+├── index.html
+├── style.css
+├── script.js
+├── images/
+└── assets/</pre>
+        </div>
+        <div class="guide-section">
+          <h4>🚀 How to Use</h4>
+          <ul>
+            <li>Navigate sections via the top menu</li>
+            <li>Click project card → "View Details"</li>
+            <li>Click certifications → gallery opens</li>
+            <li>Click the robot 🤖 to chat</li>
+            <li>Click profile photo to flip</li>
+            <li>Toggle 🌙 for dark mode</li>
+          </ul>
+        </div>
+        <div class="guide-section guide-version">
+          <span>v2.0 · Last updated 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+  <!-- Chibi Robot — rockets in, lands on the ↑ button -->
+  <div id="siteBot" class="site-bot" title="Click me to chat!">
+    <div class="bot-char" id="botChar">
+      <div class="dog-head">
+        <div class="dog-ear dog-ear-l"></div>
+        <div class="dog-ear dog-ear-r"></div>
+        <div class="dog-visor">
+          <div class="dog-eye"><div class="dog-iris"></div></div>
+          <div class="dog-eye"><div class="dog-iris"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="bot-bubble" id="botBubble">
+      <button class="bot-bubble-close" id="botBubbleClose">&times;</button>
+      <div class="bot-messages" id="botMessages"></div>
+      <div class="bot-suggestions" id="botSuggestions"></div>
+    </div>
+  </div>
+
+  <!-- CV Email Modal -->
+  <div id="cvEmailModal" class="cv-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
+    <div class="cv-modal">
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">&times;</button>
+      <div class="cv-modal-icon"><i class="fas fa-file-user"></i></div>
+      <h3 id="cvModalTitle">Get My CV</h3>
+      <p>Enter your email and I'll send it to you instantly.</p>
+      <form id="cvEmailForm" onsubmit="sendCV(event)">
+        <div class="cv-input-wrap">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="cvEmailInput" placeholder="your@email.com" required autocomplete="email" />
+        </div>
+        <button type="submit" class="cv-send-btn" id="cvSendBtn">
+          <span id="cvBtnText"><i class="fas fa-paper-plane"></i>&nbsp; Send CV</span>
+          <span id="cvBtnLoading" style="display:none"><i class="fas fa-spinner fa-spin"></i>&nbsp; Sending...</span>
+        </button>
+      </form>
+      <div id="cvSuccessMsg" class="cv-success" style="display:none">
+        <i class="fas fa-check-circle"></i> CV sent! Check your inbox.
+      </div>
+      <div id="cvErrorMsg" class="cv-error" style="display:none">
+        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("rxbFmMti3kk4abO8N");</script>
   <script src="script.js"></script>
 </body>
 
