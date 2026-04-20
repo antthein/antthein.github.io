@@ -1075,3 +1075,44 @@ function sendCV(e) {
   badge.style.opacity = '0';
   badge.style.transition = 'opacity 0.5s ease';
 })();
+
+/* ── NUS Course Dynamic Progress ───────────────── */
+(function () {
+  const bar    = document.getElementById('courseProgressBar');
+  const label  = document.getElementById('courseProgressLabel');
+  const status = document.getElementById('courseStatus');
+  if (!bar) return;
+
+  const start = new Date('2026-01-06');  // January start
+  const end   = new Date('2026-06-23');  // June 23 end date
+  const now   = new Date();
+
+  if (now < start) {
+    // Not started yet
+    bar.style.width = '0%';
+    status.textContent = 'Starting soon';
+    label.textContent  = 'Starts January 2026';
+    return;
+  }
+
+  if (now >= end) {
+    // Completed
+    bar.style.width = '100%';
+    bar.style.background = 'linear-gradient(90deg,#22c55e,#16a34a)';
+    status.textContent = 'Completed ✓';
+    label.textContent  = '100% · June 2026';
+    return;
+  }
+
+  // In progress — calculate % between start and end
+  const total   = end - start;
+  const elapsed = now - start;
+  const pct     = Math.min(Math.round((elapsed / total) * 100), 100);
+
+  // Days remaining
+  const daysLeft = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+
+  bar.style.width      = pct + '%';
+  status.textContent   = 'In progress';
+  label.textContent    = `${pct}% complete · ${daysLeft} day${daysLeft !== 1 ? 's' : ''} left`;
+})();
