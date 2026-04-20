@@ -3382,3 +3382,38 @@ section.animated .section-title::after {
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+/* ── Viewer Counter ─────────────────────────────── */
+.view-counter {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 300;
+  background: rgba(14, 165, 233, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  color: var(--text-primary);
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  box-shadow: 0 2px 12px rgba(14, 165, 233, 0.15);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.view-counter.loaded { opacity: 1; }
+.view-counter i { color: #0ea5e9; font-size: 0.72rem; }
+
+@media (max-width: 1024px) {
+  /* Shift left on mobile to avoid hamburger button */
+  .view-counter { right: 8rem; top: 0.9rem; }
+}
+@media (max-width: 480px) {
+  .view-counter { right: 7.5rem; font-size: 0.7rem; padding: 0.28rem 0.6rem; }
+}

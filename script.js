@@ -1063,3 +1063,31 @@ function sendCV(e) {
       errorMsg.style.display = 'block';
     });
 }
+
+/* ── Viewer Counter ─────────────────────────────── */
+(function () {
+  const el    = document.getElementById('viewCount');
+  const badge = document.getElementById('viewCounter');
+  if (!el || !badge) return;
+
+  fetch('https://api.counterapi.dev/v1/antthein-portfolio/views/up')
+    .then(r => r.json())
+    .then(data => {
+      const count = data.count ?? data.value ?? 0;
+      // Animate number counting up
+      let start = 0;
+      const end = count;
+      const duration = 1200;
+      const step = Math.ceil(end / (duration / 16));
+      const timer = setInterval(() => {
+        start = Math.min(start + step, end);
+        el.textContent = start.toLocaleString();
+        if (start >= end) clearInterval(timer);
+      }, 16);
+      badge.classList.add('loaded');
+    })
+    .catch(() => {
+      // Silently fail — don't show broken counter
+      badge.style.display = 'none';
+    });
+})();
