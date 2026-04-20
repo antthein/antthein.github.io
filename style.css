@@ -2264,6 +2264,8 @@ body.sidebar-collapsed .site-footer {
   .site-footer {
     margin-left: 0;
     margin-top: var(--topbar-h);
+    /* Push content above fixed bot + back-to-top button */
+    padding-bottom: 6rem;
   }
 }
 
