@@ -1048,7 +1048,10 @@ function sendCV(e) {
   btnLoading.style.display = 'inline';
   errorMsg.style.display = 'none';
 
-  emailjs.send("service_1any6g9", "template_y9v3p1m", { to_email: email })
+  emailjs.send("service_1any6g9", "template_y9v3p1m", {
+      to_email: email,
+      cv_url:   "https://antthein.github.io/assets/Antt_Hein_CV_2026.pdf"
+    })
     .then(() => {
       btnLoading.style.display = 'none';
       document.getElementById('cvEmailForm').style.display = 'none';
