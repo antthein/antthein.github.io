@@ -1116,3 +1116,8 @@ function sendCV(e) {
   status.textContent   = 'In progress';
   label.textContent    = `${pct}% complete · ${daysLeft} day${daysLeft !== 1 ? 's' : ''} left`;
 })();
+
+/* ── Brand name → scroll to top ─────────────────── */
+document.getElementById('brandHome')?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
