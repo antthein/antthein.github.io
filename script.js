@@ -2,10 +2,54 @@
    THEME & SIDEBAR MANAGEMENT
 ========================= */
 
+const ANALYTICS_CONFIG = {
+  gaMeasurementId: '', // Add your GA4 Measurement ID (e.g. G-XXXXXXX)
+  storageKey: 'portfolio.analytics.events',
+  enabled: true
+};
+
+function initAnalytics() {
+  if (!ANALYTICS_CONFIG.gaMeasurementId) return;
+  const tagScript = document.createElement('script');
+  tagScript.async = true;
+  tagScript.src = `https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_CONFIG.gaMeasurementId}`;
+  document.head.appendChild(tagScript);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag('js', new Date());
+  window.gtag('config', ANALYTICS_CONFIG.gaMeasurementId);
+}
+
+function trackEvent(name, params = {}) {
+  if (!ANALYTICS_CONFIG.enabled) return;
+  const eventData = {
+    name,
+    params,
+    path: window.location.pathname,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const existing = JSON.parse(localStorage.getItem(ANALYTICS_CONFIG.storageKey) || '[]');
+    existing.push(eventData);
+    localStorage.setItem(ANALYTICS_CONFIG.storageKey, JSON.stringify(existing.slice(-200)));
+  } catch (err) {
+    console.warn('Analytics storage failed:', err);
+  }
+
+  if (window.gtag && ANALYTICS_CONFIG.gaMeasurementId) {
+    window.gtag('event', name, params);
+  }
+}
+initAnalytics();
+
 // Dark/Light mode toggle with persistence
 const modeBtn = document.getElementById('modeToggle');
-const modeIcon = modeBtn.querySelector('.mode-icon');
-const modeText = modeBtn.querySelector('.mode-text');
+const modeIcon = modeBtn?.querySelector('.mode-icon');
+const modeText = modeBtn?.querySelector('.mode-text');
 
 // Load saved theme
 const savedTheme = localStorage.getItem('theme');
@@ -15,6 +59,7 @@ if (savedTheme === 'dark') {
 
 // Update mode button display
 function updateModeButton() {
+  if (!modeIcon || !modeText) return;
   const isDark = document.body.classList.contains('dark');
   modeIcon.textContent = isDark ? '☀️' : '🌙';
   modeText.textContent = isDark ? 'Light' : 'Dark';
@@ -22,7 +67,7 @@ function updateModeButton() {
 
 updateModeButton();
 
-modeBtn.addEventListener('click', () => {
+modeBtn?.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   const isDark = document.body.classList.contains('dark');
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -35,12 +80,13 @@ const sidebarToggle = document.getElementById('sidebarToggle');
 const savedSidebarState = localStorage.getItem('sidebarCollapsed');
 
 // Load saved sidebar state
-if (savedSidebarState === 'true') {
+if (savedSidebarState === 'true' && sidebar) {
   sidebar.classList.add('collapsed');
   document.body.classList.add('sidebar-collapsed');
 }
 
-sidebarToggle.addEventListener('click', () => {
+sidebarToggle?.addEventListener('click', () => {
+  if (!sidebar) return;
   const isCollapsed = sidebar.classList.toggle('collapsed');
   document.body.classList.toggle('sidebar-collapsed', isCollapsed);
   localStorage.setItem('sidebarCollapsed', isCollapsed);
@@ -56,17 +102,18 @@ sidebarToggle.addEventListener('click', () => {
 // Mobile/Tablet menu toggle
 const navToggle = document.getElementById('navToggle');
 navToggle?.addEventListener('click', () => {
+  if (!sidebar) return;
   const isOpen = sidebar.classList.toggle('open');
   navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
 
 // Close mobile menu after clicking a link
-const navLinks = document.querySelectorAll('.nav-link');
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
 navLinks.forEach(link => {
   link.addEventListener('click', () => {
-    if (window.matchMedia('(max-width:1024px)').matches) {
+    if (window.matchMedia('(max-width:1024px)').matches && sidebar) {
       sidebar.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle?.setAttribute('aria-expanded', 'false');
     }
   });
 });
@@ -76,9 +123,11 @@ navLinks.forEach(link => {
 ========================= */
 
 // Get all sections for intersection observer
-const sections = [...navLinks].map(link =>
-  document.querySelector(link.getAttribute('href'))
-).filter(Boolean);
+const sections = [...navLinks]
+  .map((link) => link.getAttribute('href'))
+  .filter((href) => href && href.startsWith('#'))
+  .map((href) => document.querySelector(href))
+  .filter(Boolean);
 
 const summaryEl = document.getElementById('sectionSummary');
 
@@ -130,20 +179,7 @@ navLinks.forEach(link => {
 ========================= */
 
 const backToTop = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-  // Show/hide back to top button
-  if (window.scrollY > 300) {
-    backToTop.classList.add('show');
-  } else {
-    backToTop.classList.remove('show');
-  }
-
-  // Add elevation to sidebar on scroll
-  sidebar.classList.toggle('elevated', window.scrollY > 8);
-});
-
-backToTop.addEventListener('click', () => {
+backToTop?.addEventListener('click', () => {
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
@@ -301,8 +337,10 @@ const CONTACT_EMAIL = contactEmailLink?.getAttribute('href')?.replace('mailto:',
 
 contactForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
+  trackEvent('contact_submit_attempt');
 
   if (!validateForm()) {
+    trackEvent('contact_submit_validation_failed');
     return;
   }
 
@@ -326,6 +364,7 @@ contactForm?.addEventListener('submit', async (e) => {
       });
 
       if (response.ok) {
+        trackEvent('contact_submit_success', { provider: 'form_endpoint' });
         setFormStatus('Thank you! Your message has been sent successfully. I\'ll get back to you soon.', true);
         contactForm.reset();
       } else {
@@ -343,10 +382,12 @@ contactForm?.addEventListener('submit', async (e) => {
       const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${mailtoBody}`;
 
       window.location.href = mailtoLink;
+      trackEvent('contact_submit_success', { provider: 'mailto' });
       setFormStatus('Opening your email client... If it doesn\'t open automatically, please copy the information and email me directly.', true);
     }
   } catch (error) {
     console.error('Form submission error:', error);
+    trackEvent('contact_submit_failed', { reason: error?.message || 'unknown' });
     setFormStatus('Sorry, there was an error sending your message. Please try using the email link instead.', false);
   } finally {
     // Reset loading state
@@ -418,10 +459,10 @@ const optimizedScrollHandler = debounce(() => {
   const scrollY = window.scrollY;
 
   // Update back to top button
-  backToTop.classList.toggle('show', scrollY > 300);
+  backToTop?.classList.toggle('show', scrollY > 300);
 
   // Update sidebar elevation
-  sidebar.classList.toggle('elevated', scrollY > 8);
+  sidebar?.classList.toggle('elevated', scrollY > 8);
 }, 10);
 
 window.addEventListener('scroll', optimizedScrollHandler);
@@ -433,9 +474,9 @@ window.addEventListener('scroll', optimizedScrollHandler);
 // Keyboard navigation for custom elements
 document.addEventListener('keydown', (e) => {
   // ESC key closes mobile menu
-  if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+  if (e.key === 'Escape' && sidebar?.classList.contains('open')) {
     sidebar.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle?.setAttribute('aria-expanded', 'false');
   }
 
   // Enter/Space for custom buttons
@@ -446,7 +487,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Focus management for sidebar collapse
-sidebarToggle.addEventListener('click', () => {
+sidebarToggle?.addEventListener('click', () => {
+  if (!sidebar) return;
   // Announce state change to screen readers
   const isCollapsed = sidebar.classList.contains('collapsed');
   const announcement = isCollapsed ? 'Sidebar collapsed' : 'Sidebar expanded';
@@ -560,11 +602,14 @@ if (certModal && certModalImg && certCloseBtn) {
     }
 
     item.addEventListener('click', () => {
+      certModalLastFocus = document.activeElement;
       currentCertImages = images;
       currentCertIndex = 0;
 
       certModal.style.display = "block";
+      certModal.setAttribute('aria-hidden', 'false');
       showCertImage(0);
+      certCloseBtn.focus();
 
       // Disable scrolling on body
       document.body.style.overflow = "hidden";
@@ -574,14 +619,24 @@ if (certModal && certModalImg && certCloseBtn) {
   // Close modal when clicking on (x)
   certCloseBtn.addEventListener('click', () => {
     certModal.style.display = "none";
+    certModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = "";
+    if (certModalLastFocus && typeof certModalLastFocus.focus === 'function') {
+      certModalLastFocus.focus();
+    }
+    certModalLastFocus = null;
   });
 
   // Close modal when clicking anywhere outside of the image
   certModal.addEventListener('click', (e) => {
     if (e.target === certModal) {
       certModal.style.display = "none";
+      certModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = "";
+      if (certModalLastFocus && typeof certModalLastFocus.focus === 'function') {
+        certModalLastFocus.focus();
+      }
+      certModalLastFocus = null;
     }
   });
 
@@ -590,11 +645,18 @@ if (certModal && certModalImg && certCloseBtn) {
     if (certModal.style.display === "block") {
       if (e.key === 'Escape') {
         certModal.style.display = "none";
+        certModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = "";
+        if (certModalLastFocus && typeof certModalLastFocus.focus === 'function') {
+          certModalLastFocus.focus();
+        }
+        certModalLastFocus = null;
       } else if (e.key === 'ArrowLeft') {
         changeSlide(-1);
       } else if (e.key === 'ArrowRight') {
         changeSlide(1);
+      } else {
+        trapModalFocus(e, certModal);
       }
     }
   });
@@ -703,10 +765,35 @@ const projectData = {
 
 const projectModal = document.getElementById('projectModal');
 const projectModalClose = document.getElementById('projectModalClose');
+let projectModalLastFocus = null;
+let certModalLastFocus = null;
+let cvModalLastFocus = null;
+
+function getFocusableElements(root) {
+  if (!root) return [];
+  return [...root.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')]
+    .filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+}
+
+function trapModalFocus(e, modalRoot) {
+  if (e.key !== 'Tab' || !modalRoot) return;
+  const focusable = getFocusableElements(modalRoot);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
 
 window.openProjectModal = function (id) {
   const project = projectData[id];
   if (!project) return;
+  trackEvent('project_modal_open', { project_id: id, project_title: project.title });
 
   document.getElementById('projectModalTitle').textContent = project.title;
   document.getElementById('projectModalCategory').textContent = project.category;
@@ -737,19 +824,27 @@ window.openProjectModal = function (id) {
   const actionsEl = document.getElementById('projectModalActions');
   actionsEl.innerHTML = '';
   if (project.github) {
-    actionsEl.innerHTML += `<a href="${project.github}" target="_blank" rel="noopener" class="pm-btn pm-btn-outline"><i class="fab fa-github"></i> GitHub</a>`;
+    actionsEl.innerHTML += `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="pm-btn pm-btn-outline"><i class="fab fa-github"></i> GitHub</a>`;
   }
   if (project.demo) {
-    actionsEl.innerHTML += `<a href="${project.demo}" target="_blank" rel="noopener" class="pm-btn pm-btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>`;
+    actionsEl.innerHTML += `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="pm-btn pm-btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>`;
   }
 
+  projectModalLastFocus = document.activeElement;
   projectModal.classList.add('open');
+  projectModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  projectModalClose?.focus();
 };
 
 function closeProjectModal() {
-  projectModal.classList.remove('open');
+  projectModal?.classList.remove('open');
+  projectModal?.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (projectModalLastFocus && typeof projectModalLastFocus.focus === 'function') {
+    projectModalLastFocus.focus();
+  }
+  projectModalLastFocus = null;
 }
 
 if (projectModalClose) {
@@ -763,6 +858,10 @@ projectModal?.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && projectModal?.classList.contains('open')) {
     closeProjectModal();
+    return;
+  }
+  if (projectModal?.classList.contains('open')) {
+    trapModalFocus(e, projectModal);
   }
 });
 
@@ -980,6 +1079,7 @@ guideNavBtnMobile?.addEventListener('click', () => {
   navToggle?.setAttribute('aria-expanded', 'false');
   // Open mobile bottom sheet
   guideMobileModal?.classList.add('open');
+  guideMobileClose?.focus();
 });
 
 guideMobileClose?.addEventListener('click', () => {
@@ -1009,7 +1109,11 @@ profileFlip?.addEventListener('click', () => {
 /* ── CV Email Modal ─────────────────────────────── */
 function openCVModal() {
   const modal = document.getElementById('cvEmailModal');
+  if (!modal) return;
+  trackEvent('cv_modal_open');
+  cvModalLastFocus = document.activeElement;
   modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
   document.getElementById('cvEmailInput').focus();
   document.getElementById('cvSuccessMsg').style.display = 'none';
   document.getElementById('cvErrorMsg').style.display = 'none';
@@ -1017,8 +1121,15 @@ function openCVModal() {
 }
 
 function closeCVModal() {
-  document.getElementById('cvEmailModal').classList.remove('open');
+  const modal = document.getElementById('cvEmailModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
   document.getElementById('cvEmailInput').value = '';
+  if (cvModalLastFocus && typeof cvModalLastFocus.focus === 'function') {
+    cvModalLastFocus.focus();
+  }
+  cvModalLastFocus = null;
 }
 
 // Close on backdrop click
@@ -1027,20 +1138,61 @@ document.getElementById('cvEmailModal')?.addEventListener('click', function(e) {
 });
 
 // Close on Escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeCVModal();
+document.addEventListener('keydown', function (e) {
+  const cvModal = document.getElementById('cvEmailModal');
+  if (!cvModal?.classList.contains('open')) return;
+  if (e.key === 'Escape') {
+    closeCVModal();
+    return;
+  }
+  trapModalFocus(e, cvModal);
 });
+
+const EMAILJS_CONFIG = {
+  publicKey: 'rxbFmMti3kk4abO8N',
+  serviceId: 'service_1any6g9',
+  templateId: 'template_y9v3p1m'
+};
+let emailJsReady = false;
+if (window.emailjs && EMAILJS_CONFIG.publicKey) {
+  window.emailjs.init(EMAILJS_CONFIG.publicKey);
+  emailJsReady = true;
+}
+
+let cvLastSentAt = 0;
+const CV_SEND_COOLDOWN_MS = 60 * 1000;
 
 function sendCV(e) {
   e.preventDefault();
   const email = document.getElementById('cvEmailInput').value.trim();
-  if (!email) return;
+  const errorMsg = document.getElementById('cvErrorMsg');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    trackEvent('cv_send_validation_failed');
+    errorMsg.textContent = 'Please enter a valid email address.';
+    errorMsg.style.display = 'block';
+    return;
+  }
 
   const sendBtn = document.getElementById('cvSendBtn');
   const btnText = document.getElementById('cvBtnText');
   const btnLoading = document.getElementById('cvBtnLoading');
   const successMsg = document.getElementById('cvSuccessMsg');
-  const errorMsg = document.getElementById('cvErrorMsg');
+
+  const now = Date.now();
+  const remaining = CV_SEND_COOLDOWN_MS - (now - cvLastSentAt);
+  if (remaining > 0) {
+    trackEvent('cv_send_rate_limited');
+    errorMsg.textContent = `Please wait ${Math.ceil(remaining / 1000)}s before sending again.`;
+    errorMsg.style.display = 'block';
+    return;
+  }
+  if (!emailJsReady) {
+    trackEvent('cv_send_unavailable');
+    errorMsg.textContent = 'Email service is temporarily unavailable. Please try again later.';
+    errorMsg.style.display = 'block';
+    return;
+  }
 
   // Show loading state
   sendBtn.disabled = true;
@@ -1048,11 +1200,13 @@ function sendCV(e) {
   btnLoading.style.display = 'inline';
   errorMsg.style.display = 'none';
 
-  emailjs.send("service_1any6g9", "template_y9v3p1m", {
+  emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
       to_email: email,
       cv_url:   "https://antthein.github.io/assets/Antt_Hein_CV_2026.pdf"
     })
     .then(() => {
+      cvLastSentAt = Date.now();
+      trackEvent('cv_send_success');
       btnLoading.style.display = 'none';
       document.getElementById('cvEmailForm').style.display = 'none';
       successMsg.style.display = 'block';
@@ -1060,9 +1214,11 @@ function sendCV(e) {
       setTimeout(() => closeCVModal(), 3000);
     })
     .catch(() => {
+      trackEvent('cv_send_failed');
       btnLoading.style.display = 'none';
       btnText.style.display = 'inline';
       sendBtn.disabled = false;
+      errorMsg.textContent = 'Something went wrong. Please try again.';
       errorMsg.style.display = 'block';
     });
 }

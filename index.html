@@ -5,17 +5,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Antt Hein | Portfolio</title>
+  <link rel="canonical" href="https://antthein.github.io/">
   <meta name="description"
     content="Antt Hein — Application Developer specializing in Power Platform, Java, and workflow automation.">
   <meta name="theme-color" content="#008080">
   <meta property="og:title" content="Antt Hein | Portfolio">
   <meta property="og:description" content="Power Platform developer building apps, automations, and clean UIs.">
-  <meta property="og:image" content="images/profile.jpg">
+  <meta property="og:image" content="https://antthein.github.io/images/profile.jpg">
+  <meta property="og:url" content="https://antthein.github.io/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Antt Hein | Portfolio">
+  <meta name="twitter:description" content="Power Platform developer building apps, automations, and clean UIs.">
+  <meta name="twitter:image" content="https://antthein.github.io/images/profile.jpg">
   <link rel="icon" type="image/png" href="images/Image.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Antt Hein",
+      "url": "https://antthein.github.io/",
+      "image": "https://antthein.github.io/images/profile.jpg",
+      "jobTitle": "Mid-Senior Power Platform Developer",
+      "description": "Microsoft-certified Power Platform developer specializing in Power Apps, Power Automate, Dataverse, and workflow automation.",
+      "sameAs": [
+        "https://www.linkedin.com/in/antt-hein-bb1a81254",
+        "https://github.com/antthein"
+      ],
+      "email": "mailto:antthein.dev@gmail.com",
+      "knowsAbout": [
+        "Power Apps",
+        "Power Automate",
+        "Dataverse",
+        "Dynamics 365",
+        "JavaScript",
+        "Workflow Automation"
+      ]
+    }
+  </script>
 </head>
 
 <body>
@@ -163,10 +192,20 @@
             <div class="profile-flip" id="profileFlip" title="Click to flip!">
               <div class="profile-flip-inner">
                 <div class="profile-flip-front">
-                  <img src="images/Image.png" alt="Antt Hein - Avatar" class="profile-img">
+                  <picture>
+                    <source srcset="images/Image.webp" type="image/webp">
+                    <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x"
+                      sizes="(max-width: 768px) 120px, 180px" alt="Antt Hein - Avatar" class="profile-img"
+                      loading="eager" fetchpriority="high" decoding="async">
+                  </picture>
                 </div>
                 <div class="profile-flip-back">
-                  <img src="images/profile.jpg" alt="Antt Hein" class="profile-img">
+                  <picture>
+                    <source srcset="images/profile.webp" type="image/webp">
+                    <img src="images/profile.jpg" srcset="images/profile.jpg 1x, images/profile.jpg 2x"
+                      sizes="(max-width: 768px) 120px, 180px" alt="Antt Hein" class="profile-img" loading="lazy"
+                      decoding="async">
+                  </picture>
                 </div>
               </div>
             </div>
@@ -745,7 +784,7 @@
             <div class="contact-card">
               <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
               <h3>LinkedIn</h3>
-              <p><a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener">Connect with
+              <p><a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer">Connect with
                   me</a></p>
             </div>
 
@@ -830,18 +869,18 @@
       <span class="footer-copy">&copy; <span id="footerYear"></span> Antt Hein</span>
       <span class="footer-made">
         Made with <span class="footer-heart">&#10084;</span> by
-        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" alt="Codex" class="footer-logo">Codex</span>
+        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" alt="Codex" class="footer-logo" loading="lazy" decoding="async">Codex</span>
         ,
-        <span class="footer-tool"><img src="images/Google-Antigravity-Icon-Full-Color.png" alt="Antigravity" class="footer-logo">Antigravity</span>
+        <span class="footer-tool"><img src="images/Google-Antigravity-Icon-Full-Color.png" srcset="images/Google-Antigravity-Icon-Full-Color.png 1x, images/Google-Antigravity-Icon-Full-Color.png 2x" sizes="16px" alt="Antigravity" class="footer-logo" loading="lazy" decoding="async">Antigravity</span>
         ,
-        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" class="footer-logo">Claude</span>
+        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" class="footer-logo" loading="lazy" decoding="async">Claude</span>
         &amp; my experience
       </span>
       <div class="footer-social">
-        <a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
-        <a href="https://github.com/antthein" target="_blank" rel="noopener" aria-label="GitHub">
+        <a href="https://github.com/antthein" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <i class="fab fa-github"></i>
         </a>
       </div>
@@ -974,6 +1013,8 @@
       src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fantthein.github.io&count_bg=%230ea5e9&title_bg=%230ea5e9&icon=eye.svg&icon_color=%23ffffff&title=&edge_flat=true"
       alt="views"
       id="viewBadgeImg"
+      loading="lazy"
+      decoding="async"
       onerror="document.getElementById('viewCounter').style.display='none'"
     />
   </div>
@@ -983,7 +1024,11 @@
     <div class="cv-modal">
       <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">&times;</button>
       <div class="cv-modal-icon">
-        <img src="images/Image.png" alt="Antt Hein" class="cv-modal-avatar" />
+        <picture>
+          <source srcset="images/Image.webp" type="image/webp">
+          <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x" sizes="72px" alt="Antt Hein"
+            class="cv-modal-avatar" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <h3 id="cvModalTitle">Get My CV</h3>
       <p>Enter your email and I'll send it to you instantly.</p>
@@ -1007,7 +1052,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init("rxbFmMti3kk4abO8N");</script>
   <script src="script.js"></script>
 </body>
 

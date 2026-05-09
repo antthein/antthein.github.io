@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "echo \"No automated tests configured for this static site.\""
+    "test": "playwright test",
+    "test:smoke": "playwright test tests/smoke.spec.js",
+    "test:smoke:headed": "playwright test tests/smoke.spec.js --headed"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "playwright": "^1.54.2"
   }
 }

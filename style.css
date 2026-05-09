@@ -8,6 +8,7 @@
   --primary-light: #3385d6;
   --secondary: #00d4aa;
   --accent: #ff6b6b;
+  --accent-color: #00d4aa;
 
   /* Backgrounds */
   --bg-primary: #ffffff;
@@ -20,6 +21,7 @@
   --text-secondary: #4a5568;
   --text-muted: #718096;
   --text-inverse: #ffffff;
+  --border: #d9e2ec;
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #4a90e2 0%, #0d47a1 100%);
@@ -55,6 +57,7 @@ body.dark {
   --text-primary: #ffffff;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
+  --border: #334155;
   --gradient-card: linear-gradient(145deg, #1e293b 0%, #334155 100%);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -648,12 +651,6 @@ section {
   animation: blink 0.7s step-end infinite;
   display: inline-block;
   max-width: 100%;
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent
-  }
 }
 
 .hero-cta {
