@@ -767,27 +767,36 @@
         <p class="section-subtitle">Playful side projects I built to experiment, learn, and ship fast.</p>
 
         <div class="projects-grid">
+          <!-- Cipher Lab -->
           <article class="project-card animate-on-scroll" data-category="web-dev">
             <div class="project-image">
-              <div class="project-preview checkers-preview">
+              <div class="project-preview cipher-preview">
                 <div class="mock-header">
                   <div class="mock-dots"><span></span><span></span><span></span></div>
                   <span class="mock-title">Cipher Lab</span>
                 </div>
-                <div class="checkerboard">
-                  <div class="cb-row">
-                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
-                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
+                <div class="cipher-mockup">
+                  <div class="cipher-row">
+                    <span class="cipher-label">Input</span>
+                    <span class="cipher-text">HELLO</span>
                   </div>
-                  <div class="cb-row">
-                    <div class="cb light"></div><div class="cb dark"></div>
-                    <div class="cb light"></div><div class="cb dark"></div>
+                  <div class="cipher-arrow"><i class="fas fa-arrow-right"></i> Caesar +3 <i class="fas fa-arrow-right"></i></div>
+                  <div class="cipher-row">
+                    <span class="cipher-label">Output</span>
+                    <span class="cipher-text cipher-encoded">KHOOR</span>
+                  </div>
+                  <div class="cipher-methods">
+                    <span class="cipher-tag active">Caesar</span>
+                    <span class="cipher-tag">XOR</span>
+                    <span class="cipher-tag">Base64</span>
                   </div>
                 </div>
               </div>
               <div class="project-overlay">
                 <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('cipherlab')">View Details</button>
+                  <a href="https://github.com/antthein/cipher-lab" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fab fa-github"></i></a>
+                  <a href="https://antthein.github.io/cipher-lab/" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
+                  <button class="project-link" onclick="openProjectModal('cipherlab')">Details</button>
                 </div>
               </div>
             </div>
@@ -795,36 +804,46 @@
               <h3>Cipher Lab</h3>
               <p>Interactive playground for Caesar, XOR, and Base64 transformations with quick visual mapping and output copy tools.</p>
               <div class="project-tech">
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>JavaScript</span>
+                <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
               </div>
               <div class="project-metrics">
-                <span>Educational Tool</span>
-                <span>Interactive UI</span>
+                <span>Educational Tool</span><span>Interactive UI</span>
               </div>
             </div>
           </article>
 
+          <!-- Reading List -->
           <article class="project-card animate-on-scroll" data-category="web-dev">
             <div class="project-image">
-              <div class="project-preview kitchen-preview">
+              <div class="project-preview reading-preview">
                 <div class="mock-header">
                   <div class="mock-dots"><span></span><span></span><span></span></div>
                   <span class="mock-title">Reading List</span>
                 </div>
-                <div class="kitchen-mockup">
-                  <div class="kitchen-hero">Personal reading tracker with progress and filters</div>
-                  <div class="kitchen-services">
-                    <div class="ks-item"><i class="fas fa-book"></i><span>Books</span></div>
-                    <div class="ks-item"><i class="fas fa-chart-line"></i><span>Progress</span></div>
-                    <div class="ks-item"><i class="fas fa-moon"></i><span>Theme</span></div>
+                <div class="reading-mockup">
+                  <div class="reading-stats">
+                    <span class="reading-stat"><i class="fas fa-book-open"></i> 12 Books</span>
+                    <span class="reading-stat done"><i class="fas fa-check"></i> 8 Done</span>
+                  </div>
+                  <div class="reading-book">
+                    <span class="book-title">Atomic Habits</span>
+                    <div class="book-bar"><div class="book-fill" style="width:100%"></div></div>
+                  </div>
+                  <div class="reading-book">
+                    <span class="book-title">Deep Work</span>
+                    <div class="book-bar"><div class="book-fill" style="width:65%"></div></div>
+                  </div>
+                  <div class="reading-book">
+                    <span class="book-title">The Pragmatic Programmer</span>
+                    <div class="book-bar"><div class="book-fill" style="width:30%"></div></div>
                   </div>
                 </div>
               </div>
               <div class="project-overlay">
                 <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('readinglist')">View Details</button>
+                  <a href="https://github.com/antthein/reading-list" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fab fa-github"></i></a>
+                  <a href="https://antthein.github.io/reading-list/" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
+                  <button class="project-link" onclick="openProjectModal('readinglist')">Details</button>
                 </div>
               </div>
             </div>
@@ -832,36 +851,34 @@
               <h3>Reading List</h3>
               <p>Minimal reading companion to track completed books, filter by category, and visualize your reading progress.</p>
               <div class="project-tech">
-                <span>HTML5</span>
-                <span>Inline CSS</span>
-                <span>Vanilla JS</span>
+                <span>HTML5</span><span>Vanilla JS</span><span>LocalStorage</span>
               </div>
               <div class="project-metrics">
-                <span>Minimal Design</span>
-                <span>Local Persistence</span>
+                <span>Minimal Design</span><span>Local Persistence</span>
               </div>
             </div>
           </article>
 
+          <!-- Write & Release -->
           <article class="project-card animate-on-scroll" data-category="web-dev">
             <div class="project-image">
-              <div class="project-preview engineering-preview">
+              <div class="project-preview writerelease-preview">
                 <div class="mock-header">
                   <div class="mock-dots"><span></span><span></span><span></span></div>
                   <span class="mock-title">Write &amp; Release</span>
                 </div>
-                <div class="engineering-mockup">
-                  <div class="eng-title">Write your thought. Let it go.</div>
-                  <div class="eng-services">
-                    <div class="eng-item"><i class="fas fa-pen"></i><span>Write</span></div>
-                    <div class="eng-item"><i class="fas fa-paper-plane"></i><span>Release</span></div>
-                    <div class="eng-item"><i class="fas fa-leaf"></i><span>Reset</span></div>
-                  </div>
+                <div class="writerelease-mockup">
+                  <div class="wr-label">What's on your mind?</div>
+                  <div class="wr-textarea">Today I felt overwhelmed, but I know it will pass...</div>
+                  <div class="wr-btn"><i class="fas fa-paper-plane"></i> Release</div>
+                  <div class="wr-hint">✦ Your thought will disappear forever</div>
                 </div>
               </div>
               <div class="project-overlay">
                 <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('writeandrelease')">View Details</button>
+                  <a href="https://github.com/antthein/write-and-release" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fab fa-github"></i></a>
+                  <a href="https://antthein.github.io/write-and-release/" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
+                  <button class="project-link" onclick="openProjectModal('writeandrelease')">Details</button>
                 </div>
               </div>
             </div>
@@ -869,13 +886,10 @@
               <h3>Write &amp; Release</h3>
               <p>Mindful micro-app where users write temporary thoughts and release them with an animation-based reset ritual.</p>
               <div class="project-tech">
-                <span>HTML5</span>
-                <span>CSS Animations</span>
-                <span>JavaScript</span>
+                <span>HTML5</span><span>CSS Animations</span><span>JavaScript</span>
               </div>
               <div class="project-metrics">
-                <span>Emotional UX</span>
-                <span>Privacy-first</span>
+                <span>Emotional UX</span><span>Privacy-first</span>
               </div>
             </div>
           </article>

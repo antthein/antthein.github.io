@@ -3421,3 +3421,170 @@ section.animated .section-title::after {
 @media (max-width: 480px) {
   .view-counter { right: 7.5rem; padding: 0.24rem 0.5rem; }
 }
+
+/* ── Creative Hub Previews ──────────────────────── */
+
+/* Small icon-only project link buttons */
+.project-link-sm {
+  padding: 0.6rem 0.85rem;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Cipher Lab ── */
+.cipher-preview {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+}
+.cipher-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem;
+}
+.cipher-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cipher-label {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.4);
+  width: 28px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.cipher-text {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #58d68d;
+  background: rgba(88,214,141,0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+}
+.cipher-encoded {
+  color: #5dade2;
+  background: rgba(93,173,226,0.1);
+}
+.cipher-arrow {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+.cipher-arrow i { font-size: 0.45rem; }
+.cipher-methods {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.25rem;
+}
+.cipher-tag {
+  font-size: 0.5rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+}
+.cipher-tag.active {
+  background: rgba(93,173,226,0.2);
+  border-color: #5dade2;
+  color: #5dade2;
+}
+
+/* ── Reading List ── */
+.reading-preview {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+.reading-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem;
+}
+.reading-stats {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.reading-stat {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.reading-stat.done { color: #58d68d; }
+.reading-stat i { font-size: 0.5rem; }
+.reading-book {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.book-title {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.book-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.book-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a855f7, #6366f1);
+  border-radius: 999px;
+}
+
+/* ── Write & Release ── */
+.writerelease-preview {
+  background: linear-gradient(135deg, #1a1035 0%, #0f0a1e 100%);
+}
+.writerelease-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.5rem 0.6rem;
+}
+.wr-label {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+.wr-textarea {
+  font-size: 0.58rem;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+.wr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  align-self: flex-end;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+.wr-btn i { font-size: 0.5rem; }
+.wr-hint {
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.22);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
