@@ -174,6 +174,18 @@ navLinks.forEach(link => {
   });
 });
 
+// Hero Creative Hub button smooth scroll
+const creativeHubBtn = document.getElementById('creativeHubBtn');
+creativeHubBtn?.addEventListener('click', (e) => {
+  const target = document.getElementById('creative-hub');
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+});
+
 /* =========================
    BACK TO TOP BUTTON
 ========================= */
