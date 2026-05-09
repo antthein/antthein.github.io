@@ -1,14 +1,1049 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moved to antthein.me</title>
-  <meta http-equiv="refresh" content="0; url=https://antthein.me/" />
-  <link rel="canonical" href="https://antthein.me/" />
-  <script>window.location.replace("https://antthein.me/");</script>
+  <title>Antt Hein | Portfolio</title>
+  <link rel="canonical" href="https://antthein.github.io/">
+  <meta name="description"
+    content="Antt Hein — Application Developer specializing in Power Platform, Java, and workflow automation.">
+  <meta name="theme-color" content="#008080">
+  <meta property="og:title" content="Antt Hein | Portfolio">
+  <meta property="og:description" content="Power Platform developer building apps, automations, and clean UIs.">
+  <meta property="og:image" content="https://antthein.github.io/images/profile.jpg">
+  <meta property="og:url" content="https://antthein.github.io/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Antt Hein | Portfolio">
+  <meta name="twitter:description" content="Power Platform developer building apps, automations, and clean UIs.">
+  <meta name="twitter:image" content="https://antthein.github.io/images/profile.jpg">
+  <link rel="icon" type="image/png" href="images/Image.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Antt Hein",
+      "url": "https://antthein.github.io/",
+      "image": "https://antthein.github.io/images/profile.jpg",
+      "jobTitle": "Mid-Senior Power Platform Developer",
+      "description": "Microsoft-certified Power Platform developer specializing in Power Apps, Power Automate, Dataverse, and workflow automation.",
+      "sameAs": [
+        "https://www.linkedin.com/in/antt-hein-bb1a81254",
+        "https://github.com/antthein"
+      ],
+      "email": "mailto:antthein.dev@gmail.com",
+      "knowsAbout": [
+        "Power Apps",
+        "Power Automate",
+        "Dataverse",
+        "Dynamics 365",
+        "JavaScript",
+        "Workflow Automation"
+      ]
+    }
+  </script>
 </head>
+
 <body>
-  <p>Moved to <a href="https://antthein.me/">antthein.me</a>.</p>
+  <!-- Accessibility: skip to content -->
+  <a class="skip" href="#home">Skip to content</a>
+
+  <!-- NAV: left on desktop, top on mobile/tablet -->
+  <nav class="sidebar" role="navigation">
+    <div class="sidebar-header">
+      <div class="brand" id="brandHome" title="Back to top" style="cursor:pointer;">Antt Hein</div>
+      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle sidebar" title="Collapse sidebar">
+        <span class="toggle-icon">‹</span>
+      </button>
+    </div>
+
+    <button id="modeToggle" class="mode-btn" aria-label="Toggle dark mode">
+      <span class="mode-icon"><i class="fas fa-moon"></i></span>
+      <span class="mode-text">Dark</span>
+    </button>
+
+    <button class="hamburger" id="navToggle" aria-label="Menu" aria-controls="navMenu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="summary" id="sectionSummary" aria-live="polite"></div>
+
+    <ul class="nav" id="navMenu">
+      <li><a class="nav-link" href="#home" data-label="Home" title="Home">
+          <span class="nav-icon"><i class="fas fa-home"></i></span>
+          <span class="nav-text">Home</span>
+        </a></li>
+      <li><a class="nav-link" href="#about" data-label="About" title="About">
+          <span class="nav-icon"><i class="fas fa-user"></i></span>
+          <span class="nav-text">About</span>
+        </a></li>
+      <li><a class="nav-link" href="#projects" data-label="Projects" title="Projects">
+          <span class="nav-icon"><i class="fas fa-code"></i></span>
+          <span class="nav-text">Projects</span>
+        </a></li>
+      <li><a class="nav-link" href="#contact" data-label="Contact" title="Contact">
+          <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+          <span class="nav-text">Contact</span>
+        </a></li>
+      <!-- Guide — mobile only, inside hamburger dropdown -->
+      <li class="nav-guide-mobile-li">
+        <button class="nav-link nav-guide-mobile-btn" id="guideNavBtnMobile" title="Site Guide">
+          <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+          <span class="nav-text">Guide</span>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Guide pinned at very bottom of sidebar -->
+    <div class="nav-guide-item">
+      <button class="nav-link nav-guide-btn" id="guideNavBtn" title="Site Guide">
+        <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+        <span class="nav-text">Guide</span>
+      </button>
+    </div>
+
+    <!-- Guide drawer inside sidebar -->
+    <div class="guide-drawer" id="guideDrawer">
+      <div class="guide-drawer-header">
+        <span><i class="fas fa-book-open"></i> Site Documentation</span>
+        <button class="guide-drawer-close" id="guideDrawerClose">&times;</button>
+      </div>
+      <div class="guide-drawer-body">
+
+        <div class="guide-section">
+          <h4>🛠 Tech Stack</h4>
+          <ul>
+            <li><strong>HTML5</strong> — semantic structure</li>
+            <li><strong>CSS3</strong> — custom properties, Flexbox, Grid, animations</li>
+            <li><strong>Vanilla JavaScript</strong> — no frameworks</li>
+            <li><strong>Font Awesome 6</strong> — icon set</li>
+            <li><strong>Google Fonts</strong> — Inter typeface</li>
+            <li><strong>GitHub Pages</strong> — static hosting</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>✨ Features</h4>
+          <ul>
+            <li><strong>Dark / Light mode</strong> — saved to localStorage</li>
+            <li><strong>Typing animation</strong> — hero subtitle cycles through roles</li>
+            <li><strong>Counter animation</strong> — stats animate on scroll</li>
+            <li><strong>Project modals</strong> — click "View Details" on any card</li>
+            <li><strong>Certificate gallery</strong> — keyboard navigable modal</li>
+            <li><strong>Skill bars</strong> — animated on scroll reveal</li>
+            <li><strong>Project filter</strong> — Power Platform / Web Dev</li>
+            <li><strong>Profile coin flip</strong> — click photo to flip avatar ↔ real</li>
+            <li><strong>Scroll animations</strong> — elements fade in on scroll</li>
+            <li><strong>Robot assistant</strong> — rockets in, eyes track cursor, click to chat</li>
+            <li><strong>Contact form</strong> — sends via mailto fallback</li>
+            <li><strong>Fully responsive</strong> — mobile menu, fluid grid</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>🤖 Built With AI</h4>
+          <ul>
+            <li><strong>Codex</strong> — initial scaffolding</li>
+            <li><strong>Antigravity</strong> — design iteration</li>
+            <li><strong>Claude</strong> — features &amp; polish</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>📁 File Structure</h4>
+          <pre class="guide-code">antthein.github.io/
+├── index.html
+├── style.css
+├── script.js
+├── images/
+└── assets/</pre>
+        </div>
+
+        <div class="guide-section">
+          <h4>🚀 How to Use</h4>
+          <ul>
+            <li>Navigate sections via this sidebar</li>
+            <li>Click project card → "View Details"</li>
+            <li>Click certifications → gallery opens</li>
+            <li>Click the robot 🤖 to chat</li>
+            <li>Click profile photo to flip</li>
+            <li>Toggle 🌙 for dark mode</li>
+          </ul>
+        </div>
+
+        <div class="guide-section guide-version">
+          <span>v2.0 · Last updated 2026</span>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HOME / HERO -->
+    <section id="home" class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="profile-container">
+          <div class="profile-img-wrapper">
+            <div class="profile-flip" id="profileFlip" title="Click to flip!">
+              <div class="profile-flip-inner">
+                <div class="profile-flip-front">
+                  <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x"
+                    sizes="(max-width: 768px) 120px, 180px" alt="Antt Hein - Avatar" class="profile-img"
+                    loading="eager" fetchpriority="high" decoding="async">
+                </div>
+                <div class="profile-flip-back">
+                  <img src="images/profile.jpg" srcset="images/profile.jpg 1x, images/profile.jpg 2x"
+                    sizes="(max-width: 768px) 120px, 180px" alt="Antt Hein" class="profile-img" loading="lazy"
+                    decoding="async">
+                </div>
+              </div>
+            </div>
+            <div class="status-indicator"></div>
+          </div>
+        </div>
+        <h1 class="hero-title">
+          <span class="greeting">Hello, I'm</span>
+          <span class="name">Antt Hein</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span class="typewriter" id="typing-text"></span>
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-hero">View My Work</a>
+          <a href="#contact" class="btn-hero-outline">Get In Touch</a>
+          <button class="btn-hero-outline btn-download" id="cvDownloadBtn" onclick="openCVModal()">
+            <i class="fas fa-download"></i>&nbsp;&nbsp;Download CV
+          </button>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p class="lead">
+              Microsoft-certified Mid-Senior Power Platform Developer with over 3 years of hands-on experience
+              delivering enterprise and client-facing solutions using Power Apps, Power Automate, Dataverse, and
+              Dynamics 365.
+            </p>
+            <p>
+              Proven experience across full-cycle implementation including requirements gathering, solution design,
+              development,
+              testing, deployment, and go-live support. Strong in workflow automation, Dataverse modeling, system
+              integration, and stakeholder collaboration. Experienced in supporting CRM platforms and scalable business
+              automation solutions.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-number" data-target="3">0</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-target="5">0</span>
+                <span class="stat-label">Major Projects</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-target="8">0</span>
+                <span class="stat-label">Certifications</span>
+              </div>
+            </div>
+          </div>
+          <div class="skills-section">
+            <h3>Core Technical Skills</h3>
+            <div class="skills-grid">
+              <div class="skill-category">
+                <h4>Power Platform</h4>
+                <p class="skill-label">Power Apps (Canvas & Model-Driven), Power Automate, Power BI</p>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70%"></div>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Dataverse & CRM</h4>
+                <p class="skill-label">Dataverse, Table design, relationships, security roles, business rules</p>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="50%"></div>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Development</h4>
+                <p class="skill-label">JavaScript, HTML, CSS, Python, Java, Django, MySQL</p>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="65%"></div>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Automation & Integration</h4>
+                <p class="skill-label">Approval flows, scheduled flows, error handling, SharePoint integration</p>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skills-section">
+            <h3>Current Learning Journey</h3>
+            <div class="learning-grid">
+              <div class="learning-item">
+                <div class="learning-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="learning-content">
+                  <h4>Full Stack Development with AI</h4>
+                  <p>NUS School of Computing - <span id="courseStatus">In progress</span></p>
+                  <div class="progress">
+                    <div class="progress-bar" id="courseProgressBar" style="width: 0%"></div>
+                  </div>
+                  <small id="courseProgressLabel" style="color:var(--text-secondary);font-size:0.7rem;margin-top:0.25rem;display:block;"></small>
+                </div>
+              </div>
+
+
+
+              <div class="learning-item">
+                <div class="learning-icon"><i class="fas fa-certificate"></i></div>
+                <div class="learning-content">
+                  <h4>PL-400 Certification Prep</h4>
+                  <p>Preparing for Microsoft Power Platform Developer Exam</p>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 30%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="experience-timeline">
+          <div class="experience-item">
+            <div class="experience-date">Feb 2025 - Present</div>
+            <div class="experience-content">
+              <h3>Mid-Senior Application Developer (Remote)</h3>
+              <h4>BIM Group of Companies | Myanmar</h4>
+              <ul>
+                <li>Designed and developed Canvas and Model-Driven Apps integrated with Dataverse and SharePoint</li>
+                <li>Built complex Power Automate workflows including approvals, scheduled processes, and exception
+                  handling</li>
+                <li>Contributed to the development of enterprise Power Platform solutions, supporting internal
+                  operations and external clients</li>
+                <li>Participated in end-to-end delivery: requirement analysis, solution design, development, UAT,
+                  deployment, and go-live</li>
+                <li>Collaborated with stakeholders to translate business requirements into scalable technical solutions
+                </li>
+                <li>Contributed to documentation, swim-lane diagrams, and user stories for enterprise delivery teams
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-date">Feb 2023 - Jan 2025</div>
+            <div class="experience-content">
+              <h3>Application Developer</h3>
+              <h4>BIM Group of Companies | Myanmar</h4>
+              <ul>
+                <li>Developed and maintained internal and client-facing Power Apps to improve business efficiency</li>
+                <li>Designed Dataverse schemas, relationships, and security models</li>
+                <li>Automated manual processes using Power Automate, reducing operational workload</li>
+                <li>Supported CRM systems for insurance clients, including troubleshooting and enhancements</li>
+                <li>Worked closely with business users to improve system usability and data accuracy</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-date">Dec 2022 - Jan 2023</div>
+            <div class="experience-content">
+              <h3>IT Support Intern</h3>
+              <h4>BIM Group of Companies | Myanmar</h4>
+              <ul>
+                <li>Provided L1 IT support across hardware, software, and network issues</li>
+                <li>Diagnosed and resolved end-user technical problems efficiently</li>
+                <li>Gained foundational experience in enterprise IT environments and customer support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+      <div class="container">
+        <h2 class="section-title">Certifications & Education</h2>
+        <div class="cert-grid">
+          <div class="cert-category">
+            <h3>Certifications</h3>
+            <div class="cert-list">
+              <div class="cert-item" data-cert-images="assets/AB730_AI_Business_Professional.png" data-cert-link="https://learn.microsoft.com/en-us/users/antthein-2617/credentials/certification/ai-business-professional?tab=credentials-tab">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>AB-730: Microsoft Certified AI Business Professional</h4>
+                  <p>Microsoft · Earned April 17, 2026</p>
+                  <small style="color:#0ea5e9;font-size:0.7rem;font-weight:600;">✦ NEW</small>
+                </div>
+              </div>
+              <div class="cert-item" data-cert-images="assets/Google_Technical_Support.png">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>Technical Support Fundamental</h4>
+                  <p>Google</p>
+                </div>
+              </div>
+              <div class="cert-item" data-cert-images="assets/CS50x.png,assets/CS50x_verified.png">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>CS50x: CS50's Introduction to Computer Science</h4>
+                  <p>Harvard University</p>
+                </div>
+              </div>
+              <div class="cert-item" data-cert-images="assets/PL 900.png">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>PL-900: Microsoft Power Platform Fundamentals</h4>
+                  <p>Microsoft</p>
+                </div>
+              </div>
+              <div class="cert-item" data-cert-images="assets/PL 7001.png,assets/PL 7002.png,assets/PL 7003.png">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>PL-7001, 7002, 7003: Microsoft Applied Skills courses</h4>
+                  <p>Microsoft</p>
+                </div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>Power BI Power Apps & Automate Foundation | BIM Training</h4>
+                  <p>BIM Group</p>
+                </div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>Advanced Power Apps & Automate | BIM Training</h4>
+                  <p>BIM Group</p>
+                </div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">🏆</div>
+                <div class="cert-info">
+                  <h4>Computational Thinking Course</h4>
+                  <p>American Center Yangon</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cert-category">
+            <h3>Education</h3>
+            <div class="cert-list">
+              <div class="cert-item">
+                <div class="cert-icon">🎓</div>
+                <div class="cert-info">
+                  <h4>Diploma in Web Technology (DWT) Singapore</h4>
+                  <p>May 2024 - April 2025</p>
+                  <small>Completed coursework in frontend and backend development using HTML, CSS, Python, and Java,
+                    with database integration through Django and MySQL.</small>
+                </div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">🎓</div>
+                <div class="cert-info">
+                  <h4>Diploma in Web Development (DWD) Yangon, Myanmar</h4>
+                  <p>Nov 2022 - Jun 2023</p>
+                  <small>Gaining practical experience in web development, database management, and IT support using
+                    HTML, CSS, JavaScript, and PHP.</small>
+                </div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">🎓</div>
+                <div class="cert-info">
+                  <h4>BSc (Geology) – University of Bago (Third Year)</h4>
+                  <p>2015 - 2019</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Showcasing innovative solutions that drive business transformation</p>
+
+        <div class="projects-filter">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="power-platform">Power Platform</button>
+          <button class="filter-btn" data-filter="web-dev">Web Development</button>
+          <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card animate-on-scroll" data-category="power-platform">
+            <div class="project-image">
+              <div class="project-preview crm-preview">
+                <div class="mock-header">
+                  <div class="mock-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span class="mock-title">CRM Support</span>
+                </div>
+                <div class="mock-content">
+                  <div class="mock-sidebar">
+                    <div class="mock-nav-item active"></div>
+                    <div class="mock-nav-item"></div>
+                    <div class="mock-nav-item"></div>
+                  </div>
+                  <div class="mock-main">
+                    <div class="mock-card"></div>
+                    <div class="mock-card"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('crm')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Myanmar Insurance Company (CRM)</h3>
+              <p>Provided support for a Model-Driven App built on Dataverse. Diagnosed functional issues, created
+                JavaScript customizations, and optimized workflows.</p>
+              <div class="project-tech">
+                <span>Model-Driven App</span>
+                <span>Dataverse</span>
+                <span>JavaScript</span>
+              </div>
+              <div class="project-metrics">
+                <span>Workflow Optimization</span>
+                <span>Custom Logic</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card animate-on-scroll" data-category="automation">
+            <div class="project-image">
+              <div class="project-preview workflow-preview">
+                <div class="mock-header">
+                  <div class="mock-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span class="mock-title">Invoice App</span>
+                </div>
+                <div class="workflow-diagram">
+                  <div class="workflow-step">
+                    <div class="step-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <span>Invoice</span>
+                  </div>
+                  <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                  <div class="workflow-step">
+                    <div class="step-icon"><i class="fas fa-user-check"></i></div>
+                    <span>Approval</span>
+                  </div>
+                  <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                  <div class="workflow-step">
+                    <div class="step-icon"><i class="fas fa-file-pdf"></i></div>
+                    <span>PDF Gen</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('invoice')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Invoice Management App</h3>
+              <p>Power Apps solution using SharePoint database with automated approval workflows and auto-PDF generation
+                for streamlined record-keeping.</p>
+              <div class="project-tech">
+                <span>Power Apps</span>
+                <span>Power Automate</span>
+                <span>SharePoint</span>
+              </div>
+              <div class="project-metrics">
+                <span>Auto PDF Gen</span>
+                <span>Streamlined Reviews</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card animate-on-scroll" data-category="power-platform">
+            <div class="project-image">
+              <div class="project-preview todo-preview">
+                <div class="mock-header">
+                  <div class="mock-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span class="mock-title">Car Booking</span>
+                </div>
+                <div class="todo-interface">
+                  <div class="todo-input" style="background:none; border:1px solid #eee;"></div>
+                  <div class="todo-item completed">
+                    <div class="todo-check"><i class="fas fa-car"></i></div>
+                    <span>Request Vehicle</span>
+                  </div>
+                  <div class="todo-item">
+                    <div class="todo-check"><i class="fas fa-calendar-check"></i></div>
+                    <span>Manager Approval</span>
+                  </div>
+                  <div class="todo-item">
+                    <div class="todo-check"><i class="fas fa-check-double"></i></div>
+                    <span>Booking Confirmed</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('carbooking')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Car Booking App</h3>
+              <p>Canvas App for managing car booking requests with SharePoint backend. Features intuitive UI, role-based
+                access controls, and automated confirmation workflows.</p>
+              <div class="project-tech">
+                <span>Canvas App</span>
+                <span>SharePoint</span>
+                <span>Power Automate</span>
+              </div>
+              <div class="project-metrics">
+                <span>Role-Based Access</span>
+                <span>Automated Approvals</span>
+              </div>
+            </div>
+          </article>
+          <article class="project-card animate-on-scroll" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview kitchen-preview">
+                <div class="mock-header">
+                  <div class="mock-dots"><span></span><span></span><span></span></div>
+                  <span class="mock-title">TRP Kitchen</span>
+                </div>
+                <div class="kitchen-mockup">
+                  <div class="kitchen-hero">Complete Commercial Kitchen Solutions</div>
+                  <div class="kitchen-services">
+                    <div class="ks-item"><i class="fas fa-utensils"></i><span>Design</span></div>
+                    <div class="ks-item"><i class="fas fa-tools"></i><span>Install</span></div>
+                    <div class="ks-item"><i class="fas fa-wrench"></i><span>Maintain</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('trp')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>TRP Kitchen Solutions</h3>
+              <p>Professional website for a Singapore-based commercial kitchen provider serving the F&B industry with design, supply, installation, and maintenance services.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>Netlify</span>
+              </div>
+              <div class="project-metrics">
+                <span>Client Website</span>
+                <span>Responsive Design</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card animate-on-scroll" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview engineering-preview">
+                <div class="mock-header">
+                  <div class="mock-dots"><span></span><span></span><span></span></div>
+                  <span class="mock-title">LJY Engineering</span>
+                </div>
+                <div class="engineering-mockup">
+                  <div class="eng-title">Engineering Services</div>
+                  <div class="eng-services">
+                    <div class="eng-item"><i class="fas fa-bolt"></i><span>Electrical</span></div>
+                    <div class="eng-item"><i class="fas fa-wind"></i><span>HVAC</span></div>
+                    <div class="eng-item"><i class="fas fa-hard-hat"></i><span>Construction</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('ljy')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>LJY Engineering Services</h3>
+              <p>Corporate website for a Singapore engineering company offering electrical, air-conditioning, and construction services. Designed for B2B credibility and client inquiries.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>JavaScript</span>
+                <span>Responsive Design</span>
+                <span>Netlify</span>
+              </div>
+              <div class="project-metrics">
+                <span>B2B Corporate Site</span>
+                <span>Quote Request Flow</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card animate-on-scroll" data-category="web-dev">
+            <div class="project-image">
+              <div class="project-preview checkers-preview">
+                <div class="mock-header">
+                  <div class="mock-dots"><span></span><span></span><span></span></div>
+                  <span class="mock-title">Checkers · CS50</span>
+                </div>
+                <div class="checkerboard">
+                  <div class="cb-row">
+                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
+                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
+                  </div>
+                  <div class="cb-row">
+                    <div class="cb light"></div><div class="cb dark"></div>
+                    <div class="cb light"></div><div class="cb dark"></div>
+                  </div>
+                  <div class="cb-row">
+                    <div class="cb dark"></div><div class="cb light"></div>
+                    <div class="cb dark"><div class="cb-piece black"></div></div><div class="cb light"></div>
+                  </div>
+                  <div class="cb-row">
+                    <div class="cb light"></div><div class="cb dark"><div class="cb-piece black"></div></div>
+                    <div class="cb light"></div><div class="cb dark"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <button class="project-link" onclick="openProjectModal('checkers')">View Details</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Checkers Game (CS50)</h3>
+              <p>Full-stack web implementation of classic Checkers built for Harvard's CS50x. Features an AI opponent, local multiplayer, glassmorphism UI, undo/redo, and game history tracking.</p>
+              <div class="project-tech">
+                <span>Python / Flask</span>
+                <span>JavaScript</span>
+                <span>SQLite</span>
+                <span>CSS3</span>
+              </div>
+              <div class="project-metrics">
+                <span>Harvard CS50x</span>
+                <span>AI Opponent</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-subtitle">Ready to transform your business processes? Let's discuss your next project.</p>
+
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-card">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <h3>Email</h3>
+              <p><a href="mailto:antthein.dev@gmail.com">antthein.dev@gmail.com</a></p>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+              <h3>LinkedIn</h3>
+              <p><a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer">Connect with
+                  me</a></p>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-icon"><i class="fas fa-globe"></i></div>
+              <h3>Location</h3>
+              <p>Available for remote work</p>
+            </div>
+
+            <div class="availability">
+              <div class="availability-status">
+                <div class="status-dot"></div>
+                <span>Available for new projects</span>
+              </div>
+              <p>Typical response time: 24 hours</p>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <form id="contactForm" class="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input id="name" name="name" type="text" required minlength="2" placeholder="John Doe" />
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input id="email" name="_replyto" type="email" required placeholder="john@company.com" />
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Project Type</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Select project type</option>
+                  <option value="power-platform">Power Platform Development</option>
+                  <option value="automation">Process Automation</option>
+                  <option value="integration">System Integration</option>
+                  <option value="consulting">Technical Consulting</option>
+                  <option value="other">Other</option>
+                </select>
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Project Details</label>
+                <textarea id="message" name="message" rows="5" required minlength="10"
+                  placeholder="Tell me about your project requirements, timeline, and goals..."></textarea>
+                <small class="error" aria-live="polite"></small>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                  <span class="btn-text">Send Message</span>
+                  <span class="btn-loading">Sending...</span>
+                </button>
+                <a id="mailtoLink" class="btn-secondary"
+                  href="mailto:antthein.dev@gmail.com?subject=Portfolio%20Contact">Use Email App</a>
+              </div>
+
+              <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BACK TO TOP -->
+  <!-- Certificate Modal -->
+  <div id="certModal" class="cert-modal">
+    <span class="close-modal">&times;</span>
+    <img class="cert-modal-content" id="certImage" alt="Certificate">
+    <a class="modal-prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="modal-next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; <span id="footerYear"></span> Antt Hein</span>
+      <span class="footer-made">
+        Made with <span class="footer-heart">&#10084;</span> by
+        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" alt="Codex" class="footer-logo" loading="lazy" decoding="async">Codex</span>
+        ,
+        <span class="footer-tool"><img src="images/Google-Antigravity-Icon-Full-Color.png" srcset="images/Google-Antigravity-Icon-Full-Color.png 1x, images/Google-Antigravity-Icon-Full-Color.png 2x" sizes="16px" alt="Antigravity" class="footer-logo" loading="lazy" decoding="async">Antigravity</span>
+        ,
+        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" class="footer-logo" loading="lazy" decoding="async">Claude</span>
+        &amp; my experience
+      </span>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/antthein" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Detail Modal -->
+  <div id="projectModal" class="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="project-modal-box">
+      <button class="project-modal-close" id="projectModalClose" aria-label="Close modal">&times;</button>
+      <div class="project-modal-image-area">
+        <div class="project-modal-placeholder" id="projectModalPlaceholder">
+          <i class="fas fa-image"></i>
+          <span>Screenshot coming soon</span>
+        </div>
+        <img id="projectModalImg" class="project-modal-img" src="" alt="" style="display:none">
+      </div>
+      <div class="project-modal-body">
+        <span class="project-modal-category" id="projectModalCategory"></span>
+        <h2 id="projectModalTitle"></h2>
+        <p id="projectModalDesc"></p>
+        <div class="project-modal-section">
+          <h4>Tech Stack</h4>
+          <div class="project-modal-tags" id="projectModalTech"></div>
+        </div>
+        <div class="project-modal-section">
+          <h4>Key Achievements</h4>
+          <ul id="projectModalAchievements"></ul>
+        </div>
+        <div class="project-modal-actions" id="projectModalActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guide modal for mobile (full-screen overlay) -->
+  <div id="guideMobileModal" class="guide-mobile-modal" role="dialog" aria-label="Site Guide">
+    <div class="guide-mobile-inner">
+      <div class="guide-mobile-header">
+        <span><i class="fas fa-book-open"></i> Site Documentation</span>
+        <button id="guideMobileClose" class="guide-mobile-close">&times;</button>
+      </div>
+      <div class="guide-mobile-body">
+        <div class="guide-section">
+          <h4>🛠 Tech Stack</h4>
+          <ul>
+            <li><strong>HTML5</strong> — semantic structure</li>
+            <li><strong>CSS3</strong> — custom properties, Flexbox, Grid, animations</li>
+            <li><strong>Vanilla JavaScript</strong> — no frameworks</li>
+            <li><strong>Font Awesome 6</strong> — icon set</li>
+            <li><strong>Google Fonts</strong> — Inter typeface</li>
+            <li><strong>GitHub Pages</strong> — static hosting</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h4>✨ Features</h4>
+          <ul>
+            <li><strong>Dark / Light mode</strong> — saved to localStorage</li>
+            <li><strong>Typing animation</strong> — hero subtitle cycles through roles</li>
+            <li><strong>Counter animation</strong> — stats animate on scroll</li>
+            <li><strong>Project modals</strong> — click "View Details" on any card</li>
+            <li><strong>Certificate gallery</strong> — keyboard navigable modal</li>
+            <li><strong>Skill bars</strong> — animated on scroll reveal</li>
+            <li><strong>Project filter</strong> — Power Platform / Web Dev</li>
+            <li><strong>Profile coin flip</strong> — click photo to flip avatar ↔ real</li>
+            <li><strong>Robot assistant</strong> — rockets in, eyes track cursor, click to chat</li>
+            <li><strong>Contact form</strong> — sends via mailto fallback</li>
+            <li><strong>Fully responsive</strong> — mobile menu, fluid grid</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h4>🤖 Built With AI</h4>
+          <ul>
+            <li><strong>Codex</strong> — initial scaffolding</li>
+            <li><strong>Antigravity</strong> — design iteration</li>
+            <li><strong>Claude</strong> — features &amp; polish</li>
+          </ul>
+        </div>
+        <div class="guide-section">
+          <h4>📁 File Structure</h4>
+          <pre class="guide-code">antthein.github.io/
+├── index.html
+├── style.css
+├── script.js
+├── images/
+└── assets/</pre>
+        </div>
+        <div class="guide-section">
+          <h4>🚀 How to Use</h4>
+          <ul>
+            <li>Navigate sections via the top menu</li>
+            <li>Click project card → "View Details"</li>
+            <li>Click certifications → gallery opens</li>
+            <li>Click the robot 🤖 to chat</li>
+            <li>Click profile photo to flip</li>
+            <li>Toggle 🌙 for dark mode</li>
+          </ul>
+        </div>
+        <div class="guide-section guide-version">
+          <span>v2.0 · Last updated 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Chibi Robot — rockets in, lands on the ↑ button -->
+  <div id="siteBot" class="site-bot" title="Click me to chat!">
+    <div class="bot-char" id="botChar">
+      <div class="dog-head">
+        <div class="dog-ear dog-ear-l"></div>
+        <div class="dog-ear dog-ear-r"></div>
+        <div class="dog-visor">
+          <div class="dog-eye"><div class="dog-iris"></div></div>
+          <div class="dog-eye"><div class="dog-iris"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="bot-bubble" id="botBubble">
+      <button class="bot-bubble-close" id="botBubbleClose">&times;</button>
+      <div class="bot-messages" id="botMessages"></div>
+      <div class="bot-suggestions" id="botSuggestions"></div>
+    </div>
+  </div>
+
+  <!-- Viewer Counter -->
+  <div id="viewCounter" class="view-counter" title="Total portfolio visits">
+    <i class="fas fa-eye"></i>
+    <img
+      src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fantthein.github.io&count_bg=%230ea5e9&title_bg=%230ea5e9&icon=eye.svg&icon_color=%23ffffff&title=&edge_flat=true"
+      alt="views"
+      id="viewBadgeImg"
+      loading="lazy"
+      decoding="async"
+      onerror="document.getElementById('viewCounter').style.display='none'"
+    />
+  </div>
+
+  <!-- CV Email Modal -->
+  <div id="cvEmailModal" class="cv-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
+    <div class="cv-modal">
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">&times;</button>
+      <div class="cv-modal-icon">
+        <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x" sizes="72px" alt="Antt Hein"
+          class="cv-modal-avatar" loading="lazy" decoding="async" />
+      </div>
+      <h3 id="cvModalTitle">Get My CV</h3>
+      <p>Enter your email and I'll send it to you instantly.</p>
+      <form id="cvEmailForm" onsubmit="sendCV(event)">
+        <div class="cv-input-wrap">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="cvEmailInput" placeholder="your@email.com" required autocomplete="email" />
+        </div>
+        <button type="submit" class="cv-send-btn" id="cvSendBtn">
+          <span id="cvBtnText"><i class="fas fa-paper-plane"></i>&nbsp; Send CV</span>
+          <span id="cvBtnLoading" style="display:none"><i class="fas fa-spinner fa-spin"></i>&nbsp; Sending...</span>
+        </button>
+      </form>
+      <div id="cvSuccessMsg" class="cv-success" style="display:none">
+        <i class="fas fa-check-circle"></i> CV sent! Check your inbox.
+      </div>
+      <div id="cvErrorMsg" class="cv-error" style="display:none">
+        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
