@@ -760,6 +760,51 @@ const projectData = {
     image: null,
     github: 'https://github.com/antthein/checkers',
     demo: null
+  },
+  cipherlab: {
+    title: 'Cipher Lab',
+    category: 'Creative Hub',
+    description: 'An interactive cipher playground for learning text transformations with Caesar, XOR, and Base64 methods. Built to make encryption concepts easy to explore through instant visual feedback.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Text Processing', 'Interactive Visualizer'],
+    achievements: [
+      'Implemented three transformation methods in one simple interface',
+      'Added method-specific explanations so users can learn while experimenting',
+      'Built real-time character mapping visualization for quick understanding',
+      'Added copy-to-clipboard support and validation for smoother UX'
+    ],
+    image: null,
+    github: 'https://github.com/antthein/cipher-lab',
+    demo: 'https://antthein.github.io/cipher-lab/'
+  },
+  readinglist: {
+    title: 'Reading List',
+    category: 'Creative Hub',
+    description: 'A minimalist personal reading tracker focused on clean visuals and a calm interaction flow. Users can mark books as completed, filter reading states, and track progress over time.',
+    tech: ['HTML5', 'Inline CSS', 'Vanilla JavaScript', 'LocalStorage'],
+    achievements: [
+      'Designed a clean reading-focused interface with light and dark themes',
+      'Implemented filtering by fiction, non-fiction, unread, and finished states',
+      'Added completion tracking with live progress bar and stats',
+      'Persisted reading state locally for a simple no-login experience'
+    ],
+    image: null,
+    github: 'https://github.com/antthein/reading-list',
+    demo: 'https://antthein.github.io/reading-list/'
+  },
+  writeandrelease: {
+    title: 'Write & Release',
+    category: 'Creative Hub',
+    description: 'A mindful micro-app that helps users write temporary thoughts and let them go. The interaction is designed around calm visuals, one clear action, and a lightweight release animation.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Micro-interactions', 'UI Animation'],
+    achievements: [
+      'Built a focused single-purpose flow: write, release, reset',
+      'Added animation and feedback states to reinforce the release ritual',
+      'Implemented theme toggle for comfortable day/night usage',
+      'Kept the experience privacy-first with no account or backend dependency'
+    ],
+    image: null,
+    github: 'https://github.com/antthein/write-and-release',
+    demo: 'https://antthein.github.io/write-and-release/'
   }
 };
 
