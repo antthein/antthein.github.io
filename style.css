@@ -45,6 +45,13 @@
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
+
+  /* Spacing rhythm */
+  --section-pad-y: 4.5rem;
+  --section-gap: 3rem;
+  --focus-ring: 0 0 0 3px rgba(0, 102, 204, 0.35);
+  --theme-color-light: #0066cc;
+  --theme-color-dark: #0a192f;
 }
 
 /* Dark theme */
@@ -104,9 +111,25 @@ body {
   z-index: 1000;
 }
 
-.skip:focus {
+.skip:focus,
+.skip:focus-visible {
   left: 1rem;
   top: 1rem;
+}
+
+/* Global focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.profile-flip:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.nav-link:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
 }
 
 /* =========================
@@ -451,8 +474,24 @@ body.sidebar-collapsed main {
 }
 
 section {
-  padding: 4rem 0;
+  padding: var(--section-pad-y) 0;
   position: relative;
+  scroll-margin-top: 1.5rem;
+}
+
+.section-alt {
+  background: var(--bg-secondary);
+}
+
+.section-eyebrow {
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
 }
 
 .section-title {
@@ -470,7 +509,7 @@ section {
   font-size: 1.125rem;
   color: var(--text-secondary);
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--section-gap);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -655,10 +694,47 @@ section {
 
 .hero-cta {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.hero-cta-primary,
+.hero-cta-secondary {
+  display: flex;
+  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  width: 100%;
+}
+
+.hero-cta-secondary {
+  gap: 0.75rem;
+}
+
+.btn-hero-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.btn-hero-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--text-inverse);
 }
 
 .btn-hero,
@@ -752,9 +828,20 @@ section {
 .stat {
   text-align: center;
   padding: 1.5rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: var(--bg-card);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .stat-number {
@@ -1059,11 +1146,22 @@ section {
   transition: all var(--transition-fast);
 }
 
-.filter-btn:hover,
+.filter-btn:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  background: rgba(0, 102, 204, 0.08);
+}
+
 .filter-btn.active {
   border-color: var(--primary);
-  color: var(--primary);
-  background: rgba(0, 102, 204, 0.1);
+  color: var(--text-inverse);
+  background: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .projects-grid {
@@ -1995,9 +2093,31 @@ section {
     animation-play-state: paused;
   }
 
-  .hero-cta {
+  .hero-cta-primary {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-cta-primary .btn-hero,
+  .hero-cta-primary .btn-hero-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-cta-secondary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-cta-secondary .btn-hero-ghost {
+    justify-content: center;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.6rem 0.5rem;
   }
 
   .stats {
@@ -3635,3 +3755,113 @@ section.animated .section-title::after {
   box-shadow: 0 2px 8px rgba(124, 107, 158, 0.35);
 }
 .wr-btn i { font-size: 0.45rem; }
+
+/* =========================
+   PORTFOLIO POLISH (UX pass)
+========================= */
+.project-link,
+.project-link-sm {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-item {
+  border: 1px solid var(--border);
+}
+
+.cert-item:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.contact-form .error {
+  color: #c53030;
+  font-size: 0.8125rem;
+  margin-top: 0.35rem;
+}
+
+body.dark .contact-form .error {
+  color: #fc8181;
+}
+
+.availability {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.availability-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#creative-hub .projects-grid {
+  gap: 2rem;
+}
+
+.profile-flip {
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.profile-flip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.55);
+}
+
+body.nav-open .site-bot,
+body.modal-open .site-bot {
+  z-index: 90;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+body.nav-open .bot-bubble,
+body.modal-open .bot-bubble {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bot,
+  .site-bot .bot-char,
+  .site-bot.dog-sat .bot-char {
+    animation: none !important;
+  }
+
+  .site-bot.dog-sat {
+    transform: translateX(0);
+  }
+
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad-y: 3rem;
+  }
+
+  .experience-timeline::before {
+    left: 16px;
+  }
+
+  .experience-item {
+    padding-left: 48px;
+  }
+
+  .experience-item::before {
+    left: 7px;
+    width: 18px;
+    height: 18px;
+  }
+}

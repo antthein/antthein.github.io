@@ -8,7 +8,11 @@
   <link rel="canonical" href="https://antthein.github.io/">
   <meta name="description"
     content="Antt Hein — Application Developer specializing in Power Platform, Java, and workflow automation.">
-  <meta name="theme-color" content="#008080">
+  <meta name="theme-color" content="#0066cc" id="themeColorMeta">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <meta property="og:title" content="Antt Hein | Portfolio">
   <meta property="og:description" content="Power Platform developer building apps, automations, and clean UIs.">
   <meta property="og:image" content="https://antthein.github.io/images/profile.jpg">
@@ -18,7 +22,6 @@
   <meta name="twitter:title" content="Antt Hein | Portfolio">
   <meta name="twitter:description" content="Power Platform developer building apps, automations, and clean UIs.">
   <meta name="twitter:image" content="https://antthein.github.io/images/profile.jpg">
-  <link rel="icon" type="image/png" href="images/Image.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   <script type="application/ld+json">
@@ -60,8 +63,8 @@
       </button>
     </div>
 
-    <button id="modeToggle" class="mode-btn" aria-label="Toggle dark mode">
-      <span class="mode-icon"><i class="fas fa-moon"></i></span>
+    <button id="modeToggle" class="mode-btn" aria-label="Switch to dark mode">
+      <span class="mode-icon" aria-hidden="true"><i class="fas fa-moon"></i></span>
       <span class="mode-text">Dark</span>
     </button>
 
@@ -79,9 +82,17 @@
           <span class="nav-icon"><i class="fas fa-user"></i></span>
           <span class="nav-text">About</span>
         </a></li>
+      <li><a class="nav-link" href="#experience" data-label="Experience" title="Experience">
+          <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
+          <span class="nav-text">Experience</span>
+        </a></li>
       <li><a class="nav-link" href="#projects" data-label="Projects" title="Projects">
           <span class="nav-icon"><i class="fas fa-code"></i></span>
           <span class="nav-text">Projects</span>
+        </a></li>
+      <li><a class="nav-link" href="#creative-hub" data-label="Creative Hub" title="Creative Hub">
+          <span class="nav-icon"><i class="fas fa-palette"></i></span>
+          <span class="nav-text">Creative Hub</span>
         </a></li>
       <li><a class="nav-link" href="#contact" data-label="Contact" title="Contact">
           <span class="nav-icon"><i class="fas fa-envelope"></i></span>
@@ -108,7 +119,7 @@
     <div class="guide-drawer" id="guideDrawer">
       <div class="guide-drawer-header">
         <span><i class="fas fa-book-open"></i> Site Documentation</span>
-        <button class="guide-drawer-close" id="guideDrawerClose">&times;</button>
+        <button class="guide-drawer-close" id="guideDrawerClose" aria-label="Close site guide">&times;</button>
       </div>
       <div class="guide-drawer-body">
 
@@ -189,7 +200,7 @@
       <div class="hero-inner">
         <div class="profile-container">
           <div class="profile-img-wrapper">
-            <div class="profile-flip" id="profileFlip" title="Click to flip!">
+            <div class="profile-flip" id="profileFlip" title="Click to flip!" role="button" tabindex="0" aria-label="Profile photo, click to flip between avatar and photo">
               <div class="profile-flip-inner">
                 <div class="profile-flip-front">
                   <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x"
@@ -214,12 +225,16 @@
           <span class="typewriter" id="typing-text"></span>
         </p>
         <div class="hero-cta">
-          <a href="#projects" class="btn-hero">View My Work</a>
-          <a href="#contact" class="btn-hero-outline">Get In Touch</a>
-          <button class="btn-hero-outline btn-download" id="cvDownloadBtn" onclick="openCVModal()">
-            <i class="fas fa-download"></i>&nbsp;&nbsp;Download CV
-          </button>
-          <a href="#creative-hub" class="btn-hero-outline" id="creativeHubBtn">My Creative Hub</a>
+          <div class="hero-cta-primary">
+            <a href="#projects" class="btn-hero">View My Work</a>
+            <a href="#contact" class="btn-hero-outline">Get In Touch</a>
+          </div>
+          <div class="hero-cta-secondary">
+            <button type="button" class="btn-hero-ghost btn-download" id="cvDownloadBtn" onclick="openCVModal()">
+              <i class="fas fa-download" aria-hidden="true"></i> Download CV
+            </button>
+            <a href="#creative-hub" class="btn-hero-ghost">Creative Hub</a>
+          </div>
         </div>
       </div>
       <div class="scroll-indicator">
@@ -234,9 +249,8 @@
         <div class="about-content">
           <div class="about-text">
             <p class="lead">
-              Microsoft-certified Mid-Senior Power Platform Developer with over 3 years of hands-on experience
-              delivering enterprise and client-facing solutions using Power Apps, Power Automate, Dataverse, and
-              Dynamics 365.
+              Microsoft-certified Mid-Senior Power Platform Developer with 3+ years building enterprise and
+              client-facing solutions on Power Apps, Power Automate, Dataverse, and Dynamics 365.
             </p>
             <p>
               Proven experience across full-cycle implementation including requirements gathering, solution design,
@@ -761,8 +775,9 @@
         </div>
       </div>
     </section>
-    <section id="creative-hub">
+    <section id="creative-hub" class="section-alt">
       <div class="container">
+        <p class="section-eyebrow">Side projects</p>
         <h2 class="section-title">My Creative Hub</h2>
         <p class="section-subtitle">Playful side projects I built to experiment, learn, and ship fast.</p>
 
@@ -1062,7 +1077,7 @@
     <div class="guide-mobile-inner">
       <div class="guide-mobile-header">
         <span><i class="fas fa-book-open"></i> Site Documentation</span>
-        <button id="guideMobileClose" class="guide-mobile-close">&times;</button>
+        <button id="guideMobileClose" class="guide-mobile-close" aria-label="Close site guide">&times;</button>
       </div>
       <div class="guide-mobile-body">
         <div class="guide-section">
@@ -1112,7 +1127,7 @@
         <div class="guide-section">
           <h4>🚀 How to Use</h4>
           <ul>
-            <li>Navigate sections via the top menu</li>
+            <li>Navigate sections via the sidebar or top menu (includes Creative Hub)</li>
             <li>Click project card → "View Details"</li>
             <li>Click certifications → gallery opens</li>
             <li>Click the robot 🤖 to chat</li>

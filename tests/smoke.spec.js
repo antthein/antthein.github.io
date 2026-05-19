@@ -7,6 +7,12 @@ test('home loads and core nav works', async ({ page }) => {
   await expect(page.locator('#projects')).toBeInViewport();
 });
 
+test('creative hub nav link scrolls to section', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('a.nav-link[href="#creative-hub"]').click();
+  await expect(page.locator('#creative-hub')).toBeInViewport();
+});
+
 test('project modal opens and closes', async ({ page }) => {
   await page.goto('/');
   await page.locator('a.nav-link[href="#projects"]').click();

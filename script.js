@@ -57,14 +57,37 @@ if (savedTheme === 'dark') {
   document.body.classList.add('dark');
 }
 
+function updateThemeMeta() {
+  const meta = document.getElementById('themeColorMeta');
+  if (!meta) return;
+  meta.content = document.body.classList.contains('dark') ? '#0a192f' : '#0066cc';
+}
+
+function syncOverlayState() {
+  const navOpen = sidebar?.classList.contains('open');
+  const certModalEl = document.getElementById('certModal');
+  const certOpen = certModalEl && certModalEl.style.display === 'block';
+  const modalOpen = document.querySelector(
+    '#projectModal.open, #cvEmailModal.open, .guide-mobile-modal.open'
+  ) || certOpen;
+  document.body.classList.toggle('nav-open', !!navOpen);
+  document.body.classList.toggle('modal-open', !!modalOpen);
+}
+
 // Update mode button display
 function updateModeButton() {
   if (!modeIcon || !modeText) return;
   const isDark = document.body.classList.contains('dark');
-  modeIcon.textContent = isDark ? '☀️' : '🌙';
+  const icon = modeIcon.querySelector('i');
+  if (icon) {
+    icon.classList.toggle('fa-moon', !isDark);
+    icon.classList.toggle('fa-sun', isDark);
+  }
   modeText.textContent = isDark ? 'Light' : 'Dark';
+  modeBtn?.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
 }
 
+updateThemeMeta();
 updateModeButton();
 
 modeBtn?.addEventListener('click', () => {
@@ -72,6 +95,7 @@ modeBtn?.addEventListener('click', () => {
   const isDark = document.body.classList.contains('dark');
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
   updateModeButton();
+  updateThemeMeta();
 });
 
 // Sidebar collapse functionality
@@ -105,6 +129,7 @@ navToggle?.addEventListener('click', () => {
   if (!sidebar) return;
   const isOpen = sidebar.classList.toggle('open');
   navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  syncOverlayState();
 });
 
 // Close mobile menu after clicking a link
@@ -171,18 +196,6 @@ navLinks.forEach(link => {
       behavior: 'smooth',
       block: 'start'
     });
-  });
-});
-
-// Hero Creative Hub button smooth scroll
-const creativeHubBtn = document.getElementById('creativeHubBtn');
-creativeHubBtn?.addEventListener('click', (e) => {
-  const target = document.getElementById('creative-hub');
-  if (!target) return;
-  e.preventDefault();
-  target.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
   });
 });
 
@@ -489,6 +502,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && sidebar?.classList.contains('open')) {
     sidebar.classList.remove('open');
     navToggle?.setAttribute('aria-expanded', 'false');
+    syncOverlayState();
   }
 
   // Enter/Space for custom buttons
@@ -625,6 +639,7 @@ if (certModal && certModalImg && certCloseBtn) {
 
       // Disable scrolling on body
       document.body.style.overflow = "hidden";
+      syncOverlayState();
     });
   });
 
@@ -633,6 +648,7 @@ if (certModal && certModalImg && certCloseBtn) {
     certModal.style.display = "none";
     certModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = "";
+    syncOverlayState();
     if (certModalLastFocus && typeof certModalLastFocus.focus === 'function') {
       certModalLastFocus.focus();
     }
@@ -645,6 +661,7 @@ if (certModal && certModalImg && certCloseBtn) {
       certModal.style.display = "none";
       certModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = "";
+      syncOverlayState();
       if (certModalLastFocus && typeof certModalLastFocus.focus === 'function') {
         certModalLastFocus.focus();
       }
@@ -659,6 +676,7 @@ if (certModal && certModalImg && certCloseBtn) {
         certModal.style.display = "none";
         certModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = "";
+        syncOverlayState();
         if (certModalLastFocus && typeof certModalLastFocus.focus === 'function') {
           certModalLastFocus.focus();
         }
@@ -891,6 +909,7 @@ window.openProjectModal = function (id) {
   projectModal.classList.add('open');
   projectModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  syncOverlayState();
   projectModalClose?.focus();
 };
 
@@ -898,6 +917,7 @@ function closeProjectModal() {
   projectModal?.classList.remove('open');
   projectModal?.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  syncOverlayState();
   if (projectModalLastFocus && typeof projectModalLastFocus.focus === 'function') {
     projectModalLastFocus.focus();
   }
@@ -1136,15 +1156,20 @@ guideNavBtnMobile?.addEventListener('click', () => {
   navToggle?.setAttribute('aria-expanded', 'false');
   // Open mobile bottom sheet
   guideMobileModal?.classList.add('open');
+  syncOverlayState();
   guideMobileClose?.focus();
 });
 
 guideMobileClose?.addEventListener('click', () => {
   guideMobileModal.classList.remove('open');
+  syncOverlayState();
 });
 // Tap backdrop to close
 guideMobileModal?.addEventListener('click', (e) => {
-  if (e.target === guideMobileModal) guideMobileModal.classList.remove('open');
+  if (e.target === guideMobileModal) {
+    guideMobileModal.classList.remove('open');
+    syncOverlayState();
+  }
 });
 
 /* =========================
@@ -1159,8 +1184,15 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
 ========================= */
 
 const profileFlip = document.getElementById('profileFlip');
-profileFlip?.addEventListener('click', () => {
-  profileFlip.classList.toggle('flipped');
+function toggleProfileFlip() {
+  profileFlip?.classList.toggle('flipped');
+}
+profileFlip?.addEventListener('click', toggleProfileFlip);
+profileFlip?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    toggleProfileFlip();
+  }
 });
 
 /* ── CV Email Modal ─────────────────────────────── */
@@ -1171,6 +1203,7 @@ function openCVModal() {
   cvModalLastFocus = document.activeElement;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
+  syncOverlayState();
   document.getElementById('cvEmailInput').focus();
   document.getElementById('cvSuccessMsg').style.display = 'none';
   document.getElementById('cvErrorMsg').style.display = 'none';
@@ -1182,6 +1215,7 @@ function closeCVModal() {
   if (!modal) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
+  syncOverlayState();
   document.getElementById('cvEmailInput').value = '';
   if (cvModalLastFocus && typeof cvModalLastFocus.focus === 'function') {
     cvModalLastFocus.focus();
