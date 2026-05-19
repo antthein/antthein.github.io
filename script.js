@@ -806,13 +806,13 @@ const projectData = {
   writeandrelease: {
     title: 'Write & Release',
     category: 'Creative Hub',
-    description: 'A mindful micro-app that helps users write temporary thoughts and let them go. The interaction is designed around calm visuals, one clear action, and a lightweight release animation.',
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Micro-interactions', 'UI Animation'],
+    description: 'A mindful micro-app for writing private thoughts and releasing them with calm animations. Redesigned with a softer visual language, rotating prompts, keyboard shortcuts, and a privacy-first flow — nothing is ever saved.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'LocalStorage', 'Accessibility'],
     achievements: [
-      'Built a focused single-purpose flow: write, release, reset',
-      'Added animation and feedback states to reinforce the release ritual',
-      'Implemented theme toggle for comfortable day/night usage',
-      'Kept the experience privacy-first with no account or backend dependency'
+      'Redesigned UI with glass-style writing card, ambient glow, and refined typography',
+      'Added Clear action, Ctrl/⌘+Enter release, Escape to clear, and rotating writing prompts',
+      'Burst release animation with toast feedback and prefers-reduced-motion support',
+      'Theme toggle with localStorage persistence and system dark-mode detection'
     ],
     image: null,
     github: 'https://github.com/antthein/write-and-release',
