@@ -560,7 +560,7 @@ document.addEventListener('visibilitychange', () => {
 ========================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const text = "Mid-Senior Power Platform Developer | 3+ Years Experience | Myanmar";
+  const text = "Power Platform Developer | Open to Opportunities | Myanmar";
   const element = document.getElementById('typing-text');
 
   if (element) {
@@ -950,7 +950,7 @@ const botData = {
   greeting: "Hi there! 👋 I'm Antt's assistant bot. What would you like to know?",
   suggestions: ["Who is Antt?", "Skills & Tech", "Projects", "Contact", "Fun fact 🎲"],
   responses: {
-    "Who is Antt?": "Antt Hein is a Microsoft-certified Mid-Senior Power Platform Developer 🚀 with 3+ years of experience building enterprise apps using Power Apps, Power Automate, Dataverse & Dynamics 365. Based in Myanmar, available remotely!",
+    "Who is Antt?": "Antt Hein is a Microsoft-certified Power Platform Developer with 3+ years of experience building enterprise apps using Power Apps, Power Automate, Dataverse & Dynamics 365. He recently completed a Mid-Senior Application Developer role at BIM Group (through May 2026) and is based in Myanmar, available for remote work.",
     "Skills & Tech": "Antt's core stack:\n⚡ Power Platform (Apps, Automate, BI)\n🗄️ Dataverse, CRM & Security Roles\n💻 JavaScript, Python, Flask, Java\n🔗 SharePoint & System Integration\n📜 Currently prepping for PL-400!",
     "Projects": "Notable work:\n🏢 Myanmar Insurance CRM\n📄 Invoice Management App (auto PDF)\n🚗 Car Booking App\n🍳 TRP Kitchen Solutions\n⚡ LJY Engineering Services\n♟️ Checkers AI Game (Harvard CS50!)",
     "Contact": "Reach Antt here:\n📧 antthein.dev@gmail.com\n💼 LinkedIn: antt-hein-bb1a81254\n⏰ Replies within 24 hours!",
