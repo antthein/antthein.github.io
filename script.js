@@ -804,7 +804,7 @@ const projectData = {
     ],
     image: null,
     github: 'https://github.com/antthein/cipher-lab',
-    demo: 'https://antthein.github.io/cipher-lab/'
+    demo: 'https://antthein.me/cipher-lab/'
   },
   readinglist: {
     title: 'Reading List',
@@ -819,7 +819,7 @@ const projectData = {
     ],
     image: null,
     github: 'https://github.com/antthein/reading-list',
-    demo: 'https://antthein.github.io/reading-list/'
+    demo: 'https://antthein.me/reading-list/'
   },
   writeandrelease: {
     title: 'Write & Release',
@@ -834,7 +834,7 @@ const projectData = {
     ],
     image: null,
     github: 'https://github.com/antthein/write-and-release',
-    demo: 'https://antthein.github.io/write-and-release/'
+    demo: 'https://antthein.me/write-and-release/'
   }
 };
 
@@ -1293,7 +1293,7 @@ function sendCV(e) {
 
   emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
       to_email: email,
-      cv_url:   "https://antthein.github.io/assets/Antt_Hein_CV_2026.pdf"
+      cv_url:   "https://antthein.me/assets/Antt_Hein_CV_2026.pdf"
     })
     .then(() => {
       cvLastSentAt = Date.now();
