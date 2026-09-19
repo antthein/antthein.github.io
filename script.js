@@ -560,7 +560,7 @@ document.addEventListener('visibilitychange', () => {
 ========================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const text = "Power Platform Developer | Open to Opportunities | Myanmar";
+  const text = "IT / Web Designer | Web Developer | Singapore";
   const element = document.getElementById('typing-text');
 
   if (element) {
@@ -741,6 +741,35 @@ const projectData = {
     image: null,
     github: null,
     demo: null
+  },
+  globalhr: {
+    title: 'Global-HR Staffing Service',
+    category: 'Web Development',
+    description: 'Company website for Global-HR Staffing Service Pte Ltd, a Singapore employment agency. I built and maintain the live site, manage content updates and job postings, and support bilingual candidate outreach.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Content Management', 'Canva'],
+    achievements: [
+      'Built and launched the live company website at globalhrss.com',
+      'Manage ongoing content updates and job postings',
+      'Designed flyers, marketing materials, and the company profile presentation in Canva',
+      'Set up bilingual English/Burmese WhatsApp Business auto-replies for candidate enquiries'
+    ],
+    image: null,
+    github: null,
+    demo: 'https://globalhrss.com'
+  },
+  gie: {
+    title: 'Global Infrastructure Engineering',
+    category: 'Web Development',
+    description: 'Live website for the affiliated training centre at giesg.com. I manage the site, publish updates, and keep content current alongside day-to-day operations support.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Content Management'],
+    achievements: [
+      'Built and maintain the live company website at giesg.com',
+      'Handle content updates and day-to-day publishing',
+      'Support bilingual communications for Singapore and Myanmar audiences'
+    ],
+    image: null,
+    github: null,
+    demo: 'https://giesg.com'
   },
   trp: {
     title: 'TRP Kitchen Solutions',
@@ -950,9 +979,9 @@ const botData = {
   greeting: "Hi there! 👋 I'm Antt's assistant bot. What would you like to know?",
   suggestions: ["Who is Antt?", "Skills & Tech", "Projects", "Contact", "Fun fact 🎲"],
   responses: {
-    "Who is Antt?": "Antt Hein is a Microsoft-certified Power Platform Developer with 3+ years of experience building enterprise apps using Power Apps, Power Automate, Dataverse & Dynamics 365. He recently completed a Mid-Senior Application Developer role at BIM Group (through May 2026) and is based in Myanmar, available for remote work.",
-    "Skills & Tech": "Antt's core stack:\n⚡ Power Platform (Apps, Automate, BI)\n🗄️ Dataverse, CRM & Security Roles\n💻 JavaScript, Python, Flask, Java\n🔗 SharePoint & System Integration\n📜 Currently prepping for PL-400!",
-    "Projects": "Notable work:\n🏢 Myanmar Insurance CRM\n📄 Invoice Management App (auto PDF)\n🚗 Car Booking App\n🍳 TRP Kitchen Solutions\n⚡ LJY Engineering Services\n♟️ Checkers AI Game (Harvard CS50!)",
+    "Who is Antt?": "Antt Hein is an IT / Web Designer in Singapore. He currently builds and manages company websites at Global-HR Staffing Service, designs marketing materials in Canva, and handles IT support. He also has 3+ years as a Microsoft-certified Power Platform developer at BIM Group.",
+    "Skills & Tech": "Antt's core stack:\n🌐 Website design & management\n🎨 Canva, bilingual English/Burmese content\n🛠️ L1/L2 IT support, hardware & networking\n⚡ Power Platform (Apps, Automate, BI)\n💻 HTML, CSS, JavaScript, Python",
+    "Projects": "Notable work:\n🌐 Global-HR (globalhrss.com)\n🏫 GIE Singapore (giesg.com)\n🍳 TRP Kitchen Solutions\n⚡ LJY Engineering Services\n📄 Invoice Management App\n♟️ Checkers AI Game (Harvard CS50!)",
     "Contact": "Reach Antt here:\n📧 antthein.dev@gmail.com\n💼 LinkedIn: antt-hein-bb1a81254\n⏰ Replies within 24 hours!",
     "Fun fact 🎲": "Antt studied Geology before switching to tech! 🪨➡️💻 He also completed Harvard's CS50x and built a full AI-powered Checkers game as his final project. Quite the journey!"
   }

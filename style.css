@@ -1035,6 +1035,12 @@ section {
   font-weight: bold;
 }
 
+.experience-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* =========================
    CERTIFICATIONS SECTION
 ========================= */
@@ -2713,6 +2719,59 @@ section.animated .section-title::after {
 /* =========================
    WEB PROJECT MOCKUPS
 ========================= */
+
+/* Global-HR Staffing */
+.ghr-preview {
+  background: linear-gradient(135deg, #0f4c5c 0%, #1a7a8c 100%);
+}
+
+.ghr-mockup,
+.gie-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.ghr-hero,
+.gie-hero {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.ghr-services,
+.gie-services {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ghr-item,
+.gie-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: white;
+  font-size: 0.75rem;
+}
+
+.ghr-item i,
+.gie-item i {
+  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+/* Global Infrastructure Engineering */
+.gie-preview {
+  background: linear-gradient(135deg, #1b3a4b 0%, #2f6f4e 100%);
+}
 
 /* TRP Kitchen Solutions */
 .kitchen-preview {
