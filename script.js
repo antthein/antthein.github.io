@@ -392,7 +392,7 @@ const projectData = {
       'Set up bilingual English/Burmese WhatsApp Business auto-replies for candidate enquiries'
     ],
     github: null,
-    demo: 'https://globalhrss.com'
+    demo: 'https://www.globalhrss.com'
   },
   gie: {
     title: 'Global Infrastructure Engineering',
@@ -405,7 +405,7 @@ const projectData = {
       'Support bilingual communications for Singapore and Myanmar audiences'
     ],
     github: null,
-    demo: 'https://giesg.com'
+    demo: 'https://www.giesg.com'
   },
   trp: {
     title: 'TRP Kitchen Solutions',
