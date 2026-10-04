@@ -85,6 +85,52 @@ darkQuery?.addEventListener('change', () => {
 });
 
 /* =========================
+   HEXAGON BACKGROUND: cursor spotlight + parallax
+   (mouse/trackpad only; off for touch and reduced motion)
+========================= */
+
+(function initHexInteraction() {
+  const wrap = document.querySelector('.hex-wrap');
+  const spot = document.querySelector('.hex-spot');
+  if (!wrap || !spot || !window.matchMedia) return;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!finePointer.matches || reducedMotion.matches) return;
+
+  const PARALLAX_X = 14; // max px shift
+  const PARALLAX_Y = 10;
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let x = targetX;
+  let y = targetY;
+  let frame = null;
+
+  function tick() {
+    x += (targetX - x) * 0.14;
+    y += (targetY - y) * 0.14;
+
+    const rect = spot.getBoundingClientRect();
+    spot.style.setProperty('--mx', `${(x - rect.left).toFixed(1)}px`);
+    spot.style.setProperty('--my', `${(y - rect.top).toFixed(1)}px`);
+    wrap.style.setProperty('--px', `${((0.5 - x / window.innerWidth) * PARALLAX_X).toFixed(2)}px`);
+    wrap.style.setProperty('--py', `${((0.5 - y / window.innerHeight) * PARALLAX_Y).toFixed(2)}px`);
+
+    frame = Math.abs(targetX - x) + Math.abs(targetY - y) > 0.5 ? requestAnimationFrame(tick) : null;
+  }
+
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    targetX = e.clientX;
+    targetY = e.clientY;
+    spot.classList.add('is-on');
+    if (!frame) frame = requestAnimationFrame(tick);
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', () => spot.classList.remove('is-on'));
+  window.addEventListener('blur', () => spot.classList.remove('is-on'));
+})();
+
+/* =========================
    CARDS → PANELS (open in place, hash-based)
 ========================= */
 

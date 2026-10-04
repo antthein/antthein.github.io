@@ -97,8 +97,9 @@
 
   <div class="app">
 
-    <!-- Moving hexagon background (decorative) -->
-    <div class="hex-bg" aria-hidden="true">
+    <!-- Moving hexagon background (decorative); spotlight + parallax follow the cursor -->
+    <div class="hex-wrap" aria-hidden="true">
+    <div class="hex-bg">
       <svg class="hex-field" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="hexTile" width="52" height="90" patternUnits="userSpaceOnUse">
@@ -113,6 +114,10 @@
         <rect width="100%" height="100%" fill="url(#hexTile)"/>
       </svg>
       <div class="hex-glow"></div>
+    </div>
+    <div class="hex-spot">
+      <svg class="hex-field" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="url(#hexTile)"/></svg>
+    </div>
     </div>
 
     <!-- SIDEBAR: mini profile -->

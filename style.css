@@ -112,6 +112,22 @@ button { cursor: pointer; }
   background: radial-gradient(circle, var(--glow) 0%, transparent 65%);
   animation: hexGlow 18s ease-in-out infinite;
 }
+/* Cursor interaction: wrapper shifts slightly (parallax), spotlight layer
+   shows brighter hexagons around the pointer. Driven by script.js. */
+.hex-wrap {
+  position: absolute; inset: -24px; z-index: 0; pointer-events: none;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
+  will-change: transform;
+}
+.hex-spot {
+  position: absolute; inset: 0; overflow: hidden;
+  opacity: 0; transition: opacity .4s ease;
+  -webkit-mask-image: radial-gradient(circle 240px at var(--mx, -999px) var(--my, -999px), #000 0%, rgba(0,0,0,.4) 45%, transparent 100%);
+          mask-image: radial-gradient(circle 240px at var(--mx, -999px) var(--my, -999px), #000 0%, rgba(0,0,0,.4) 45%, transparent 100%);
+}
+.hex-spot.is-on { opacity: var(--spot-opacity, 0.32); }
+:root[data-theme="dark"] .hex-spot.is-on { opacity: var(--spot-opacity, 0.55); }
+
 @keyframes hexDrift { from { transform: translate(0, 0); } to { transform: translate(104px, 180px); } }
 @keyframes hexGlow { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-420px, 260px); } }
 
