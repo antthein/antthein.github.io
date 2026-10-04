@@ -338,6 +338,37 @@ document.getElementById('certClose')?.addEventListener('click', () => closeModal
 ========================= */
 
 const projectData = {
+  flakehunter: {
+    title: 'FlakeHunter',
+    category: 'Hackathon · IBM Bob 2.0 · Sep 2026 · Team GuGuGaGa',
+    description: 'Flaky tests pass and fail on the same code, wasting CI time and hiding real bugs. FlakeHunter turns the detective work into one command: it re-runs the suite in random order to prove which tests are flaky, then starts a headless IBM Bob agent per flaky test, in parallel, each in its own isolated copy of the project, to find the root cause and make a minimal fix.',
+    tech: ['IBM Bob', 'Python', 'pytest', 'AST analysis', 'Parallel agents', 'Render'],
+    achievements: [
+      'Detects flakiness by proof: the suite runs N times in random order',
+      'One IBM Bob agent per flaky test, in parallel, each in an isolated temp copy',
+      'A fix is kept only if its test passes 50 out of 50 runs; otherwise the original is restored',
+      'Demo suite: 4 flaky tests fixed, CI went from green in 15% of runs to 100%',
+      'Self-contained HTML report with root causes, diffs and estimated CI time saved'
+    ],
+    github: 'https://github.com/antthein/Flake_Hunter',
+    demo: 'https://flake-hunter.onrender.com/',
+    submission: 'https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon/gugugaga/flakehunter-find-and-fix-flaky-tests-with-ibm-bob'
+  },
+  starterkit: {
+    title: 'Project Starter-kit',
+    category: 'Hackathon · IBM Bob · May 2026 · Team Techspire',
+    description: 'Every developer knows the blank-screen moment. Project Starter-kit turns an idea into a complete project blueprint in under two minutes: describe it in a 7-question form and get the recommended stack with reasoning, a folder structure, key starter files and six steps to run it locally.',
+    tech: ['Next.js 16', 'TypeScript', 'Tailwind v4', 'IBM Bob', 'watsonx', 'Claude', 'Vercel'],
+    achievements: [
+      'Built with IBM Bob as the coding partner on every commit',
+      'Pluggable AI engine: watsonx, Anthropic, OpenAI or an offline demo mode, switched with one environment variable',
+      'Blueprint can be copied as Markdown or downloaded as a .md file',
+      'Live, working proof of concept deployed on Vercel'
+    ],
+    github: 'https://github.com/antthein/project_starter-kit',
+    demo: 'https://project-starter-kit-theta.vercel.app/',
+    submission: 'https://lablab.ai/ai-hackathons/ibm-bob-hackathon/techspire/project-starter-kit'
+  },
   crm: {
     title: 'Myanmar Insurance Company (CRM)',
     category: 'Power Platform',
@@ -530,6 +561,7 @@ window.openProjectModal = function (id) {
   actions.replaceChildren();
   if (project.demo) actions.appendChild(makeExternalLink(project.demo, 'Live demo', 'btn-primary'));
   if (project.github) actions.appendChild(makeExternalLink(project.github, 'GitHub', 'btn-outline'));
+  if (project.submission) actions.appendChild(makeExternalLink(project.submission, 'Hackathon page', 'btn-outline'));
 
   openModal(projectModal, document.getElementById('projectModalClose'));
 };
@@ -636,7 +668,7 @@ const botData = {
   responses: {
     'Who is Antt?': 'Antt Hein is an IT & Web Developer in Singapore. He builds and manages company websites at Global-HR Staffing Service, designs marketing materials in Canva, and handles IT support. Before that he spent 3+ years as a Microsoft-certified Power Platform developer at BIM Group.',
     'Skills & tech': 'Core stack:\n• Website design & management\n• Canva, bilingual English/Burmese content\n• L1/L2 IT support, hardware & networking\n• Power Platform (Apps, Automate, BI)\n• HTML, CSS, JavaScript, Python',
-    'Projects': 'Notable work:\n• Global-HR (globalhrss.com)\n• GIE Singapore (giesg.com)\n• TRP Kitchen Solutions\n• LJY Engineering Services\n• Invoice Management App\n• Checkers AI game (Harvard CS50)\nOpen the Projects card for details.',
+    'Projects': 'Notable work:\n• FlakeHunter (IBM Bob 2.0 Hackathon)\n• Project Starter-kit (IBM Bob Hackathon)\n• Global-HR (globalhrss.com)\n• GIE Singapore (giesg.com)\n• TRP Kitchen Solutions\n• LJY Engineering Services\n• Invoice Management App\n• Checkers AI game (Harvard CS50)\nOpen the Projects card for details.',
     'Contact': 'Reach Antt here:\n• antthein.dev@gmail.com\n• LinkedIn: antt-hein-bb1a81254\nHe usually replies within 24 hours.',
     'Fun fact': 'Antt studied Geology before switching to tech. He also completed Harvard\'s CS50x and built a full AI-powered Checkers game as his final project.'
   }
