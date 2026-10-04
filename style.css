@@ -119,14 +119,34 @@ button { cursor: pointer; }
   transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
   will-change: transform;
 }
+@property --spot-r {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 240px;
+}
 .hex-spot {
   position: absolute; inset: 0; overflow: hidden;
-  opacity: 0; transition: opacity .4s ease;
-  -webkit-mask-image: radial-gradient(circle 240px at var(--mx, -999px) var(--my, -999px), #000 0%, rgba(0,0,0,.4) 45%, transparent 100%);
-          mask-image: radial-gradient(circle 240px at var(--mx, -999px) var(--my, -999px), #000 0%, rgba(0,0,0,.4) 45%, transparent 100%);
+  --spot-r: 240px;
+  opacity: 0; transition: opacity .4s ease, --spot-r .35s ease;
+  -webkit-mask-image: radial-gradient(circle var(--spot-r) at var(--mx, -999px) var(--my, -999px), #000 0%, rgba(0,0,0,.4) 45%, transparent 100%);
+          mask-image: radial-gradient(circle var(--spot-r) at var(--mx, -999px) var(--my, -999px), #000 0%, rgba(0,0,0,.4) 45%, transparent 100%);
 }
-.hex-spot.is-on { opacity: var(--spot-opacity, 0.32); }
-:root[data-theme="dark"] .hex-spot.is-on { opacity: var(--spot-opacity, 0.55); }
+.hex-spot.is-on { opacity: 0.4; }
+.hex-spot.is-big { --spot-r: 360px; }
+:root[data-theme="dark"] .hex-spot.is-on { opacity: 0.65; }
+
+/* Hexagon under the cursor lights up; previous cells fade out as a trail */
+.hex-hover { position: absolute; inset: 0; overflow: hidden; }
+.hex-hover polygon {
+  fill: var(--accent);
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+.hex-hover polygon.on { opacity: 0.55; transition: opacity .12s ease; }
+:root[data-theme="dark"] .hex-hover polygon.on { opacity: 0.9; }
+:root[data-theme="light"] .hex-hover polygon { fill-opacity: 0.6; }
 
 @keyframes hexDrift { from { transform: translate(0, 0); } to { transform: translate(104px, 180px); } }
 @keyframes hexGlow { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-420px, 260px); } }
@@ -284,6 +304,42 @@ button { cursor: pointer; }
 }
 @keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .panel { animation: none; } .card { transition: none; } }
+
+/* =========================
+   HOVER: bold "lift" on buttons and cards
+   (jumps up-left with a hard shadow, presses down on click)
+========================= */
+.card, .btn-block, .btn-back, .btn-primary, .btn-outline, .link-btn,
+.social-card, .bot-toggle, .tile {
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+@media (hover: hover) {
+  .card:hover, .btn-block:hover, .btn-back:hover, .btn-primary:hover,
+  .btn-outline:hover, .link-btn:hover, .social-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 var(--line);
+  }
+  .card:hover { transform: translate(-6px, -6px); box-shadow: 6px 6px 0 var(--line); }
+  .btn-block:hover { box-shadow: 4px 4px 0 var(--accent); background: var(--text); color: var(--bg); }
+  .btn-back:hover { box-shadow: 4px 4px 0 var(--accent); }
+  .tile-accent .link-btn:hover { box-shadow: 4px 4px 0 var(--on-accent); }
+  .tile:hover { border-color: var(--accent); }
+  .tile-accent:hover { border-color: var(--line); }
+  .bot-toggle:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--line); }
+  .theme-switch button { transition: background-color .15s ease, color .15s ease; }
+  .theme-switch button:not([aria-pressed="true"]):hover { background: var(--accent); color: var(--on-accent); }
+}
+.card:active, .btn-block:active, .btn-back:active, .btn-primary:active,
+.btn-outline:active, .link-btn:active, .social-card:active, .bot-toggle:active {
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 var(--line);
+  transition-duration: .05s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .btn-block, .btn-back, .btn-primary, .btn-outline, .link-btn, .social-card, .bot-toggle, .tile { transition: none; }
+  .card:hover, .btn-block:hover, .btn-back:hover, .btn-primary:hover, .btn-outline:hover,
+  .link-btn:hover, .social-card:hover, .bot-toggle:hover { transform: none; }
+}
 
 .panel-head {
   flex: none;

@@ -118,16 +118,70 @@ darkQuery?.addEventListener('change', () => {
     frame = Math.abs(targetX - x) + Math.abs(targetY - y) > 0.5 ? requestAnimationFrame(tick) : null;
   }
 
+  /* Hexagon under the cursor: a small pool of cells inside the drifting SVG,
+     so a lit cell moves with the pattern. Grid matches the #hexTile pattern
+     (52 x 90 tile; centres at (26 + 52i, 90j) and (52i, 45 + 90j)). */
+  const hoverField = document.querySelector('.hex-hover .hex-field');
+  const cellGroup = document.getElementById('hexHoverCells');
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const cells = [];
+  let cellIndex = 0;
+  let litCell = null;
+  let litKey = '';
+
+  for (let i = 0; i < 10; i += 1) {
+    const poly = document.createElementNS(SVG_NS, 'polygon');
+    poly.setAttribute('points', '0,-26 22.5,-13 22.5,13 0,26 -22.5,13 -22.5,-13');
+    cellGroup?.appendChild(poly);
+    cells.push(poly);
+  }
+
+  function nearestHexCentre(lx, ly) {
+    const ja = Math.round(ly / 90);
+    const ia = Math.round((lx - 26) / 52);
+    const a = { x: 26 + 52 * ia, y: 90 * ja };
+    const jb = Math.round((ly - 45) / 90);
+    const ib = Math.round(lx / 52);
+    const b = { x: 52 * ib, y: 45 + 90 * jb };
+    return Math.hypot(lx - a.x, ly - a.y) <= Math.hypot(lx - b.x, ly - b.y) ? a : b;
+  }
+
+  function lightCellAt(clientX, clientY) {
+    if (!hoverField || !cells.length) return;
+    const r = hoverField.getBoundingClientRect();
+    const c = nearestHexCentre(clientX - r.left, clientY - r.top);
+    const key = `${c.x},${c.y}`;
+    if (key === litKey) return;
+    litKey = key;
+    litCell?.classList.remove('on');
+    litCell = cells[cellIndex];
+    cellIndex = (cellIndex + 1) % cells.length;
+    litCell.setAttribute('transform', `translate(${c.x} ${c.y})`);
+    litCell.classList.add('on');
+  }
+
+  function clearCell() {
+    litCell?.classList.remove('on');
+    litCell = null;
+    litKey = '';
+  }
+
   document.addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
     targetX = e.clientX;
     targetY = e.clientY;
     spot.classList.add('is-on');
+    spot.classList.toggle('is-big', !!e.target.closest?.('a, button, .tile'));
+    lightCellAt(e.clientX, e.clientY);
     if (!frame) frame = requestAnimationFrame(tick);
   }, { passive: true });
 
-  document.documentElement.addEventListener('mouseleave', () => spot.classList.remove('is-on'));
-  window.addEventListener('blur', () => spot.classList.remove('is-on'));
+  function hideAll() {
+    spot.classList.remove('is-on', 'is-big');
+    clearCell();
+  }
+  document.documentElement.addEventListener('mouseleave', hideAll);
+  window.addEventListener('blur', hideAll);
 })();
 
 /* =========================
