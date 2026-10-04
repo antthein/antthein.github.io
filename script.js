@@ -530,6 +530,20 @@ const projectData = {
 
 const projectModal = document.getElementById('projectModal');
 
+/* Tech tag text → brand colour key (see [data-tool] in style.css) */
+const TOOL_BRANDS = [
+  [/^html/i, 'html'], [/^(css|inline css|css animations)/i, 'css'], [/^(javascript|vanilla javascript)$/i, 'javascript'],
+  [/^typescript/i, 'typescript'], [/^canva$/i, 'canva'], [/^(power apps|canvas app|model-driven app)$/i, 'powerapps'],
+  [/^(power automate|approval flows)$/i, 'powerautomate'], [/^dataverse$/i, 'dataverse'], [/^sharepoint$/i, 'sharepoint'],
+  [/^power bi$/i, 'powerbi'], [/^python$/i, 'python'], [/^django$/i, 'django'], [/^mysql$/i, 'mysql'],
+  [/^next\.js/i, 'nextjs'], [/^tailwind/i, 'tailwind'], [/^vercel$/i, 'vercel'], [/^netlify$/i, 'netlify'],
+  [/^flask$/i, 'flask'], [/^sqlite$/i, 'sqlite'], [/^claude$/i, 'claude'], [/^(ibm bob|watsonx)$/i, 'ibm'], [/^render$/i, 'render']
+];
+function toolBrand(name) {
+  const hit = TOOL_BRANDS.find(([re]) => re.test(name.trim()));
+  return hit ? hit[1] : null;
+}
+
 function makeEl(tag, text, className) {
   const el = document.createElement(tag);
   if (text) el.textContent = text;
@@ -554,7 +568,12 @@ window.openProjectModal = function (id) {
   document.getElementById('projectModalTitle').textContent = project.title;
   document.getElementById('projectModalCategory').textContent = project.category;
   document.getElementById('projectModalDesc').textContent = project.description;
-  document.getElementById('projectModalTech').replaceChildren(...project.tech.map((t) => makeEl('li', t)));
+  document.getElementById('projectModalTech').replaceChildren(...project.tech.map((t) => {
+    const li = makeEl('li', t);
+    const brand = toolBrand(t);
+    if (brand) li.dataset.tool = brand;
+    return li;
+  }));
   document.getElementById('projectModalAchievements').replaceChildren(...project.achievements.map((a) => makeEl('li', a)));
 
   const actions = document.getElementById('projectModalActions');

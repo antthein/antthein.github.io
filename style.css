@@ -424,6 +424,44 @@ button { cursor: pointer; }
   font-size: 14px; font-weight: 500; background: var(--surface);
 }
 
+/* Brand-coloured tool tags. Text colour picked per brand for 4.5:1 contrast. */
+.tags li[data-tool] {
+  background: var(--tool-bg); color: var(--tool-fg);
+  font-weight: 700;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+@media (hover: hover) {
+  .tags li[data-tool]:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tags li[data-tool] { transition: none; }
+  .tags li[data-tool]:hover { transform: none; }
+}
+[data-tool="html"]          { --tool-bg: #E34F26; --tool-fg: #0A0A0A; }
+[data-tool="css"]           { --tool-bg: #1572B6; --tool-fg: #FFFFFF; }
+[data-tool="javascript"]    { --tool-bg: #F7DF1E; --tool-fg: #0A0A0A; }
+[data-tool="typescript"]    { --tool-bg: #3178C6; --tool-fg: #FFFFFF; }
+[data-tool="canva"]         { --tool-bg: #00C4CC; --tool-fg: #0A0A0A; }
+[data-tool="powerapps"]     { --tool-bg: #742774; --tool-fg: #FFFFFF; }
+[data-tool="powerautomate"] { --tool-bg: #0066FF; --tool-fg: #FFFFFF; }
+[data-tool="dataverse"]     { --tool-bg: #088142; --tool-fg: #FFFFFF; }
+[data-tool="sharepoint"]    { --tool-bg: #036C70; --tool-fg: #FFFFFF; }
+[data-tool="powerbi"]       { --tool-bg: #F2C811; --tool-fg: #0A0A0A; }
+[data-tool="python"]        { --tool-bg: #3776AB; --tool-fg: #FFFFFF; }
+[data-tool="django"]        { --tool-bg: #0C4B33; --tool-fg: #FFFFFF; }
+[data-tool="mysql"]         { --tool-bg: #00758F; --tool-fg: #FFFFFF; }
+[data-tool="nextjs"]        { --tool-bg: #000000; --tool-fg: #FFFFFF; }
+[data-tool="tailwind"]      { --tool-bg: #38BDF8; --tool-fg: #0A0A0A; }
+[data-tool="vercel"]        { --tool-bg: #000000; --tool-fg: #FFFFFF; }
+[data-tool="netlify"]       { --tool-bg: #00C7B7; --tool-fg: #0A0A0A; }
+[data-tool="flask"]         { --tool-bg: #3BABC3; --tool-fg: #0A0A0A; }
+[data-tool="sqlite"]        { --tool-bg: #003B57; --tool-fg: #FFFFFF; }
+[data-tool="claude"]        { --tool-bg: #D97757; --tool-fg: #0A0A0A; }
+[data-tool="ibm"]           { --tool-bg: #0F62FE; --tool-fg: #FFFFFF; }
+[data-tool="render"]        { --tool-bg: #46E3B7; --tool-fg: #0A0A0A; }
+:root[data-theme="dark"] [data-tool="nextjs"],
+:root[data-theme="dark"] [data-tool="vercel"] { --tool-bg: #FFFFFF; --tool-fg: #0A0A0A; }
+
 /* Project and lab tiles */
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--gap); }
 .tile {
