@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
@@ -10,11 +10,22 @@
     content="Antt Hein — IT / Web Designer in Singapore. Website design and management, Canva, and IT support.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Antt Hein">
-  <meta name="theme-color" content="#0066cc" id="themeColorMeta">
+  <meta name="theme-color" content="#FAFAFA" id="themeColorMeta">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>
+    /* Apply the saved theme before first paint so there is no flash. */
+    (function () {
+      var pref = 'system';
+      try {
+        pref = localStorage.getItem('theme-pref') || localStorage.getItem('theme') || 'system';
+      } catch (e) {}
+      var dark = pref === 'dark' || (pref === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&display=swap" rel="stylesheet">
   <meta property="og:title" content="Antt Hein | Portfolio">
   <meta property="og:site_name" content="Antt Hein">
   <meta property="og:description" content="IT / Web Designer in Singapore — websites, Canva, and IT support.">
@@ -25,7 +36,6 @@
   <meta name="twitter:title" content="Antt Hein | Portfolio">
   <meta name="twitter:description" content="IT / Web Designer in Singapore — websites, Canva, and IT support.">
   <meta name="twitter:image" content="https://antthein.me/images/profile.jpg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   <script type="application/ld+json">
     {
@@ -68,1261 +78,508 @@
 </head>
 
 <body>
-  <!-- Accessibility: skip to content -->
-  <a class="skip" href="#home">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- NAV: left on desktop, top on mobile/tablet -->
-  <nav class="sidebar" role="navigation">
-    <div class="sidebar-header">
-      <div class="brand" id="brandHome" title="Back to top" style="cursor:pointer;">Antt Hein</div>
-      <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle sidebar" title="Collapse sidebar">
-        <span class="toggle-icon">‹</span>
+  <!-- Inline icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></g></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z"/></symbol>
+  </svg>
+
+  <div class="app">
+
+    <!-- Moving hexagon background (decorative) -->
+    <div class="hex-bg" aria-hidden="true">
+      <svg class="hex-field" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hexTile" width="52" height="90" patternUnits="userSpaceOnUse">
+            <g fill="var(--accent)">
+              <polygon points="26,-26 48.5,-13 48.5,13 26,26 3.5,13 3.5,-13"/>
+              <polygon points="26,64 48.5,77 48.5,103 26,116 3.5,103 3.5,77"/>
+              <polygon points="0,19 22.5,32 22.5,58 0,71 -22.5,58 -22.5,32"/>
+              <polygon points="52,19 74.5,32 74.5,58 52,71 29.5,58 29.5,32"/>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hexTile)"/>
+      </svg>
+      <div class="hex-glow"></div>
+    </div>
+
+    <!-- SIDEBAR: mini profile -->
+    <aside class="side" aria-label="Profile">
+      <div class="side-head">
+        <a href="#" class="brand" id="brandHome">A. Hein</a>
+        <p class="side-role">IT &amp; Web Designer</p>
+      </div>
+
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to work · FT &amp; Contract</p>
+
+      <dl class="facts">
+        <div><dt>Now</dt><dd>Global-HR Staffing</dd></div>
+        <div><dt>Based</dt><dd>Singapore</dd></div>
+        <div><dt>Speaks</dt><dd>EN · MY</dd></div>
+      </dl>
+
+      <button type="button" class="btn-block" id="cvDownloadBtn" onclick="openCVModal()">
+        <span>Download CV</span>
+        <svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>
       </button>
-    </div>
 
-    <button id="modeToggle" class="mode-btn" aria-label="Switch to dark mode">
-      <span class="mode-icon" aria-hidden="true"><i class="fas fa-moon"></i></span>
-      <span class="mode-text">Dark</span>
-    </button>
+      <dl class="stats">
+        <div><dt>3+</dt><dd>years in IT &amp; web</dd></div>
+        <div><dt>2</dt><dd>live company sites</dd></div>
+        <div><dt>8</dt><dd>certifications</dd></div>
+        <div><dt>8</dt><dd>projects</dd></div>
+      </dl>
+    </aside>
 
-    <button class="hamburger" id="navToggle" aria-label="Menu" aria-controls="navMenu" aria-expanded="false">
-      <i class="fas fa-bars"></i>
-    </button>
-    <div class="summary" id="sectionSummary" aria-live="polite"></div>
-
-    <ul class="nav" id="navMenu">
-      <li><a class="nav-link" href="#home" data-label="Home" title="Home">
-          <span class="nav-icon"><i class="fas fa-home"></i></span>
-          <span class="nav-text">Home</span>
-        </a></li>
-      <li><a class="nav-link" href="#about" data-label="About" title="About">
-          <span class="nav-icon"><i class="fas fa-user"></i></span>
-          <span class="nav-text">About</span>
-        </a></li>
-      <li><a class="nav-link" href="#experience" data-label="Experience" title="Experience">
-          <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
-          <span class="nav-text">Experience</span>
-        </a></li>
-      <li><a class="nav-link" href="#projects" data-label="Projects" title="Projects">
-          <span class="nav-icon"><i class="fas fa-code"></i></span>
-          <span class="nav-text">Projects</span>
-        </a></li>
-      <li><a class="nav-link" href="#creative-hub" data-label="Creative Hub" title="Creative Hub">
-          <span class="nav-icon"><i class="fas fa-palette"></i></span>
-          <span class="nav-text">Creative Hub</span>
-        </a></li>
-      <li><a class="nav-link" href="#contact" data-label="Contact" title="Contact">
-          <span class="nav-icon"><i class="fas fa-envelope"></i></span>
-          <span class="nav-text">Contact</span>
-        </a></li>
-      <!-- Guide — mobile only, inside hamburger dropdown -->
-      <li class="nav-guide-mobile-li">
-        <button class="nav-link nav-guide-mobile-btn" id="guideNavBtnMobile" title="Site Guide">
-          <span class="nav-icon"><i class="fas fa-book-open"></i></span>
-          <span class="nav-text">Guide</span>
-        </button>
-      </li>
-    </ul>
-
-    <!-- Guide pinned at very bottom of sidebar -->
-    <div class="nav-guide-item">
-      <button class="nav-link nav-guide-btn" id="guideNavBtn" title="Site Guide">
-        <span class="nav-icon"><i class="fas fa-book-open"></i></span>
-        <span class="nav-text">Guide</span>
-      </button>
-    </div>
-
-    <!-- Guide drawer inside sidebar -->
-    <div class="guide-drawer" id="guideDrawer">
-      <div class="guide-drawer-header">
-        <span><i class="fas fa-book-open"></i> Site Documentation</span>
-        <button class="guide-drawer-close" id="guideDrawerClose" aria-label="Close site guide">&times;</button>
+    <!-- MAIN STAGE -->
+    <main id="main" class="stage" tabindex="-1">
+      <div class="topbar">
+        <div class="theme-switch" role="group" aria-label="Color theme">
+          <button type="button" data-theme-pref="system" aria-pressed="true">System</button>
+          <button type="button" data-theme-pref="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-pref="dark" aria-pressed="false">Dark</button>
+        </div>
       </div>
-      <div class="guide-drawer-body">
 
-        <div class="guide-section">
-          <h4>🛠 Tech Stack</h4>
-          <ul>
-            <li><strong>HTML5</strong> — semantic structure</li>
-            <li><strong>CSS3</strong> — custom properties, Flexbox, Grid, animations</li>
-            <li><strong>Vanilla JavaScript</strong> — no frameworks</li>
-            <li><strong>Font Awesome 6</strong> — icon set</li>
-            <li><strong>Google Fonts</strong> — Inter typeface</li>
-            <li><strong>GitHub Pages</strong> — static hosting</li>
+      <!-- HOME: hero + cards -->
+      <section class="home" id="home" aria-labelledby="heroName">
+        <div class="hero">
+          <div class="hero-text">
+            <h1 id="heroName" class="hero-name">Antt <br>Hein</h1>
+            <p class="hero-intro">Hi, I'm Antt. I build and run websites, Power Apps and the IT support behind them.</p>
+          </div>
+          <figure class="hero-photo">
+            <picture>
+              <source srcset="images/profile-560.webp" type="image/webp">
+              <img src="images/profile.jpg" alt="Antt Hein" width="560" height="560" fetchpriority="high" decoding="async">
+            </picture>
+          </figure>
+        </div>
+
+        <nav class="cards" aria-label="Portfolio sections">
+          <a class="card" href="#experience">
+            <span class="card-top"><span>01 · Experience</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            <span class="card-title">4 roles · 3+ yrs</span>
+            <span class="card-meta">Now at Global-HR Staffing</span>
+          </a>
+          <a class="card" href="#projects">
+            <span class="card-top"><span>02 · Projects</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            <span class="card-title">8 projects</span>
+            <span class="card-meta">2 live sites · 3 Power Apps</span>
+          </a>
+          <a class="card" href="#contact">
+            <span class="card-top"><span>03 · Contact me</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            <span class="card-title">Let's talk</span>
+            <span class="card-meta">Message · Email · LinkedIn</span>
+          </a>
+          <a class="card" href="#certificates">
+            <span class="card-top"><span>04 · Certificates</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            <span class="card-title">8 certificates</span>
+            <span class="card-meta">Latest: Microsoft AB-730</span>
+          </a>
+          <a class="card" href="#social">
+            <span class="card-top"><span>05 · Social media</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            <span class="card-title">Find me online</span>
+            <span class="card-meta">LinkedIn · GitHub</span>
+          </a>
+          <a class="card" href="#lab">
+            <span class="card-top"><span>06 · Lab</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            <span class="card-title">4 side projects</span>
+            <span class="card-meta">Cipher Lab · Morph · +2</span>
+          </a>
+        </nav>
+      </section>
+
+      <!-- PANEL: EXPERIENCE -->
+      <section class="panel" id="experience" aria-labelledby="experienceTitle" hidden>
+        <header class="panel-head">
+          <h2 id="experienceTitle" tabindex="-1">Experience</h2>
+          <button type="button" class="btn-back" data-back><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> All cards</button>
+        </header>
+        <div class="panel-body">
+          <ol class="roles">
+            <li class="role">
+              <p class="role-date">Aug 2026 – Now</p>
+              <div>
+                <h3>IT Recruiter (Apprenticeship) — IT, Digital Marketing &amp; Operations Support</h3>
+                <p class="role-org">Global-HR Staffing Service Pte Ltd · Singapore, on-site</p>
+                <ul>
+                  <li>Built and maintain two company websites (<a href="https://globalhrss.com" target="_blank" rel="noopener noreferrer">globalhrss.com</a>, <a href="https://giesg.com" target="_blank" rel="noopener noreferrer">giesg.com</a>), including content updates and job postings</li>
+                  <li>Design flyers and marketing materials in Canva, and built the company profile presentation</li>
+                  <li>Create TikTok recruitment content for Singapore and Myanmar audiences (<a href="https://www.tiktok.com/@global.hr2001" target="_blank" rel="noopener noreferrer">@global.hr2001</a>)</li>
+                  <li>Set up bilingual (English/Burmese) WhatsApp Business auto-replies for faster candidate replies</li>
+                  <li>Prepare business documents such as letterheads, templates and payslip formats</li>
+                </ul>
+              </div>
+            </li>
+            <li class="role">
+              <p class="role-date">Feb 2025 – May 2026</p>
+              <div>
+                <h3>Mid-Senior Application Developer (Remote)</h3>
+                <p class="role-org">BIM Group of Companies · Myanmar</p>
+                <ul>
+                  <li>Delivered Canvas and Model-Driven Apps on Dataverse and SharePoint: invoice management, car booking, ticketing and quality management</li>
+                  <li>Built multi-stage approval and scheduled flows in Power Automate, including automatic PDF generation after approval</li>
+                  <li>Worked directly with business users on requirements, UAT, deployment and go-live support</li>
+                  <li>Wrote user stories, swim-lane diagrams and technical documentation</li>
+                </ul>
+              </div>
+            </li>
+            <li class="role">
+              <p class="role-date">Feb 2023 – Jan 2025</p>
+              <div>
+                <h3>Application Developer</h3>
+                <p class="role-org">BIM Group of Companies · Myanmar</p>
+                <ul>
+                  <li>Developed and maintained internal and client-facing Power Apps</li>
+                  <li>Designed Dataverse schemas, relationships and security models</li>
+                  <li>Automated manual processes with Power Automate</li>
+                  <li>Supported insurance-client CRM systems with troubleshooting and enhancements</li>
+                </ul>
+              </div>
+            </li>
+            <li class="role">
+              <p class="role-date">Dec 2022 – Jan 2023</p>
+              <div>
+                <h3>IT Support Intern</h3>
+                <p class="role-org">BIM Group of Companies · Myanmar</p>
+                <ul>
+                  <li>Delivered L1/L2 support for hardware, software and network issues</li>
+                  <li>Diagnosed and resolved end-user technical problems</li>
+                </ul>
+              </div>
+            </li>
+          </ol>
+
+          <h3 class="sub-head">Tools I use</h3>
+          <ul class="tags">
+            <li>Website design &amp; management</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Canva</li>
+            <li>Power Apps</li><li>Power Automate</li><li>Dataverse</li><li>SharePoint</li><li>Power BI</li>
+            <li>Python</li><li>Django</li><li>MySQL</li><li>L1/L2 IT support</li><li>Networking</li>
           </ul>
         </div>
+      </section>
 
-        <div class="guide-section">
-          <h4>✨ Features</h4>
-          <ul>
-            <li><strong>Dark / Light mode</strong> — saved to localStorage</li>
-            <li><strong>Typing animation</strong> — hero subtitle cycles through roles</li>
-            <li><strong>Counter animation</strong> — stats animate on scroll</li>
-            <li><strong>Project modals</strong> — click "View Details" on any card</li>
-            <li><strong>Certificate gallery</strong> — keyboard navigable modal</li>
-            <li><strong>Skill bars</strong> — animated on scroll reveal</li>
-            <li><strong>Project filter</strong> — Power Platform / Web Dev</li>
-            <li><strong>Profile coin flip</strong> — click photo to flip avatar ↔ real</li>
-            <li><strong>Scroll animations</strong> — elements fade in on scroll</li>
-            <li><strong>Robot assistant</strong> — rockets in, eyes track cursor, click to chat</li>
-            <li><strong>Contact form</strong> — sends via mailto fallback</li>
-            <li><strong>Fully responsive</strong> — mobile menu, fluid grid</li>
-          </ul>
-        </div>
-
-        <div class="guide-section">
-          <h4>🤖 Built With AI</h4>
-          <ul>
-            <li><strong>Codex</strong> — initial scaffolding</li>
-            <li><strong>Antigravity</strong> — design iteration</li>
-            <li><strong>Claude</strong> — features &amp; polish</li>
-          </ul>
-        </div>
-
-        <div class="guide-section">
-          <h4>📁 File Structure</h4>
-          <pre class="guide-code">antthein.github.io/
-├── index.html
-├── style.css
-├── script.js
-├── images/
-└── assets/</pre>
-        </div>
-
-        <div class="guide-section">
-          <h4>🚀 How to Use</h4>
-          <ul>
-            <li>Navigate sections via this sidebar</li>
-            <li>Click project card → "View Details"</li>
-            <li>Click certifications → gallery opens</li>
-            <li>Click the robot 🤖 to chat</li>
-            <li>Click profile photo to flip</li>
-            <li>Toggle 🌙 for dark mode</li>
-          </ul>
-        </div>
-
-        <div class="guide-section guide-version">
-          <span>v2.0 · Last updated 2026</span>
-        </div>
-
-      </div>
-    </div>
-  </nav>
-
-  <!-- MAIN -->
-  <main>
-    <!-- HOME / HERO -->
-    <section id="home" class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-inner">
-        <div class="profile-container">
-          <div class="profile-img-wrapper">
-            <div class="profile-flip" id="profileFlip" title="Click to flip!" role="button" tabindex="0" aria-label="Profile photo, click to flip between avatar and photo">
-              <div class="profile-flip-inner">
-                <div class="profile-flip-front">
-                  <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x"
-                    sizes="(max-width: 768px) 120px, 180px" alt="Antt Hein - Avatar" class="profile-img"
-                    loading="eager" fetchpriority="high" decoding="async">
-                </div>
-                <div class="profile-flip-back">
-                  <img src="images/profile.jpg" srcset="images/profile.jpg 1x, images/profile.jpg 2x"
-                    sizes="(max-width: 768px) 120px, 180px" alt="Antt Hein" class="profile-img" loading="lazy"
-                    decoding="async">
-                </div>
+      <!-- PANEL: PROJECTS -->
+      <section class="panel" id="projects" aria-labelledby="projectsTitle" hidden>
+        <header class="panel-head">
+          <h2 id="projectsTitle" tabindex="-1">Projects</h2>
+          <button type="button" class="btn-back" data-back><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> All cards</button>
+        </header>
+        <div class="panel-body">
+          <h3 class="sub-head">Websites</h3>
+          <div class="tiles">
+            <article class="tile tile-accent">
+              <p class="tile-kicker">Live site</p>
+              <h4>Global-HR Staffing Service</h4>
+              <p>Company website for a Singapore employment agency. I built it and keep content and job postings current.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('globalhr')">Details</button>
+                <a href="https://globalhrss.com" target="_blank" rel="noopener noreferrer" class="link-btn">Visit <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
               </div>
-            </div>
-            <div class="status-indicator"></div>
-          </div>
-        </div>
-        <h1 class="hero-title">
-          <span class="greeting">Hello, I'm</span>
-          <span class="name">Antt Hein</span>
-        </h1>
-        <p class="hero-subtitle">
-          <span class="typewriter" id="typing-text"></span>
-        </p>
-        <div class="hero-cta">
-          <div class="hero-cta-row hero-cta-row--top">
-            <a href="#projects" class="btn-hero">View My Work</a>
-            <a href="#contact" class="btn-hero-outline">Get In Touch</a>
-            <button type="button" class="btn-hero-outline btn-download" id="cvDownloadBtn" onclick="openCVModal()">
-              <i class="fas fa-download" aria-hidden="true"></i> Download CV
-            </button>
-          </div>
-          <div class="hero-cta-row hero-cta-row--bottom">
-            <a href="#creative-hub" class="btn-hero-outline">Creative Hub</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <p class="lead">
-              IT and web professional with 3+ years in enterprise IT, web development, and user support.
-              Currently at Global-HR Staffing Service in Singapore, building and managing two live company
-              websites, designing marketing materials in Canva, and handling IT and operations support.
-            </p>
-            <p>
-              Background includes L1/L2 IT support, bilingual English/Burmese content, and Microsoft-certified
-              Power Platform work — Power Apps, Power Automate, Dataverse, and Dynamics 365. Comfortable
-              turning business needs into practical, user-friendly websites and tools.
-            </p>
-            <div class="stats">
-              <div class="stat">
-                <span class="stat-number" data-target="3">0</span>
-                <span class="stat-label">Years Experience</span>
+            </article>
+            <article class="tile tile-accent">
+              <p class="tile-kicker">Live site</p>
+              <h4>Global Infrastructure Engineering</h4>
+              <p>Live site for the affiliated training centre. I manage content updates and day-to-day publishing.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('gie')">Details</button>
+                <a href="https://giesg.com" target="_blank" rel="noopener noreferrer" class="link-btn">Visit <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
               </div>
-              <div class="stat">
-                <span class="stat-number" data-target="5">0</span>
-                <span class="stat-label">Major Projects</span>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Client website</p>
+              <h4>TRP Kitchen Solutions</h4>
+              <p>Website for a Singapore commercial kitchen provider: design, supply, installation and maintenance.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('trp')">Details</button>
               </div>
-              <div class="stat">
-                <span class="stat-number" data-target="8">0</span>
-                <span class="stat-label">Certifications</span>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Client website</p>
+              <h4>LJY Engineering Services</h4>
+              <p>B2B site for an electrical, air-conditioning and construction company, built for quote requests.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('ljy')">Details</button>
               </div>
-            </div>
-          </div>
-          <div class="skills-section">
-            <h3>Core Technical Skills</h3>
-            <div class="skills-grid">
-              <div class="skill-category">
-                <h4>Power Platform</h4>
-                <p class="skill-label">Power Apps (Canvas & Model-Driven), Power Automate, Power BI</p>
-                <div class="skill-bar">
-                  <div class="skill-progress" data-width="70%"></div>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>Dataverse & CRM</h4>
-                <p class="skill-label">Dataverse, Table design, relationships, security roles, business rules</p>
-                <div class="skill-bar">
-                  <div class="skill-progress" data-width="50%"></div>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>Web Design &amp; Management</h4>
-                <p class="skill-label">Website building, content updates, job postings, Canva, bilingual content</p>
-                <div class="skill-bar">
-                  <div class="skill-progress" data-width="75%"></div>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>IT Support</h4>
-                <p class="skill-label">L1/L2 setup, troubleshooting, hardware, software, and networking</p>
-                <div class="skill-bar">
-                  <div class="skill-progress" data-width="70%"></div>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>Development</h4>
-                <p class="skill-label">JavaScript, HTML, CSS, Python, Java, Django, MySQL</p>
-                <div class="skill-bar">
-                  <div class="skill-progress" data-width="65%"></div>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>Automation & Integration</h4>
-                <p class="skill-label">Approval flows, scheduled flows, error handling, SharePoint integration</p>
-                <div class="skill-bar">
-                  <div class="skill-progress" data-width="70%"></div>
-                </div>
-              </div>
-            </div>
+            </article>
           </div>
 
-          <div class="skills-section">
-            <h3>Current Learning Journey</h3>
-            <div class="learning-grid">
-              <div class="learning-item">
-                <div class="learning-icon"><i class="fas fa-laptop-code"></i></div>
-                <div class="learning-content">
-                  <h4>Full Stack Development with AI</h4>
-                  <p>NUS School of Computing - <span id="courseStatus">Completed</span></p>
-                  <div class="progress">
-                    <div class="progress-bar" id="courseProgressBar" style="width: 0%"></div>
-                  </div>
-                  <small id="courseProgressLabel" style="color:var(--text-secondary);font-size:0.7rem;margin-top:0.25rem;display:block;"></small>
-                </div>
+          <h3 class="sub-head">Power Platform</h3>
+          <div class="tiles">
+            <article class="tile">
+              <p class="tile-kicker">Model-Driven App</p>
+              <h4>Myanmar Insurance CRM</h4>
+              <p>Support for a Dataverse CRM: fixed functional issues, added JavaScript customizations, tuned workflows.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('crm')">Details</button>
               </div>
-
-
-
-              <div class="learning-item">
-                <div class="learning-icon"><i class="fas fa-certificate"></i></div>
-                <div class="learning-content">
-                  <h4>PL-400 Certification Prep</h4>
-                  <p>Preparing for Microsoft Power Platform Developer Exam</p>
-                  <div class="progress">
-                    <div class="progress-bar" style="width: 30%"></div>
-                  </div>
-                </div>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Power Apps · Automate</p>
+              <h4>Invoice Management App</h4>
+              <p>SharePoint-backed app with multi-level approval flows and automatic PDF generation.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('invoice')">Details</button>
               </div>
-            </div>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Canvas App</p>
+              <h4>Car Booking App</h4>
+              <p>Self-service vehicle booking with role-based access and automated confirmations.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('carbooking')">Details</button>
+              </div>
+            </article>
+          </div>
+
+          <h3 class="sub-head">Coursework</h3>
+          <div class="tiles">
+            <article class="tile">
+              <p class="tile-kicker">Harvard CS50x</p>
+              <h4>Checkers Game</h4>
+              <p>Full-stack Checkers with an AI opponent, undo/redo and game history (Flask, SQLite).</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('checkers')">Details</button>
+                <a href="https://github.com/antthein/checkers" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
+              </div>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <div class="container">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="experience-timeline">
-          <div class="experience-item">
-            <div class="experience-date">Aug 2026 - Present</div>
-            <div class="experience-content">
-              <h3>IT Recruiter (Apprenticeship) — IT, Digital Marketing &amp; Operations Support</h3>
-              <h4>Global-HR Staffing Service Pte Ltd | Singapore, On-site</h4>
-              <ul>
-                <li>Built and maintain two company websites (<a href="https://globalhrss.com" target="_blank" rel="noopener noreferrer">globalhrss.com</a> and <a href="https://giesg.com" target="_blank" rel="noopener noreferrer">giesg.com</a>), including content updates and job postings</li>
-                <li>Design flyers and marketing materials in Canva and built the company profile presentation</li>
-                <li>Create recruitment content for TikTok, including marketing video, for Singapore and Myanmar audiences (<a href="https://www.tiktok.com/@global.hr2001" target="_blank" rel="noopener noreferrer">@global.hr2001</a>)</li>
-                <li>Set up bilingual (English/Burmese) WhatsApp Business auto-replies to handle candidate enquiries faster</li>
-                <li>Prepare business documents such as letterheads, templates, and payslip formats</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-date">Feb 2025 - May 2026</div>
-            <div class="experience-content">
-              <h3>Mid-Senior Application Developer (Remote)</h3>
-              <h4>BIM Group of Companies | Myanmar</h4>
-              <ul>
-                <li>Designed and delivered Canvas and Model-Driven Apps integrated with Dataverse and SharePoint, including invoice management, car booking, ticketing, and quality management systems</li>
-                <li>Built multi-stage approval and scheduled workflows in Power Automate, including automated PDF generation after approval</li>
-                <li>Worked directly with business users on requirements, UAT, deployment, and go-live support</li>
-                <li>Wrote user stories, swim-lane diagrams, and technical documentation</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-date">Feb 2023 - Jan 2025</div>
-            <div class="experience-content">
-              <h3>Application Developer</h3>
-              <h4>BIM Group of Companies | Myanmar</h4>
-              <ul>
-                <li>Developed and maintained internal and client-facing Power Apps to improve business efficiency</li>
-                <li>Designed Dataverse schemas, relationships, and security models</li>
-                <li>Automated manual processes using Power Automate, reducing operational workload</li>
-                <li>Supported CRM systems for insurance clients, including troubleshooting and enhancements</li>
-                <li>Worked closely with business users to improve system usability and data accuracy</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-date">Dec 2022 - Jan 2023</div>
-            <div class="experience-content">
-              <h3>IT Support Intern</h3>
-              <h4>BIM Group of Companies | Myanmar</h4>
-              <ul>
-                <li>Delivered L1/L2 IT support covering hardware, software, and network issues</li>
-                <li>Diagnosed and resolved end-user technical problems efficiently</li>
-                <li>Gained foundational experience in enterprise IT environments and customer support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICATIONS -->
-    <section id="certifications">
-      <div class="container">
-        <h2 class="section-title">Certifications & Education</h2>
-        <div class="cert-grid">
-          <div class="cert-category">
-            <h3>Certifications</h3>
-            <div class="cert-list">
-              <div class="cert-item" data-cert-images="assets/AB730_AI_Business_Professional.png" data-cert-link="https://learn.microsoft.com/en-us/users/antthein-2617/credentials/certification/ai-business-professional?tab=credentials-tab">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>AB-730: Microsoft Certified AI Business Professional</h4>
-                  <p>Microsoft · Earned April 17, 2026</p>
-                  <small style="color:#0ea5e9;font-size:0.7rem;font-weight:600;">✦ NEW</small>
-                </div>
-              </div>
-              <div class="cert-item" data-cert-images="assets/Google_Technical_Support.png">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>Technical Support Fundamental</h4>
-                  <p>Google</p>
-                </div>
-              </div>
-              <div class="cert-item" data-cert-images="assets/CS50x.png,assets/CS50x_verified.png">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>CS50x: CS50's Introduction to Computer Science</h4>
-                  <p>Harvard University</p>
-                </div>
-              </div>
-              <div class="cert-item" data-cert-images="assets/PL 900.png">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>PL-900: Microsoft Power Platform Fundamentals</h4>
-                  <p>Microsoft</p>
-                </div>
-              </div>
-              <div class="cert-item" data-cert-images="assets/PL 7001.png,assets/PL 7002.png,assets/PL 7003.png">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>PL-7001, 7002, 7003: Microsoft Applied Skills courses</h4>
-                  <p>Microsoft</p>
-                </div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>Power BI Power Apps & Automate Foundation | BIM Training</h4>
-                  <p>BIM Group</p>
-                </div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>Advanced Power Apps & Automate | BIM Training</h4>
-                  <p>BIM Group</p>
-                </div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon">🏆</div>
-                <div class="cert-info">
-                  <h4>Computational Thinking Course</h4>
-                  <p>American Center Yangon</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cert-category">
-            <h3>Education</h3>
-            <div class="cert-list">
-              <div class="cert-item">
-                <div class="cert-icon">🎓</div>
-                <div class="cert-info">
-                  <h4>Advance Diploma in Electrical and Electronic Engineering (ADEEE)</h4>
-                  <p>June 2025 - May 2026 · Singapore</p>
-                  <small>Digital logic, electronic devices, linear ICs, power and energy systems.</small>
-                </div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon">🎓</div>
-                <div class="cert-info">
-                  <h4>Diploma in Web Technology (DWT) Singapore</h4>
-                  <p>May 2024 - April 2025</p>
-                  <small>Completed coursework in frontend and backend development using HTML, CSS, Python, and Java,
-                    with database integration through Django and MySQL.</small>
-                </div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon">🎓</div>
-                <div class="cert-info">
-                  <h4>Diploma in Web Development (DWD) Yangon, Myanmar</h4>
-                  <p>Nov 2022 - Jun 2023</p>
-                  <small>Gaining practical experience in web development, database management, and IT support using
-                    HTML, CSS, JavaScript, and PHP.</small>
-                </div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon">🎓</div>
-                <div class="cert-info">
-                  <h4>BSc (Geology) – University of Bago (Third Year)</h4>
-                  <p>2015 - 2019</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="projects">
-      <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">Showcasing innovative solutions that drive business transformation</p>
-
-        <div class="projects-filter">
-          <button class="filter-btn active" data-filter="all">All Projects</button>
-          <button class="filter-btn" data-filter="power-platform">Power Platform</button>
-          <button class="filter-btn" data-filter="web-dev">Web Development</button>
-          <button class="filter-btn" data-filter="automation">Automation</button>
-        </div>
-
-        <div class="projects-grid">
-          <article class="project-card animate-on-scroll" data-category="power-platform">
-            <div class="project-image">
-              <div class="project-preview crm-preview">
-                <div class="mock-header">
-                  <div class="mock-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mock-title">CRM Support</span>
-                </div>
-                <div class="mock-content">
-                  <div class="mock-sidebar">
-                    <div class="mock-nav-item active"></div>
-                    <div class="mock-nav-item"></div>
-                    <div class="mock-nav-item"></div>
-                  </div>
-                  <div class="mock-main">
-                    <div class="mock-card"></div>
-                    <div class="mock-card"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('crm')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Myanmar Insurance Company (CRM)</h3>
-              <p>Provided support for a Model-Driven App built on Dataverse. Diagnosed functional issues, created
-                JavaScript customizations, and optimized workflows.</p>
-              <div class="project-tech">
-                <span>Model-Driven App</span>
-                <span>Dataverse</span>
-                <span>JavaScript</span>
-              </div>
-              <div class="project-metrics">
-                <span>Workflow Optimization</span>
-                <span>Custom Logic</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card animate-on-scroll" data-category="automation">
-            <div class="project-image">
-              <div class="project-preview workflow-preview">
-                <div class="mock-header">
-                  <div class="mock-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mock-title">Invoice App</span>
-                </div>
-                <div class="workflow-diagram">
-                  <div class="workflow-step">
-                    <div class="step-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                    <span>Invoice</span>
-                  </div>
-                  <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
-                  <div class="workflow-step">
-                    <div class="step-icon"><i class="fas fa-user-check"></i></div>
-                    <span>Approval</span>
-                  </div>
-                  <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
-                  <div class="workflow-step">
-                    <div class="step-icon"><i class="fas fa-file-pdf"></i></div>
-                    <span>PDF Gen</span>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('invoice')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Invoice Management App</h3>
-              <p>Power Apps solution using SharePoint database with automated approval workflows and auto-PDF generation
-                for streamlined record-keeping.</p>
-              <div class="project-tech">
-                <span>Power Apps</span>
-                <span>Power Automate</span>
-                <span>SharePoint</span>
-              </div>
-              <div class="project-metrics">
-                <span>Auto PDF Gen</span>
-                <span>Streamlined Reviews</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card animate-on-scroll" data-category="power-platform">
-            <div class="project-image">
-              <div class="project-preview todo-preview">
-                <div class="mock-header">
-                  <div class="mock-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mock-title">Car Booking</span>
-                </div>
-                <div class="todo-interface">
-                  <div class="todo-input" style="background:none; border:1px solid #eee;"></div>
-                  <div class="todo-item completed">
-                    <div class="todo-check"><i class="fas fa-car"></i></div>
-                    <span>Request Vehicle</span>
-                  </div>
-                  <div class="todo-item">
-                    <div class="todo-check"><i class="fas fa-calendar-check"></i></div>
-                    <span>Manager Approval</span>
-                  </div>
-                  <div class="todo-item">
-                    <div class="todo-check"><i class="fas fa-check-double"></i></div>
-                    <span>Booking Confirmed</span>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('carbooking')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Car Booking App</h3>
-              <p>Canvas App for managing car booking requests with SharePoint backend. Features intuitive UI, role-based
-                access controls, and automated confirmation workflows.</p>
-              <div class="project-tech">
-                <span>Canvas App</span>
-                <span>SharePoint</span>
-                <span>Power Automate</span>
-              </div>
-              <div class="project-metrics">
-                <span>Role-Based Access</span>
-                <span>Automated Approvals</span>
-              </div>
-            </div>
-          </article>
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview ghr-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">Global-HR</span>
-                </div>
-                <div class="ghr-mockup">
-                  <div class="ghr-hero">Staffing &amp; Job Postings</div>
-                  <div class="ghr-services">
-                    <div class="ghr-item"><i class="fas fa-globe"></i><span>Website</span></div>
-                    <div class="ghr-item"><i class="fas fa-briefcase"></i><span>Jobs</span></div>
-                    <div class="ghr-item"><i class="fas fa-pen-nib"></i><span>Canva</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <a href="https://globalhrss.com" target="_blank" rel="noopener noreferrer" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
-                  <button class="project-link" onclick="openProjectModal('globalhr')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Global-HR Staffing Service</h3>
-              <p>Company website for a Singapore employment agency. I built and maintain the live site, including content updates and job postings.</p>
-              <div class="project-tech">
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>JavaScript</span>
-                <span>Content Management</span>
-              </div>
-              <div class="project-metrics">
-                <span>Live Client Site</span>
-                <span>Job Postings</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview gie-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">GIE Singapore</span>
-                </div>
-                <div class="gie-mockup">
-                  <div class="gie-hero">Training &amp; Engineering</div>
-                  <div class="gie-services">
-                    <div class="gie-item"><i class="fas fa-graduation-cap"></i><span>Training</span></div>
-                    <div class="gie-item"><i class="fas fa-cogs"></i><span>Services</span></div>
-                    <div class="gie-item"><i class="fas fa-sync"></i><span>Updates</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <a href="https://giesg.com" target="_blank" rel="noopener noreferrer" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
-                  <button class="project-link" onclick="openProjectModal('gie')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Global Infrastructure Engineering</h3>
-              <p>Live company site for the affiliated training centre. I manage the website, content updates, and day-to-day publishing.</p>
-              <div class="project-tech">
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>JavaScript</span>
-                <span>Content Management</span>
-              </div>
-              <div class="project-metrics">
-                <span>Live Client Site</span>
-                <span>Ongoing Management</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview kitchen-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">TRP Kitchen</span>
-                </div>
-                <div class="kitchen-mockup">
-                  <div class="kitchen-hero">Complete Commercial Kitchen Solutions</div>
-                  <div class="kitchen-services">
-                    <div class="ks-item"><i class="fas fa-utensils"></i><span>Design</span></div>
-                    <div class="ks-item"><i class="fas fa-tools"></i><span>Install</span></div>
-                    <div class="ks-item"><i class="fas fa-wrench"></i><span>Maintain</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('trp')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>TRP Kitchen Solutions</h3>
-              <p>Professional website for a Singapore-based commercial kitchen provider serving the F&B industry with design, supply, installation, and maintenance services.</p>
-              <div class="project-tech">
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>JavaScript</span>
-                <span>Netlify</span>
-              </div>
-              <div class="project-metrics">
-                <span>Client Website</span>
-                <span>Responsive Design</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview engineering-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">LJY Engineering</span>
-                </div>
-                <div class="engineering-mockup">
-                  <div class="eng-title">Engineering Services</div>
-                  <div class="eng-services">
-                    <div class="eng-item"><i class="fas fa-bolt"></i><span>Electrical</span></div>
-                    <div class="eng-item"><i class="fas fa-wind"></i><span>HVAC</span></div>
-                    <div class="eng-item"><i class="fas fa-hard-hat"></i><span>Construction</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('ljy')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>LJY Engineering Services</h3>
-              <p>Corporate website for a Singapore engineering company offering electrical, air-conditioning, and construction services. Designed for B2B credibility and client inquiries.</p>
-              <div class="project-tech">
-                <span>HTML5</span>
-                <span>JavaScript</span>
-                <span>Responsive Design</span>
-                <span>Netlify</span>
-              </div>
-              <div class="project-metrics">
-                <span>B2B Corporate Site</span>
-                <span>Quote Request Flow</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview checkers-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">Checkers · CS50</span>
-                </div>
-                <div class="checkerboard">
-                  <div class="cb-row">
-                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
-                    <div class="cb dark"><div class="cb-piece red"></div></div><div class="cb light"></div>
-                  </div>
-                  <div class="cb-row">
-                    <div class="cb light"></div><div class="cb dark"></div>
-                    <div class="cb light"></div><div class="cb dark"></div>
-                  </div>
-                  <div class="cb-row">
-                    <div class="cb dark"></div><div class="cb light"></div>
-                    <div class="cb dark"><div class="cb-piece black"></div></div><div class="cb light"></div>
-                  </div>
-                  <div class="cb-row">
-                    <div class="cb light"></div><div class="cb dark"><div class="cb-piece black"></div></div>
-                    <div class="cb light"></div><div class="cb dark"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <button class="project-link" onclick="openProjectModal('checkers')">View Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Checkers Game (CS50)</h3>
-              <p>Full-stack web implementation of classic Checkers built for Harvard's CS50x. Features an AI opponent, local multiplayer, glassmorphism UI, undo/redo, and game history tracking.</p>
-              <div class="project-tech">
-                <span>Python / Flask</span>
-                <span>JavaScript</span>
-                <span>SQLite</span>
-                <span>CSS3</span>
-              </div>
-              <div class="project-metrics">
-                <span>Harvard CS50x</span>
-                <span>AI Opponent</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-    <section id="creative-hub" class="section-alt">
-      <div class="container">
-        <p class="section-eyebrow">Side projects</p>
-        <h2 class="section-title">My Creative Hub</h2>
-        <p class="section-subtitle">Playful side projects I built to experiment, learn, and ship fast.</p>
-
-        <div class="projects-grid">
-          <!-- Cipher Lab -->
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview cipher-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">Cipher Lab</span>
-                </div>
-                <div class="cipher-mockup">
-                  <div class="cipher-row">
-                    <span class="cipher-label">Input</span>
-                    <span class="cipher-text">HELLO</span>
-                  </div>
-                  <div class="cipher-arrow"><i class="fas fa-arrow-right"></i> Caesar +3 <i class="fas fa-arrow-right"></i></div>
-                  <div class="cipher-row">
-                    <span class="cipher-label">Output</span>
-                    <span class="cipher-text cipher-encoded">KHOOR</span>
-                  </div>
-                  <div class="cipher-methods">
-                    <span class="cipher-tag active">Caesar</span>
-                    <span class="cipher-tag">XOR</span>
-                    <span class="cipher-tag">Base64</span>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <a href="https://github.com/antthein/cipher-lab" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fab fa-github"></i></a>
-                  <a href="https://antthein.me/cipher-lab/" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
-                  <button class="project-link" onclick="openProjectModal('cipherlab')">Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Cipher Lab</h3>
-              <p>Interactive playground for Caesar, XOR, and Base64 transformations with quick visual mapping and output copy tools.</p>
-              <div class="project-tech">
-                <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
-              </div>
-              <div class="project-metrics">
-                <span>Educational Tool</span><span>Interactive UI</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Reading List -->
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview reading-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">Reading List</span>
-                </div>
-                <div class="reading-mockup">
-                  <div class="reading-stats">
-                    <span class="reading-stat"><i class="fas fa-book-open"></i> 12 Books</span>
-                    <span class="reading-stat done"><i class="fas fa-check"></i> 8 Done</span>
-                  </div>
-                  <div class="reading-book">
-                    <span class="book-title">Atomic Habits</span>
-                    <div class="book-bar"><div class="book-fill" style="width:100%"></div></div>
-                  </div>
-                  <div class="reading-book">
-                    <span class="book-title">Deep Work</span>
-                    <div class="book-bar"><div class="book-fill" style="width:65%"></div></div>
-                  </div>
-                  <div class="reading-book">
-                    <span class="book-title">The Pragmatic Programmer</span>
-                    <div class="book-bar"><div class="book-fill" style="width:30%"></div></div>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <a href="https://github.com/antthein/reading-list" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fab fa-github"></i></a>
-                  <a href="https://antthein.me/reading-list/" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
-                  <button class="project-link" onclick="openProjectModal('readinglist')">Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Reading List</h3>
-              <p>Minimal reading companion to track completed books, filter by category, and visualize your reading progress.</p>
-              <div class="project-tech">
-                <span>HTML5</span><span>Vanilla JS</span><span>LocalStorage</span>
-              </div>
-              <div class="project-metrics">
-                <span>Minimal Design</span><span>Local Persistence</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Write & Release -->
-          <article class="project-card animate-on-scroll" data-category="web-dev">
-            <div class="project-image">
-              <div class="project-preview writerelease-preview">
-                <div class="mock-header">
-                  <div class="mock-dots"><span></span><span></span><span></span></div>
-                  <span class="mock-title">Write &amp; Release</span>
-                </div>
-                <div class="writerelease-mockup">
-                  <div class="wr-mini-header">
-                    <span class="wr-mark">✦</span>
-                    <span class="wr-mini-tagline">Put words down — then let them go</span>
-                  </div>
-                  <div class="wr-card">
-                    <div class="wr-label">What's on your mind?</div>
-                    <div class="wr-textarea">Today felt heavy, but I know it will pass…</div>
-                    <div class="wr-meta">
-                      <span class="wr-prompt">What are you ready to leave behind?</span>
-                      <span class="wr-count">42 / 2000</span>
-                    </div>
-                  </div>
-                  <div class="wr-actions">
-                    <span class="wr-ghost">Clear</span>
-                    <span class="wr-btn"><i class="fas fa-arrow-up"></i> Release</span>
-                  </div>
-                </div>
-              </div>
-              <div class="project-overlay">
-                <div class="project-links">
-                  <a href="https://github.com/antthein/write-and-release" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fab fa-github"></i></a>
-                  <a href="https://antthein.me/write-and-release/" target="_blank" rel="noopener" class="project-link project-link-sm"><i class="fas fa-external-link-alt"></i></a>
-                  <button class="project-link" onclick="openProjectModal('writeandrelease')">Details</button>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>Write &amp; Release</h3>
-              <p>Mindful micro-app to write private thoughts, then release them with calm animations — nothing is ever saved.</p>
-              <div class="project-tech">
-                <span>HTML5</span><span>CSS Animations</span><span>JavaScript</span>
-              </div>
-              <div class="project-metrics">
-                <span>Emotional UX</span><span>Privacy-first</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="container">
-        <h2 class="section-title">Let's Work Together</h2>
-        <p class="section-subtitle">Open to full-time and contract opportunities — let's discuss how I can help your team.</p>
-
-        <div class="contact-content">
+      <!-- PANEL: CONTACT -->
+      <section class="panel" id="contact" aria-labelledby="contactTitle" hidden>
+        <header class="panel-head">
+          <h2 id="contactTitle" tabindex="-1">Contact</h2>
+          <button type="button" class="btn-back" data-back><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> All cards</button>
+        </header>
+        <div class="panel-body contact-grid">
           <div class="contact-info">
-            <div class="contact-card">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <h3>Email</h3>
-              <p><a href="mailto:antthein.dev@gmail.com">antthein.dev@gmail.com</a></p>
-            </div>
-
-            <div class="contact-card">
-              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-              <h3>LinkedIn</h3>
-              <p><a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer">Connect with
-                  me</a></p>
-            </div>
-
-            <div class="contact-card">
-              <div class="contact-icon"><i class="fas fa-globe"></i></div>
-              <h3>Location</h3>
-              <p>Singapore · Open to new roles</p>
-            </div>
-
-            <div class="availability">
-              <div class="availability-status">
-                <div class="status-dot"></div>
-                <span>Open to full-time &amp; contract roles</span>
-              </div>
-              <p>Typical response time: 24 hours</p>
-            </div>
+            <p class="lead">Open to full-time and contract roles. I usually reply within 24 hours.</p>
+            <ul class="contact-list">
+              <li><span>Email</span><a href="mailto:antthein.dev@gmail.com">antthein.dev@gmail.com</a></li>
+              <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer">Connect <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a></li>
+              <li><span>Location</span><span>Singapore</span></li>
+            </ul>
           </div>
 
-          <div class="contact-form-container">
-            <form id="contactForm" class="contact-form" novalidate>
-              <div class="form-group">
-                <label for="name">Your Name</label>
-                <input id="name" name="name" type="text" required minlength="2" placeholder="John Doe" />
-                <small class="error" aria-live="polite"></small>
-              </div>
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" required minlength="2" autocomplete="name" />
+              <small class="error" aria-live="polite"></small>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input id="email" name="_replyto" type="email" required autocomplete="email" />
+              <small class="error" aria-live="polite"></small>
+            </div>
+            <div class="form-group">
+              <label for="subject">Reason</label>
+              <select id="subject" name="subject" required>
+                <option value="">Choose one</option>
+                <option value="full-time">Full-time role</option>
+                <option value="contract">Contract / freelance</option>
+                <option value="website">Website project</option>
+                <option value="it-support">IT support</option>
+                <option value="other">Other</option>
+              </select>
+              <small class="error" aria-live="polite"></small>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="3" required minlength="10"></textarea>
+              <small class="error" aria-live="polite"></small>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">
+                <span class="btn-text">Send message</span>
+                <span class="btn-loading">Sending…</span>
+              </button>
+              <a id="mailtoLink" class="btn-outline" href="mailto:antthein.dev@gmail.com?subject=Portfolio%20Contact">Use email app</a>
+            </div>
+            <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
 
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input id="email" name="_replyto" type="email" required placeholder="john@company.com" />
-                <small class="error" aria-live="polite"></small>
-              </div>
+      <!-- PANEL: CERTIFICATES -->
+      <section class="panel" id="certificates" aria-labelledby="certificatesTitle" hidden>
+        <header class="panel-head">
+          <h2 id="certificatesTitle" tabindex="-1">Certificates</h2>
+          <button type="button" class="btn-back" data-back><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> All cards</button>
+        </header>
+        <div class="panel-body">
+          <h3 class="sub-head">Certifications</h3>
+          <ul class="cert-list">
+            <li><button type="button" class="cert-item" data-cert-images="assets/AB730_AI_Business_Professional.png"><strong>AB-730: Microsoft Certified AI Business Professional</strong><span>Microsoft · Apr 2026 · View</span></button></li>
+            <li><button type="button" class="cert-item" data-cert-images="assets/PL 900.png"><strong>PL-900: Power Platform Fundamentals</strong><span>Microsoft · View</span></button></li>
+            <li><button type="button" class="cert-item" data-cert-images="assets/PL 7001.png,assets/PL 7002.png,assets/PL 7003.png"><strong>PL-7001 / 7002 / 7003: Applied Skills</strong><span>Microsoft · View 3</span></button></li>
+            <li><button type="button" class="cert-item" data-cert-images="assets/CS50x.png,assets/CS50x_verified.png"><strong>CS50x: Introduction to Computer Science</strong><span>Harvard University · View 2</span></button></li>
+            <li><button type="button" class="cert-item" data-cert-images="assets/Google_Technical_Support.png"><strong>Technical Support Fundamentals</strong><span>Google · View</span></button></li>
+            <li><div class="cert-item is-static"><strong>Power BI, Power Apps &amp; Automate Foundation</strong><span>BIM Training</span></div></li>
+            <li><div class="cert-item is-static"><strong>Advanced Power Apps &amp; Automate</strong><span>BIM Training</span></div></li>
+            <li><div class="cert-item is-static"><strong>Computational Thinking</strong><span>American Center Yangon</span></div></li>
+          </ul>
 
-              <div class="form-group">
-                <label for="subject">Project Type</label>
-                <select id="subject" name="subject" required>
-                  <option value="">Select project type</option>
-                  <option value="power-platform">Power Platform Development</option>
-                  <option value="automation">Process Automation</option>
-                  <option value="integration">System Integration</option>
-                  <option value="consulting">Technical Consulting</option>
-                  <option value="other">Other</option>
-                </select>
-                <small class="error" aria-live="polite"></small>
-              </div>
+          <h3 class="sub-head">Education</h3>
+          <ul class="cert-list">
+            <li><div class="cert-item is-static"><strong>Full Stack Development with AI</strong><span>NUS School of Computing · Completed Jun 2026</span></div></li>
+            <li><div class="cert-item is-static"><strong>Advanced Diploma in Electrical &amp; Electronic Engineering</strong><span>Singapore · Jun 2025 – May 2026</span></div></li>
+            <li><div class="cert-item is-static"><strong>Diploma in Web Technology</strong><span>Singapore · May 2024 – Apr 2025</span></div></li>
+            <li><div class="cert-item is-static"><strong>Diploma in Web Development</strong><span>Yangon · Nov 2022 – Jun 2023</span></div></li>
+            <li><div class="cert-item is-static"><strong>BSc (Geology), third year</strong><span>University of Bago · 2015 – 2019</span></div></li>
+          </ul>
+        </div>
+      </section>
 
-              <div class="form-group">
-                <label for="message">Project Details</label>
-                <textarea id="message" name="message" rows="5" required minlength="10"
-                  placeholder="Tell me about your project requirements, timeline, and goals..."></textarea>
-                <small class="error" aria-live="polite"></small>
-              </div>
-
-              <div class="form-actions">
-                <button type="submit" class="btn-primary">
-                  <span class="btn-text">Send Message</span>
-                  <span class="btn-loading">Sending...</span>
-                </button>
-                <a id="mailtoLink" class="btn-secondary"
-                  href="mailto:antthein.dev@gmail.com?subject=Portfolio%20Contact">Use Email App</a>
-              </div>
-
-              <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
-            </form>
+      <!-- PANEL: SOCIAL -->
+      <section class="panel" id="social" aria-labelledby="socialTitle" hidden>
+        <header class="panel-head">
+          <h2 id="socialTitle" tabindex="-1">Social</h2>
+          <button type="button" class="btn-back" data-back><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> All cards</button>
+        </header>
+        <div class="panel-body">
+          <div class="social-grid">
+            <a class="social-card" href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer">
+              <svg class="icon icon-lg" aria-hidden="true"><use href="#i-linkedin"/></svg>
+              <strong>LinkedIn</strong>
+              <span>Career updates and contact</span>
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
+            <a class="social-card" href="https://github.com/antthein" target="_blank" rel="noopener noreferrer">
+              <svg class="icon icon-lg" aria-hidden="true"><use href="#i-github"/></svg>
+              <strong>GitHub</strong>
+              <span>Code for my projects and lab</span>
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- BACK TO TOP -->
-  <!-- Certificate Modal -->
-  <div id="certModal" class="cert-modal">
-    <span class="close-modal">&times;</span>
-    <img class="cert-modal-content" id="certImage" alt="Certificate">
-    <a class="modal-prev" onclick="changeSlide(-1)">&#10094;</a>
-    <a class="modal-next" onclick="changeSlide(1)">&#10095;</a>
+      <!-- PANEL: LAB -->
+      <section class="panel" id="lab" aria-labelledby="labTitle" hidden>
+        <header class="panel-head">
+          <h2 id="labTitle" tabindex="-1">Lab</h2>
+          <button type="button" class="btn-back" data-back><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> All cards</button>
+        </header>
+        <div class="panel-body">
+          <p class="lead">Side projects I build to experiment, learn and ship fast.</p>
+          <div class="tiles">
+            <article class="tile">
+              <p class="tile-kicker">Tool</p>
+              <h4>Morph</h4>
+              <p>Glassmorphism and claymorphism CSS generator with live preview and copy-ready code.</p>
+              <div class="tile-actions">
+                <a href="morph/" class="link-btn">Open <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Learning tool</p>
+              <h4>Cipher Lab</h4>
+              <p>Playground for Caesar, XOR and Base64 transformations with visual character mapping.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('cipherlab')">Details</button>
+                <a href="/cipher-lab/" target="_blank" rel="noopener" class="link-btn">Demo <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
+              </div>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Micro-app</p>
+              <h4>Reading List</h4>
+              <p>Minimal reading tracker with filters, progress stats and local saving.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('readinglist')">Details</button>
+                <a href="/reading-list/" target="_blank" rel="noopener" class="link-btn">Demo <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
+              </div>
+            </article>
+            <article class="tile">
+              <p class="tile-kicker">Micro-app</p>
+              <h4>Write &amp; Release</h4>
+              <p>Write private thoughts, then release them with calm animations. Nothing is saved.</p>
+              <div class="tile-actions">
+                <button type="button" class="link-btn" onclick="openProjectModal('writeandrelease')">Details</button>
+                <a href="/write-and-release/" target="_blank" rel="noopener" class="link-btn">Demo <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <span class="footer-copy">&copy; <span id="footerYear"></span> Antt Hein</span>
-      <span class="footer-made">
-        Made with <span class="footer-heart">&#10084;</span> by
-        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" alt="Codex" class="footer-logo" loading="lazy" decoding="async">Codex</span>
-        ,
-        <span class="footer-tool"><img src="images/Google-Antigravity-Icon-Full-Color.png" srcset="images/Google-Antigravity-Icon-Full-Color.png 1x, images/Google-Antigravity-Icon-Full-Color.png 2x" sizes="16px" alt="Antigravity" class="footer-logo" loading="lazy" decoding="async">Antigravity</span>
-        ,
-        <span class="footer-tool"><img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude" class="footer-logo" loading="lazy" decoding="async">Claude</span>
-        &amp; my experience
-      </span>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/in/antt-hein-bb1a81254" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/antthein" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
+  <!-- Robot assistant -->
+  <div class="bot" id="siteBot">
+    <div class="bot-panel" id="botPanel" role="dialog" aria-label="Site assistant" hidden>
+      <div class="bot-head">
+        <strong>Ask about Antt</strong>
+        <button type="button" class="icon-btn" id="botClose" aria-label="Close assistant"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
-    </div>
-  </footer>
-
-  <!-- Project Detail Modal -->
-  <div id="projectModal" class="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
-    <div class="project-modal-box">
-      <button class="project-modal-close" id="projectModalClose" aria-label="Close modal">&times;</button>
-      <div class="project-modal-image-area">
-        <div class="project-modal-placeholder" id="projectModalPlaceholder">
-          <i class="fas fa-image"></i>
-          <span>Screenshot coming soon</span>
-        </div>
-        <img id="projectModalImg" class="project-modal-img" src="" alt="" style="display:none">
-      </div>
-      <div class="project-modal-body">
-        <span class="project-modal-category" id="projectModalCategory"></span>
-        <h2 id="projectModalTitle"></h2>
-        <p id="projectModalDesc"></p>
-        <div class="project-modal-section">
-          <h4>Tech Stack</h4>
-          <div class="project-modal-tags" id="projectModalTech"></div>
-        </div>
-        <div class="project-modal-section">
-          <h4>Key Achievements</h4>
-          <ul id="projectModalAchievements"></ul>
-        </div>
-        <div class="project-modal-actions" id="projectModalActions"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Guide modal for mobile (full-screen overlay) -->
-  <div id="guideMobileModal" class="guide-mobile-modal" role="dialog" aria-label="Site Guide">
-    <div class="guide-mobile-inner">
-      <div class="guide-mobile-header">
-        <span><i class="fas fa-book-open"></i> Site Documentation</span>
-        <button id="guideMobileClose" class="guide-mobile-close" aria-label="Close site guide">&times;</button>
-      </div>
-      <div class="guide-mobile-body">
-        <div class="guide-section">
-          <h4>🛠 Tech Stack</h4>
-          <ul>
-            <li><strong>HTML5</strong> — semantic structure</li>
-            <li><strong>CSS3</strong> — custom properties, Flexbox, Grid, animations</li>
-            <li><strong>Vanilla JavaScript</strong> — no frameworks</li>
-            <li><strong>Font Awesome 6</strong> — icon set</li>
-            <li><strong>Google Fonts</strong> — Inter typeface</li>
-            <li><strong>GitHub Pages</strong> — static hosting</li>
-          </ul>
-        </div>
-        <div class="guide-section">
-          <h4>✨ Features</h4>
-          <ul>
-            <li><strong>Dark / Light mode</strong> — saved to localStorage</li>
-            <li><strong>Typing animation</strong> — hero subtitle cycles through roles</li>
-            <li><strong>Counter animation</strong> — stats animate on scroll</li>
-            <li><strong>Project modals</strong> — click "View Details" on any card</li>
-            <li><strong>Certificate gallery</strong> — keyboard navigable modal</li>
-            <li><strong>Skill bars</strong> — animated on scroll reveal</li>
-            <li><strong>Project filter</strong> — Power Platform / Web Dev</li>
-            <li><strong>Profile coin flip</strong> — click photo to flip avatar ↔ real</li>
-            <li><strong>Robot assistant</strong> — rockets in, eyes track cursor, click to chat</li>
-            <li><strong>Contact form</strong> — sends via mailto fallback</li>
-            <li><strong>Fully responsive</strong> — mobile menu, fluid grid</li>
-          </ul>
-        </div>
-        <div class="guide-section">
-          <h4>🤖 Built With AI</h4>
-          <ul>
-            <li><strong>Codex</strong> — initial scaffolding</li>
-            <li><strong>Antigravity</strong> — design iteration</li>
-            <li><strong>Claude</strong> — features &amp; polish</li>
-          </ul>
-        </div>
-        <div class="guide-section">
-          <h4>📁 File Structure</h4>
-          <pre class="guide-code">antthein.github.io/
-├── index.html
-├── style.css
-├── script.js
-├── images/
-└── assets/</pre>
-        </div>
-        <div class="guide-section">
-          <h4>🚀 How to Use</h4>
-          <ul>
-            <li>Navigate sections via the sidebar or top menu (includes Creative Hub)</li>
-            <li>Click project card → "View Details"</li>
-            <li>Click certifications → gallery opens</li>
-            <li>Click the robot 🤖 to chat</li>
-            <li>Click profile photo to flip</li>
-            <li>Toggle 🌙 for dark mode</li>
-          </ul>
-        </div>
-        <div class="guide-section guide-version">
-          <span>v2.0 · Last updated 2026</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-
-  <!-- Chibi Robot — rockets in, lands on the ↑ button -->
-  <div id="siteBot" class="site-bot" title="Click me to chat!">
-    <div class="bot-char" id="botChar">
-      <div class="dog-head">
-        <div class="dog-ear dog-ear-l"></div>
-        <div class="dog-ear dog-ear-r"></div>
-        <div class="dog-visor">
-          <div class="dog-eye"><div class="dog-iris"></div></div>
-          <div class="dog-eye"><div class="dog-iris"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="bot-bubble" id="botBubble">
-      <button class="bot-bubble-close" id="botBubbleClose">&times;</button>
-      <div class="bot-messages" id="botMessages"></div>
+      <div class="bot-messages" id="botMessages" aria-live="polite"></div>
       <div class="bot-suggestions" id="botSuggestions"></div>
     </div>
+    <button type="button" class="bot-toggle" id="botToggle" aria-label="Chat with the site assistant" aria-expanded="false" aria-controls="botPanel">
+      <svg class="icon" aria-hidden="true"><use href="#i-robot"/></svg>
+    </button>
   </div>
 
-  <!-- Viewer Counter -->
-  <div id="viewCounter" class="view-counter" title="Total portfolio visits">
-    <i class="fas fa-eye"></i>
-    <img
-      src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fantthein.me&count_bg=%230ea5e9&title_bg=%230ea5e9&icon=eye.svg&icon_color=%23ffffff&title=&edge_flat=true"
-      alt="views"
-      id="viewBadgeImg"
-      loading="lazy"
-      decoding="async"
-      onerror="document.getElementById('viewCounter').style.display='none'"
-    />
-  </div>
-
-  <!-- CV Email Modal -->
-  <div id="cvEmailModal" class="cv-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
-    <div class="cv-modal">
-      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">&times;</button>
-      <div class="cv-modal-icon">
-        <img src="images/Image.png" srcset="images/Image.png 1x, images/Image.png 2x" sizes="72px" alt="Antt Hein"
-          class="cv-modal-avatar" loading="lazy" decoding="async" />
+  <!-- Certificate gallery modal -->
+  <div id="certModal" class="modal" role="dialog" aria-modal="true" aria-label="Certificate" hidden>
+    <div class="modal-box cert-box">
+      <button type="button" class="icon-btn modal-close" id="certClose" aria-label="Close certificate"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <img id="certImage" alt="Certificate">
+      <div class="cert-nav">
+        <button type="button" class="btn-outline" id="certPrev" aria-label="Previous image">←</button>
+        <span id="certCount" aria-live="polite"></span>
+        <button type="button" class="btn-outline" id="certNext" aria-label="Next image">→</button>
       </div>
-      <h3 id="cvModalTitle">Get My CV</h3>
-      <p>Enter your email and I'll send it to you instantly.</p>
+    </div>
+  </div>
+
+  <!-- Project detail modal -->
+  <div id="projectModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle" hidden>
+    <div class="modal-box">
+      <button type="button" class="icon-btn modal-close" id="projectModalClose" aria-label="Close project details"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <p class="tile-kicker" id="projectModalCategory"></p>
+      <h2 id="projectModalTitle"></h2>
+      <p id="projectModalDesc"></p>
+      <h3 class="sub-head">Tech stack</h3>
+      <ul class="tags" id="projectModalTech"></ul>
+      <h3 class="sub-head">Highlights</h3>
+      <ul class="checks" id="projectModalAchievements"></ul>
+      <div class="modal-actions" id="projectModalActions"></div>
+    </div>
+  </div>
+
+  <!-- CV email modal -->
+  <div id="cvEmailModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle" hidden>
+    <div class="modal-box cv-box">
+      <button type="button" class="icon-btn modal-close" onclick="closeCVModal()" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <img src="images/profile-160.webp" alt="" class="cv-avatar" width="80" height="80" loading="lazy" decoding="async">
+      <h2 id="cvModalTitle">Get my CV</h2>
+      <p>Enter your email and I'll send it to you right away.</p>
       <form id="cvEmailForm" onsubmit="sendCV(event)">
-        <div class="cv-input-wrap">
-          <i class="fas fa-envelope"></i>
-          <input type="email" id="cvEmailInput" placeholder="your@email.com" required autocomplete="email" />
-        </div>
-        <button type="submit" class="cv-send-btn" id="cvSendBtn">
-          <span id="cvBtnText"><i class="fas fa-paper-plane"></i>&nbsp; Send CV</span>
-          <span id="cvBtnLoading" style="display:none"><i class="fas fa-spinner fa-spin"></i>&nbsp; Sending...</span>
+        <label for="cvEmailInput" class="sr-only">Your email</label>
+        <input type="email" id="cvEmailInput" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit" class="btn-primary" id="cvSendBtn">
+          <span id="cvBtnText"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg> Send CV</span>
+          <span id="cvBtnLoading" hidden>Sending…</span>
         </button>
       </form>
-      <div id="cvSuccessMsg" class="cv-success" style="display:none">
-        <i class="fas fa-check-circle"></i> CV sent! Check your inbox.
-      </div>
-      <div id="cvErrorMsg" class="cv-error" style="display:none">
-        <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
-      </div>
+      <p id="cvSuccessMsg" class="msg-ok" hidden><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> CV sent! Check your inbox.</p>
+      <p id="cvErrorMsg" class="msg-err" hidden>Something went wrong. Please try again.</p>
     </div>
   </div>
 
