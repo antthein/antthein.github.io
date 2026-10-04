@@ -273,11 +273,13 @@ button { cursor: pointer; }
   padding-bottom: clamp(16px, 3vh, 28px);
   border-bottom: var(--rule) solid var(--line);
 }
-.hero-text { flex: 1 1 auto; display: flex; flex-direction: column; gap: clamp(10px, 2vh, 20px); }
+.hero-text { flex: 1 1 auto; min-width: 0; container-type: inline-size; display: flex; flex-direction: column; gap: clamp(10px, 2vh, 20px); }
 .hero-name {
   font-weight: 900; text-transform: uppercase;
-  font-size: clamp(56px, min(9.2vw, 15vh), 150px);
-  line-height: 0.86; letter-spacing: -0.05em;
+  /* One line that fills the space beside the photo (cqi = % of .hero-text width) */
+  font-size: clamp(36px, min(17cqi, 22vh), 240px);
+  line-height: 0.9; letter-spacing: -0.05em;
+  white-space: nowrap;
 }
 .hero-intro {
   max-width: 34ch;
@@ -669,6 +671,7 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 560px) {
   .hero { flex-direction: column-reverse; align-items: flex-start; }
+  .hero-text { align-self: stretch; }
   .hero-photo { width: 120px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
   .role { grid-template-columns: minmax(0, 1fr); }
