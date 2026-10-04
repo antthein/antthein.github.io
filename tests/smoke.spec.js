@@ -95,3 +95,10 @@ test('robot assistant opens and answers', async ({ page }) => {
   await page.locator('#botSuggestions button', { hasText: 'Contact' }).click();
   await expect(page.locator('#botMessages')).toContainText('antthein.dev@gmail.com');
 });
+
+test('phone layout has no sideways scroll', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  const extra = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(extra).toBeLessThanOrEqual(0);
+});

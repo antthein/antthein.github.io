@@ -634,7 +634,7 @@ const botData = {
   greeting: "Hi! I'm Antt's assistant. What would you like to know?",
   suggestions: ['Who is Antt?', 'Skills & tech', 'Projects', 'Contact', 'Fun fact'],
   responses: {
-    'Who is Antt?': 'Antt Hein is an IT / Web Designer in Singapore. He builds and manages company websites at Global-HR Staffing Service, designs marketing materials in Canva, and handles IT support. Before that he spent 3+ years as a Microsoft-certified Power Platform developer at BIM Group.',
+    'Who is Antt?': 'Antt Hein is an IT & Web Developer in Singapore. He builds and manages company websites at Global-HR Staffing Service, designs marketing materials in Canva, and handles IT support. Before that he spent 3+ years as a Microsoft-certified Power Platform developer at BIM Group.',
     'Skills & tech': 'Core stack:\n• Website design & management\n• Canva, bilingual English/Burmese content\n• L1/L2 IT support, hardware & networking\n• Power Platform (Apps, Automate, BI)\n• HTML, CSS, JavaScript, Python',
     'Projects': 'Notable work:\n• Global-HR (globalhrss.com)\n• GIE Singapore (giesg.com)\n• TRP Kitchen Solutions\n• LJY Engineering Services\n• Invoice Management App\n• Checkers AI game (Harvard CS50)\nOpen the Projects card for details.',
     'Contact': 'Reach Antt here:\n• antthein.dev@gmail.com\n• LinkedIn: antt-hein-bb1a81254\nHe usually replies within 24 hours.',

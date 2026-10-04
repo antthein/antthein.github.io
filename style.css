@@ -84,6 +84,8 @@ button { cursor: pointer; }
   display: flex;
   min-height: 100vh;
   min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* One screen, no page scroll — desktop and tablet with enough height */
@@ -198,6 +200,31 @@ button { cursor: pointer; }
   border: 0; font-weight: 700; font-size: 16px;
 }
 .btn-block:hover { background: var(--accent); color: var(--on-accent); }
+
+/* AI toolkit strip: monochrome logos, brand colour on hover */
+.ai-kit { display: grid; gap: 10px; }
+.ai-kit-label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.ai-kit-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ai-kit-list li {
+  display: grid; place-items: center;
+  aspect-ratio: 1; max-height: 52px;
+  border: 2px solid var(--line); background: var(--surface);
+  transition: transform .15s ease, box-shadow .15s ease, color .15s ease;
+}
+.ai-kit-list .icon { width: 22px; height: 22px; }
+.ai-kit-list img { width: 22px; height: 22px; filter: grayscale(1) contrast(1.4); transition: filter .15s ease; }
+:root[data-theme="dark"] .ai-kit-list img { filter: grayscale(1) brightness(1.8) contrast(1.2); }
+@media (hover: hover) {
+  .ai-kit-list li:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--line); }
+  .ai-kit-list li.ai-claude:hover { color: #D97757; }
+  .ai-kit-list li.ai-gemini:hover { color: #8E75B2; }
+  .ai-kit-list li.ai-cursor:hover { color: var(--accent); }
+  .ai-kit-list li.ai-antigravity:hover img { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-kit-list li { transition: none; }
+  .ai-kit-list li:hover { transform: none; }
+}
 
 .stats {
   margin-top: auto;
@@ -591,6 +618,8 @@ body.modal-open { overflow: hidden; }
   .side-head { padding: 0; border: 0; }
   .status { grid-column: 1 / -1; }
   .facts, .stats { display: none; }
+  .ai-kit { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 220px); align-items: center; gap: 12px; }
+  .ai-kit-list li { max-height: 44px; }
   .btn-block { grid-column: 2; grid-row: 1; min-height: 44px; gap: 12px; }
   .stage { overflow: visible; }
   .home, .panel { flex: none; }
