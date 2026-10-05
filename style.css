@@ -460,6 +460,7 @@ button { cursor: pointer; }
 [data-tool="sqlite"]        { --tool-bg: #003B57; --tool-fg: #FFFFFF; }
 [data-tool="claude"]        { --tool-bg: #D97757; --tool-fg: #0A0A0A; }
 [data-tool="ibm"]           { --tool-bg: #0F62FE; --tool-fg: #FFFFFF; }
+[data-tool="docker"]        { --tool-bg: #2496ED; --tool-fg: #0A0A0A; }
 [data-tool="render"]        { --tool-bg: #46E3B7; --tool-fg: #0A0A0A; }
 :root[data-theme="dark"] [data-tool="nextjs"],
 :root[data-theme="dark"] [data-tool="vercel"] { --tool-bg: #FFFFFF; --tool-fg: #0A0A0A; }

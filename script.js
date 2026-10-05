@@ -342,7 +342,7 @@ const projectData = {
     title: 'FlakeHunter',
     category: 'Hackathon · IBM Bob 2.0 · Sep 2026 · Team GuGuGaGa',
     description: 'Flaky tests pass and fail on the same code, wasting CI time and hiding real bugs. FlakeHunter turns the detective work into one command: it re-runs the suite in random order to prove which tests are flaky, then starts a headless IBM Bob agent per flaky test, in parallel, each in its own isolated copy of the project, to find the root cause and make a minimal fix.',
-    tech: ['IBM Bob', 'Python', 'pytest', 'AST analysis', 'Parallel agents', 'Render'],
+    tech: ['IBM Bob 2.0', 'Python', 'pytest', 'AST analysis', 'Parallel agents', 'Docker', 'Render'],
     achievements: [
       'Detects flakiness by proof: the suite runs N times in random order',
       'One IBM Bob agent per flaky test, in parallel, each in an isolated temp copy',
@@ -537,7 +537,7 @@ const TOOL_BRANDS = [
   [/^(power automate|approval flows)$/i, 'powerautomate'], [/^dataverse$/i, 'dataverse'], [/^sharepoint$/i, 'sharepoint'],
   [/^power bi$/i, 'powerbi'], [/^python$/i, 'python'], [/^django$/i, 'django'], [/^mysql$/i, 'mysql'],
   [/^next\.js/i, 'nextjs'], [/^tailwind/i, 'tailwind'], [/^vercel$/i, 'vercel'], [/^netlify$/i, 'netlify'],
-  [/^flask$/i, 'flask'], [/^sqlite$/i, 'sqlite'], [/^claude$/i, 'claude'], [/^(ibm bob|watsonx)$/i, 'ibm'], [/^render$/i, 'render']
+  [/^flask$/i, 'flask'], [/^sqlite$/i, 'sqlite'], [/^claude$/i, 'claude'], [/^(ibm bob|watsonx)/i, 'ibm'], [/^docker$/i, 'docker'], [/^render$/i, 'render']
 ];
 function toolBrand(name) {
   const hit = TOOL_BRANDS.find(([re]) => re.test(name.trim()));
@@ -803,7 +803,7 @@ function sendCV(e) {
 
   emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
     to_email: email,
-    cv_url: 'https://antthein.me/assets/Antt_Hein_CV_2026.pdf'
+    cv_url: 'https://antthein.me/assets/Antt_Hein_CV_IT_Web_Designer_2026.pdf'
   })
     .then(() => {
       cvLastSentAt = Date.now();
