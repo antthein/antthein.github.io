@@ -102,3 +102,20 @@ test('phone layout has no sideways scroll', async ({ page }) => {
   const extra = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(extra).toBeLessThanOrEqual(0);
 });
+
+test('old site section links open the matching card', async ({ page }) => {
+  await page.goto('/#creative-hub');
+  await expect(page.locator('#lab')).toBeVisible();
+  await page.goto('/#certifications');
+  await expect(page.locator('#certificates')).toBeVisible();
+});
+
+test('AB-730 certificate shows Microsoft verify link', async ({ page }) => {
+  await page.goto('/#certificates');
+  await page.locator('.cert-item[data-cert-link]').click();
+  await expect(page.locator('#certVerify')).toBeVisible();
+  await expect(page.locator('#certVerify')).toHaveAttribute('href', /learn\.microsoft\.com/);
+  await page.keyboard.press('Escape');
+  await page.locator('.cert-item[data-cert-images]').nth(1).click();
+  await expect(page.locator('#certVerify')).toBeHidden();
+});

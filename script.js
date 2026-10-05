@@ -197,8 +197,12 @@ const BASE_TITLE = 'Antt Hein | Portfolio';
 let openedFromHome = false;
 let lastCard = null;
 
+/* Section links from the previous site (e.g. saved in a CV) map to the new cards */
+const LEGACY_HASHES = { certifications: 'certificates', 'creative-hub': 'lab' };
+
 function currentPanelId() {
-  const id = decodeURIComponent(window.location.hash.slice(1));
+  const raw = decodeURIComponent(window.location.hash.slice(1));
+  const id = LEGACY_HASHES[raw] || raw;
   return panelIds.includes(id) ? id : null;
 }
 
@@ -322,6 +326,9 @@ function showCertImage(index) {
 document.querySelectorAll('.cert-item[data-cert-images]').forEach((item) => {
   item.addEventListener('click', () => {
     certImages = item.dataset.certImages.split(',').map((s) => s.trim());
+    const verify = document.getElementById('certVerify');
+    verify.hidden = !item.dataset.certLink;
+    if (item.dataset.certLink) verify.href = item.dataset.certLink;
     certImage.alt = item.querySelector('strong')?.textContent || 'Certificate';
     showCertImage(0);
     openModal(certModal, document.getElementById('certClose'));

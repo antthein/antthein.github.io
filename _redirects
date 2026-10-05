@@ -1,0 +1,10 @@
+# Cloudflare Pages (live antthein.me): side-project apps are GitHub Pages
+# project sites, served from antthein.github.io. 302 so it can change later.
+/cipher-lab         https://antthein.github.io/cipher-lab/           302
+/cipher-lab/*       https://antthein.github.io/cipher-lab/:splat     302
+/reading-list       https://antthein.github.io/reading-list/         302
+/reading-list/*     https://antthein.github.io/reading-list/:splat   302
+/write-and-release  https://antthein.github.io/write-and-release/    302
+/write-and-release/* https://antthein.github.io/write-and-release/:splat 302
+/GIE                https://antthein.github.io/GIE/                  302
+/GIE/*              https://antthein.github.io/GIE/:splat            302
