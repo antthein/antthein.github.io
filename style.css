@@ -557,6 +557,55 @@ button.cert-item:hover strong { text-decoration: underline; text-decoration-colo
 .social-card:hover span { color: var(--on-accent); }
 
 /* =========================
+   "NOTHING TO SCROLL" FEEDBACK
+   Edge glow + small bounce + friendly toast (script.js)
+========================= */
+.edge-glow {
+  position: fixed; left: 0; right: 0; z-index: 30; height: 160px;
+  pointer-events: none; opacity: 0;
+  transition: opacity .5s ease;
+}
+.edge-glow::after {
+  content: ''; position: absolute; left: 10%; right: 10%; height: 3px;
+  background: var(--accent); box-shadow: 0 0 24px 6px var(--accent);
+}
+.edge-glow-bottom { bottom: 0; background: radial-gradient(ellipse 60% 100% at 50% 100%, var(--glow) 0%, transparent 70%); }
+.edge-glow-bottom::after { bottom: 0; }
+.edge-glow-top { top: 0; background: radial-gradient(ellipse 60% 100% at 50% 0%, var(--glow) 0%, transparent 70%); }
+.edge-glow-top::after { top: 0; }
+.edge-glow.is-on { opacity: 1; transition-duration: .12s; }
+
+.scroll-toast {
+  position: fixed; z-index: 45;
+  left: calc(300px + (100% - 300px) / 2); bottom: 28px;
+  display: flex; align-items: center; gap: 10px;
+  max-width: min(440px, calc(100vw - 340px));
+  padding: 12px 18px;
+  background: var(--text); color: var(--bg);
+  border: 2px solid var(--text);
+  box-shadow: 5px 5px 0 var(--accent);
+  font-size: 15px; font-weight: 700;
+  opacity: 0; transform: translate(-50%, 16px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+.scroll-toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+.scroll-toast .icon { color: var(--accent); width: 18px; height: 18px; }
+
+.stage.bump-down { animation: bumpDown .45s ease; }
+.stage.bump-up { animation: bumpUp .45s ease; }
+@keyframes bumpDown { 0%, 100% { transform: none; } 35% { transform: translateY(-10px); } }
+@keyframes bumpUp { 0%, 100% { transform: none; } 35% { transform: translateY(10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage.bump-down, .stage.bump-up { animation: none; }
+  .scroll-toast { transition: opacity .25s ease; transform: translate(-50%, 0); }
+}
+@media (max-width: 899px), (max-height: 599px) {
+  .edge-glow, .scroll-toast { display: none; }
+}
+
+/* =========================
    ROBOT ASSISTANT
 ========================= */
 .bot { position: fixed; right: 24px; bottom: 24px; z-index: 40; }

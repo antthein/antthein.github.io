@@ -252,6 +252,99 @@ window.addEventListener('hashchange', renderRoute);
 renderRoute();
 
 /* =========================
+   "NOTHING TO SCROLL" FEEDBACK
+   Desktop one-screen layout only: when a scroll has nowhere to go,
+   light the edge, bump the stage and show a friendly note.
+========================= */
+
+(function initScrollHint() {
+  const oneScreen = window.matchMedia('(min-width: 900px) and (min-height: 600px)');
+  const toast = document.getElementById('scrollToast');
+  const glowTop = document.querySelector('.edge-glow-top');
+  const glowBottom = document.querySelector('.edge-glow-bottom');
+  if (!toast || !glowTop || !glowBottom) return;
+
+  const HOME_MESSAGES = [
+    'No need to scroll — everything fits on one screen.',
+    "That's the bottom! Pick a card to see more.",
+    'Nothing hiding down here. Try a card instead.',
+    'All of me is right here on one page.'
+  ];
+  const PANEL_END = "That's the end. Use All cards to go back.";
+  const TOP = "You're already at the top.";
+  let homeIndex = 0;
+  let wheelSum = 0;
+  let wheelTimer = null;
+  let hideTimer = null;
+  let glowTimer = null;
+
+  function canScroll(start, dir) {
+    for (let el = start; el && el !== document.body; el = el.parentElement) {
+      const overflowY = getComputedStyle(el).overflowY;
+      if (!/(auto|scroll)/.test(overflowY) || el.scrollHeight <= el.clientHeight + 1) continue;
+      if (dir > 0 && el.scrollTop + el.clientHeight < el.scrollHeight - 1) return true;
+      if (dir < 0 && el.scrollTop > 0) return true;
+    }
+    return false;
+  }
+
+  function signal(dir) {
+    const glow = dir > 0 ? glowBottom : glowTop;
+    glow.classList.add('is-on');
+    clearTimeout(glowTimer);
+    glowTimer = setTimeout(() => glow.classList.remove('is-on'), 450);
+
+    stage.classList.remove('bump-down', 'bump-up');
+    void stage.offsetWidth; // restart the animation
+    stage.classList.add(dir > 0 ? 'bump-down' : 'bump-up');
+
+    if (!toast.classList.contains('is-on')) {
+      let text;
+      if (dir < 0) text = TOP;
+      else if (currentPanelId()) text = PANEL_END;
+      else { text = HOME_MESSAGES[homeIndex]; homeIndex = (homeIndex + 1) % HOME_MESSAGES.length; }
+      // Arrow points back up (or down from the top) toward the content
+      toast.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>';
+      toast.querySelector('.icon').style.transform = dir > 0 ? 'rotate(-90deg)' : 'rotate(90deg)';
+      toast.append(text);
+      toast.classList.add('is-on');
+      trackEvent('scroll_hint', { where: currentPanelId() || 'home', dir: dir > 0 ? 'down' : 'up' });
+    }
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => toast.classList.remove('is-on'), 2600);
+  }
+
+  function blocked() {
+    return !oneScreen.matches || document.querySelector('.modal.open');
+  }
+
+  window.addEventListener('wheel', (e) => {
+    if (blocked() || e.ctrlKey) return;
+    const dir = Math.sign(e.deltaY);
+    if (!dir || canScroll(e.target, dir)) { wheelSum = 0; return; }
+    wheelSum += e.deltaY;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { wheelSum = 0; }, 250);
+    if (Math.abs(wheelSum) > 60) { // ignore tiny trackpad nudges
+      wheelSum = 0;
+      signal(dir);
+    }
+  }, { passive: true });
+
+  document.addEventListener('keydown', (e) => {
+    if (blocked()) return;
+    const t = e.target;
+    if (t.closest?.('input, textarea, select, [contenteditable]')) return;
+    const down = ['ArrowDown', 'PageDown', 'End'].includes(e.key) || (e.key === ' ' && !t.closest?.('button, a') && !e.shiftKey);
+    const up = ['ArrowUp', 'PageUp', 'Home'].includes(e.key) || (e.key === ' ' && e.shiftKey && !t.closest?.('button, a'));
+    if (!down && !up) return;
+    const dir = down ? 1 : -1;
+    const scroller = t === document.body || t === document.documentElement ? (document.querySelector('.panel:not([hidden]) .panel-body') || stage) : t;
+    if (!canScroll(scroller, dir)) signal(dir);
+  });
+})();
+
+/* =========================
    MODAL HELPERS
 ========================= */
 

@@ -119,3 +119,19 @@ test('AB-730 certificate shows Microsoft verify link', async ({ page }) => {
   await page.locator('.cert-item[data-cert-images]').nth(1).click();
   await expect(page.locator('#certVerify')).toBeHidden();
 });
+
+test('scrolling on the one-screen home shows a friendly hint and edge glow', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await page.mouse.move(700, 400);
+  await page.mouse.wheel(0, 300);
+  await expect(page.locator('#scrollToast')).toHaveClass(/is-on/);
+  await expect(page.locator('#scrollToast')).toContainText(/scroll|bottom|card|page/i);
+  await expect(page.locator('.edge-glow-bottom')).toHaveClass(/is-on/);
+});
+
+test('scroll hint stays off on phones', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  await expect(page.locator('#scrollToast')).toBeHidden();
+});
