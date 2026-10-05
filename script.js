@@ -294,11 +294,12 @@ renderRoute();
     clearTimeout(glowTimer);
     glowTimer = setTimeout(() => glow.classList.remove('is-on'), 450);
 
-    stage.classList.remove('bump-down', 'bump-up');
-    void stage.offsetWidth; // restart the animation
-    stage.classList.add(dir > 0 ? 'bump-down' : 'bump-up');
-
     if (!toast.classList.contains('is-on')) {
+      // One gentle bump per hint, not on every wheel tick
+      stage.classList.remove('bump-down', 'bump-up');
+      void stage.offsetWidth; // restart the animation
+      stage.classList.add(dir > 0 ? 'bump-down' : 'bump-up');
+
       let text;
       if (dir < 0) text = TOP;
       else if (currentPanelId()) text = PANEL_END;

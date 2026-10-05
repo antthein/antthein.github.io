@@ -592,10 +592,10 @@ button.cert-item:hover strong { text-decoration: underline; text-decoration-colo
 .scroll-toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 .scroll-toast .icon { color: var(--accent); width: 18px; height: 18px; }
 
-.stage.bump-down { animation: bumpDown .45s ease; }
-.stage.bump-up { animation: bumpUp .45s ease; }
-@keyframes bumpDown { 0%, 100% { transform: none; } 35% { transform: translateY(-10px); } }
-@keyframes bumpUp { 0%, 100% { transform: none; } 35% { transform: translateY(10px); } }
+.stage.bump-down { animation: bumpDown .5s cubic-bezier(.25, .8, .35, 1); }
+.stage.bump-up { animation: bumpUp .5s cubic-bezier(.25, .8, .35, 1); }
+@keyframes bumpDown { 0%, 100% { transform: none; } 40% { transform: translateY(-3px); } }
+@keyframes bumpUp { 0%, 100% { transform: none; } 40% { transform: translateY(3px); } }
 
 @media (prefers-reduced-motion: reduce) {
   .stage.bump-down, .stage.bump-up { animation: none; }
