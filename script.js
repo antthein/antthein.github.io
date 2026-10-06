@@ -276,7 +276,10 @@ renderRoute();
   let wheelSum = 0;
   let wheelTimer = null;
   let hideTimer = null;
-  let glowTimer = null;
+  let lastSignalAt = -Infinity; // performance.now() starts near 0 on load
+  const GLOW_MS = 600;      // each edge light turns itself off after this
+  const COOLDOWN_MS = 1200; // trackpad momentum can't keep re-triggering it
+  const TOAST_MS = 2200;
 
   function canScroll(start, dir) {
     for (let el = start; el && el !== document.body; el = el.parentElement) {
@@ -289,10 +292,16 @@ renderRoute();
   }
 
   function signal(dir) {
+    const now = performance.now();
+    if (now - lastSignalAt < COOLDOWN_MS) return;
+    lastSignalAt = now;
+
+    // Each light has its own off-timer, so switching direction can't leave one stuck on
     const glow = dir > 0 ? glowBottom : glowTop;
+    (dir > 0 ? glowTop : glowBottom).classList.remove('is-on');
     glow.classList.add('is-on');
-    clearTimeout(glowTimer);
-    glowTimer = setTimeout(() => glow.classList.remove('is-on'), 450);
+    clearTimeout(glow._offTimer);
+    glow._offTimer = setTimeout(() => glow.classList.remove('is-on'), GLOW_MS);
 
     if (!toast.classList.contains('is-on')) {
       // One gentle bump per hint, not on every wheel tick
@@ -312,7 +321,7 @@ renderRoute();
       trackEvent('scroll_hint', { where: currentPanelId() || 'home', dir: dir > 0 ? 'down' : 'up' });
     }
     clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => toast.classList.remove('is-on'), 2600);
+    hideTimer = setTimeout(() => toast.classList.remove('is-on'), TOAST_MS);
   }
 
   function blocked() {

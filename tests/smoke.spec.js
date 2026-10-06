@@ -135,3 +135,19 @@ test('scroll hint stays off on phones', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#scrollToast')).toBeHidden();
 });
+
+test('edge lights never get stuck on (direction change and long scrolling)', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/#lab');
+  await page.mouse.move(900, 500);
+  await page.mouse.wheel(0, -300);                       // top light
+  await expect(page.locator('.edge-glow-top')).toHaveClass(/is-on/);
+  await page.waitForTimeout(1300);
+  await page.mouse.wheel(0, 2000);                       // scroll to end, then bottom light
+  await page.waitForTimeout(1300);
+  await page.mouse.wheel(0, 300);
+  for (let i = 0; i < 25; i++) { await page.mouse.wheel(0, 120); await page.waitForTimeout(60); } // momentum-like
+  await page.waitForTimeout(900);
+  await expect(page.locator('.edge-glow-top')).not.toHaveClass(/is-on/);
+  await expect(page.locator('.edge-glow-bottom')).not.toHaveClass(/is-on/);
+});
