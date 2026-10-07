@@ -110,13 +110,18 @@ test('old site section links open the matching card', async ({ page }) => {
   await expect(page.locator('#certificates')).toBeVisible();
 });
 
-test('AB-730 certificate shows Microsoft verify link', async ({ page }) => {
+test('certificates show the right verify link (NUS, Microsoft, none)', async ({ page }) => {
   await page.goto('/#certificates');
-  await page.locator('.cert-item[data-cert-link]').click();
+  await page.locator('.cert-item', { hasText: 'Full Stack Development with AI' }).click();
   await expect(page.locator('#certVerify')).toBeVisible();
-  await expect(page.locator('#certVerify')).toHaveAttribute('href', /learn\.microsoft\.com/);
+  await expect(page.locator('#certVerify')).toHaveAttribute('href', /accredify\.io/);
+  await expect(page.locator('#certVerify')).toContainText('Verify with NUS');
   await page.keyboard.press('Escape');
-  await page.locator('.cert-item[data-cert-images]').nth(1).click();
+  await page.locator('.cert-item', { hasText: 'AB-730' }).click();
+  await expect(page.locator('#certVerify')).toHaveAttribute('href', /learn\.microsoft\.com/);
+  await expect(page.locator('#certVerify')).toContainText('Verify on Microsoft Learn');
+  await page.keyboard.press('Escape');
+  await page.locator('.cert-item', { hasText: 'PL-900' }).click();
   await expect(page.locator('#certVerify')).toBeHidden();
 });
 

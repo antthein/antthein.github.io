@@ -431,7 +431,10 @@ document.querySelectorAll('.cert-item[data-cert-images]').forEach((item) => {
     certImages = item.dataset.certImages.split(',').map((s) => s.trim());
     const verify = document.getElementById('certVerify');
     verify.hidden = !item.dataset.certLink;
-    if (item.dataset.certLink) verify.href = item.dataset.certLink;
+    if (item.dataset.certLink) {
+      verify.href = item.dataset.certLink;
+      document.getElementById('certVerifyLabel').textContent = item.dataset.certLinkLabel || 'Verify';
+    }
     certImage.alt = item.querySelector('strong')?.textContent || 'Certificate';
     showCertImage(0);
     openModal(certModal, document.getElementById('certClose'));
